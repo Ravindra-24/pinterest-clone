@@ -1,0 +1,34 @@
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:34:06"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:37:53"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:40:49"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:41:26"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:43:44"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:44:07"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 15:50:50"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:23:38"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:25:06"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:26:07"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:28:24"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:30:24"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:45:08"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 17:54:35"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 18:02:50"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 18:05:03"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 18:05:51"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 18:08:16"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 18:08:46"}
+{"_message":"Post validation failed","errors":{"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-11 20:16:44"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 13:35:30"}
+{"level":"\u001b[31merror\u001b[39m","path":"comment","timestamp":"2023-06-12 13:44:00"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 13:53:16"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 13:53:43"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 13:59:13"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 13:59:48"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 14:01:18"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 14:02:00"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 14:02:43"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 14:02:55"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 18:40:04"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 18:40:53"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 18:47:22"}
+{"_message":"Post validation failed","errors":{"image":{"kind":"required","message":"Path `image` is required.","name":"ValidatorError","path":"image","properties":{"message":"Path `image` is required.","path":"image","type":"required"}},"title":{"kind":"required","message":"Path `title` is required.","name":"ValidatorError","path":"title","properties":{"message":"Path `title` is required.","path":"title","type":"required"}}},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-12 18:56:52"}
