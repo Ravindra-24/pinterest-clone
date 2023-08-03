@@ -2,10 +2,20 @@ import { User } from "../db";
 import logger from "../logger";
 import { hashPassword } from "../utils/auth.utils";
 import { generateResetToken, verifyResetToken } from "../utils/token";
+const {validationResult} = require('express-validator');
 
 export const signup = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, phone, profilePicture } = req.body;
+    // validate the request body
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        message: "Validation failed",
+        success: false,
+        data: errors.array(),
+      });
+    }
+    const { firstName, lastName, email, password } = req.body;
     // check if user exists in the DB
     const user =await User.findOne({ email });
     if (user) {
@@ -16,20 +26,16 @@ export const signup = async (req, res) => {
       });
     };
     // create a new user
-    // hashed password
-    const hashedPassword = await hashPassword(password)
-    const createdUser = await User.create({
+    const newUser = await User.create({
         firstName,
         lastName,
         email,
-        password:hashedPassword,
-        phone,
-        profilePicture,
+        password,
     })
     return res.status(201).json({
-        message:"User created successfully",
+        message:"Signup successfully",
         success:true,
-        data:createdUser,
+        data:newUser,
     })
   } catch (error) {
     logger.error(error);
