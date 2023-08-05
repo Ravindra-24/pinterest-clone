@@ -1,8 +1,12 @@
 import { User } from "../db";
 import logger from "../logger";
-import { hashPassword } from "../utils/auth.utils";
-import { generateResetToken, verifyResetToken } from "../utils/token";
-const {validationResult} = require('express-validator');
+import { comparePassword } from "../utils/auth.utils";
+import {
+  generateResetToken,
+  verifyResetToken,
+  generateToken,
+} from "../utils/token";
+const { validationResult } = require("express-validator");
 
 export const signup = async (req, res) => {
   try {
@@ -16,27 +20,69 @@ export const signup = async (req, res) => {
       });
     }
     const { firstName, lastName, email, password } = req.body;
-    // check if user exists in the DB
-    const user =await User.findOne({ email });
-    if (user) {
+    // create a new user
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    return res.status(201).json({
+      message: "Signup successfull",
+      success: true,
+      data: newUser,
+    });
+  } catch (error) {
+    logger.error(error);
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    // validate the request body
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
       return res.status(400).json({
-        message: "User already exists",
+        message: "Validation failed",
+        success: false,
+        data: errors.array(),
+      });
+    }
+    const { email, password } = req.body;
+    // create a new user
+    const user = await User.findOne({ email });
+    if(!user){
+      return res.status(400).json({
+        message: "Invalid Email",
         success: false,
         data: null,
       });
-    };
-    // create a new user
-    const newUser = await User.create({
-        firstName,
-        lastName,
-        email,
-        password,
-    })
+    }
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({
+        message: "Invalid Password",
+        success: false,
+        data: null,
+      });
+    }
+    const token = generateToken({
+      id: user._id,
+      email: user.email,
+      fullName: user.fullName,
+      initials: user.initials,
+      role: user.role,
+    });
     return res.status(201).json({
-        message:"Signup successfully",
-        success:true,
-        data:newUser,
-    })
+      message: "Login successfull",
+      success: true,
+      data: { token },
+    });
   } catch (error) {
     logger.error(error);
     return res.status(500).json({

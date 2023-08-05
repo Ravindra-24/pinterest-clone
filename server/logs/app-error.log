@@ -43,3 +43,12 @@
 {"level":"\u001b[31merror\u001b[39m","message":"\u001b[31mconnect ECONNREFUSED 127.0.0.1:27017\u001b[39m","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2023-08-03 19:29:34"}
 {"level":"\u001b[31merror\u001b[39m","message":"\u001b[31mconnect ECONNREFUSED 127.0.0.1:27017\u001b[39m","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2023-08-03 19:32:44"}
 {"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-03 19:47:36"}
+{"level":"\u001b[31merror\u001b[39m","message":"\u001b[31mconnect ECONNREFUSED 127.0.0.1:27017\u001b[39m","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":null,"stale":false,"type":"Unknown"},"timestamp":"2023-08-05 12:07:36"}
+{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"text2@mail.com"},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 18:21:12"}
+{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"text2@mail.com"},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 18:21:53"}
+{"code":11000,"index":0,"keyPattern":{"email":1},"keyValue":{"email":"text2@mail.com"},"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 18:29:47"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 19:26:55"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 19:29:15"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 19:30:48"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 19:33:53"}
+{"level":"\u001b[31merror\u001b[39m","timestamp":"2023-08-05 19:38:40"}

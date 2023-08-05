@@ -77,4 +77,24 @@ userSchema.pre('save',async function(next){
     next()
 })
 
+userSchema.statics.exists = async function(id){
+    try {
+        const user = await this.findOne({_id:id})
+    if(user) throw new Error('User already exists')
+    return user
+    } catch (error) {
+        throw error
+    }
+}
+
+userSchema.statics.findByEmail = async function(email){
+    try {
+        const user = await this.findOne({email})
+    if(user) throw new Error('User already exists')
+    return true
+    } catch (error) {
+        throw error
+    }
+}
+
 export const User = mongoose.model('User', userSchema)

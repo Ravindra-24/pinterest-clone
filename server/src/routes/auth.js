@@ -1,6 +1,11 @@
 import { Router } from "express";
-import { resetPassword, changePassword } from "../controllers/auth";
-import { signup } from "../controllers/auth";
+import {
+  resetPassword,
+  changePassword,
+  login,
+  signup,
+} from "../controllers/auth";
+import { User } from "../db";
 const { body } = require("express-validator");
 const router = Router();
 
@@ -12,6 +17,7 @@ router.post("/reset-password/:token", changePassword);
 router.post(
   "/signup",
   //validate User data using express validator
+  body("email").custom(async (value) => await User.findByEmail(value)),
   body("email").isEmail().withMessage("Please enter a valid email"),
   body("password")
     .trim()
@@ -24,6 +30,13 @@ router.post(
     .withMessage("First Name is required"),
   body("lastName").trim().not().isEmpty().withMessage("Last Name is required"),
   signup
+);
+
+router.post(
+  "/login",
+  //validate User data using express validator
+  body("email").isEmail().withMessage("Please enter a valid email"),
+  login
 );
 
 export default router;
