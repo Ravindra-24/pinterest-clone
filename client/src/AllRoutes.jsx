@@ -5,6 +5,10 @@ import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import PostView from "./components/PostView";
 import LoadingBar from "react-top-loading-bar";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
 
 const AllRoutes = () => {
   const [progress, setProgress] = useState(0);
@@ -29,6 +33,10 @@ const AllRoutes = () => {
           path="/post/:id"
           element={<PostView setProgress={setProgress} />}
         />
+        <Route path="/login" element={<Login setProgress={setProgress}/>} />
+        <Route path="/signup" element={<Signup setProgress={setProgress}/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword setProgress={setProgress}/>}/>
+        <Route path="/reset-password" element={<ResetPassword setProgress={setProgress}/>}/>
       </Routes>
       <Footer />
     </div>
