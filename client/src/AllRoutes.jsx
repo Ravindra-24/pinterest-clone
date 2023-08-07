@@ -9,13 +9,15 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import { Toaster } from "react-hot-toast";
 
 const AllRoutes = () => {
   const [progress, setProgress] = useState(0);
 
   return (
     <div>
-      <Navbar />
+      <Toaster />
+      <Navbar setProgress={setProgress} />
       <LoadingBar
         color="#6096f8"
         height={4}
@@ -33,10 +35,16 @@ const AllRoutes = () => {
           path="/post/:id"
           element={<PostView setProgress={setProgress} />}
         />
-        <Route path="/login" element={<Login setProgress={setProgress}/>} />
-        <Route path="/signup" element={<Signup setProgress={setProgress}/>}/>
-        <Route path="/forgot-password" element={<ForgotPassword setProgress={setProgress}/>}/>
-        <Route path="/reset-password" element={<ResetPassword setProgress={setProgress}/>}/>
+        <Route path="/login" element={<Login setProgress={setProgress} />} />
+        <Route path="/signup" element={<Signup setProgress={setProgress} />} />
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword setProgress={setProgress} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<ResetPassword setProgress={setProgress} />}
+        />
       </Routes>
       <Footer />
     </div>

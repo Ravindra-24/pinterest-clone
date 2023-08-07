@@ -1,20 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-// import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import { loginUser } from "../../redux/action/auth";
+import withPublic from "../../hoc/withPublic";
 
 const Login = ({setProgress}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-//   const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        setProgress(50)
-      console.log(email, password);
-      setProgress(100)
+        dispatch(loginUser({email, password},navigate,setProgress))
     } catch (error) {
       console.log(error);
     }
@@ -114,4 +115,4 @@ const Login = ({setProgress}) => {
   );
 };
 
-export default Login;
+export default withPublic(Login);

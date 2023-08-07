@@ -5,6 +5,7 @@ import {
   generateResetToken,
   verifyResetToken,
   generateToken,
+  verifyAuthToken,
 } from "../utils/token";
 const { validationResult } = require("express-validator");
 
@@ -21,16 +22,15 @@ export const signup = async (req, res) => {
     }
     const { firstName, lastName, email, password } = req.body;
     // create a new user
-    const newUser = await User.create({
+    await User.create({
       firstName,
       lastName,
       email,
       password,
     });
     return res.status(201).json({
-      message: "Signup successfull",
+      message: "Signup successful",
       success: true,
-      data: newUser,
     });
   } catch (error) {
     logger.error(error);
@@ -58,7 +58,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Invalid Email",
+        message: "Invalid Credentials",
         success: false,
         data: null,
       });
@@ -66,7 +66,7 @@ export const login = async (req, res) => {
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
-        message: "Invalid Password",
+        message: "Invalid Credentials",
         success: false,
         data: null,
       });
@@ -81,7 +81,16 @@ export const login = async (req, res) => {
     return res.status(201).json({
       message: "Login successfull",
       success: true,
-      data: { token },
+      data: {
+        token,
+        user: {
+          id: user._id,
+          email: user.email,
+          fullName: user.fullName,
+          initials: user.initials,
+          role: user.role,
+        },
+      },
     });
   } catch (error) {
     logger.error(error);
@@ -157,7 +166,7 @@ export const resetPassword = async (req, res) => {
     }
     const { email } = payload;
     await User.findOneAndUpdate({ email }, { password });
-    
+
     return res.status(200).json({
       message: "Password updated successfully",
       success: true,
@@ -165,6 +174,32 @@ export const resetPassword = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    logger.error(error);
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+};
+
+export const validate = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const payload = verifyAuthToken(token);
+    if (!payload) {
+      return res.status(401).json({
+        message: "Invalid or expired token",
+        success: false,
+        data: null,
+      });
+    }
+    return res.status(200).json({
+      message: "User Verified",
+      success: true,
+      data: { token, user: payload },
+    });
+  } catch (error) {
     logger.error(error);
     return res.status(500).json({
       message: error.message,

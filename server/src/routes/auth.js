@@ -4,6 +4,7 @@ import {
   resetPassword,
   login,
   signup,
+  validate,
 } from "../controllers/auth";
 import { User } from "../db";
 const { body } = require("express-validator");
@@ -13,6 +14,7 @@ const router = Router();
 router.post("/forgot-password",
 body("email").isEmail().withMessage("Please enter a valid email"),
 forgotPassword);
+
 // reset the password
 router.post("/reset-password/:token",
 body("password").trim().isLength({ min: 5 }).withMessage("Password must be at least 5 characters long"),
@@ -42,5 +44,7 @@ router.post(
   body("email").isEmail().withMessage("Please enter a valid email"),
   login
 );
+
+router.get("/validate/:token", validate)
 
 export default router;

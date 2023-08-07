@@ -24,7 +24,7 @@ app.use('/post', postRoutes)
 app.use('/comment', commentRoutes)
 
 app.get('/', (req, res) =>{
-    res.send(`Server is running `)
+    res.send(`Server is running on port ${PORT} `)
 })
 
 app.listen(PORT, () => {

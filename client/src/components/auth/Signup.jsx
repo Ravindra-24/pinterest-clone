@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import withPublic from "../../hoc/withPublic";
 
 const Signup = ({ setProgress }) => {
   const [email, setEmail] = useState("");
@@ -138,4 +139,4 @@ const Signup = ({ setProgress }) => {
   );
 };
 
-export default Signup;
+export default withPublic(Signup);

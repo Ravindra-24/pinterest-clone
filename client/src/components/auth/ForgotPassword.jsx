@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Link } from "react-router-dom";
+import withPublic from '../../hoc/withPublic';
 
 const ForgotPassword = ({setProgress}) => {
     const [email, setEmail] = useState("")
@@ -83,4 +84,4 @@ const ForgotPassword = ({setProgress}) => {
   )
 }
 
-export default ForgotPassword
+export default withPublic(ForgotPassword)
