@@ -22,3 +22,6 @@ export const validate =(token)=>API.get(`/auth/validate/${token}`)
 
 export const signup =(authData)=>API.post("/auth/signup",authData)
 export const login =(authData)=>API.post("/auth/login",authData)
+
+export const forgot = (email)=>API.post("/auth/forgot-password",email)
+export const reset = (token, password)=>API.post(`/auth/reset-password/${token}`,password)

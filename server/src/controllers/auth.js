@@ -1,6 +1,6 @@
 import { User } from "../db";
 import logger from "../logger";
-import { comparePassword, hashPassword } from "../utils/auth.utils";
+import { comparePassword } from "../utils/auth.utils";
 import {
   generateResetToken,
   verifyResetToken,
@@ -126,7 +126,7 @@ export const forgotPassword = async (req, res, next) => {
     const token = generateResetToken({
       email,
     });
-    const resetPasswordLink = `http://localhost:8080/auth/reset-password/${token}`;
+    const resetPasswordLink = `http://localhost:3000/reset-password/${token}`;
     // send the email
     return res.status(200).json({
       message: "Reset password link sent to email",
@@ -165,8 +165,10 @@ export const resetPassword = async (req, res) => {
       });
     }
     const { email } = payload;
-    await User.findOneAndUpdate({ email }, { password });
-
+    const user = await User.findOne({ email });
+    user.password = password;
+    await user.save();
+    // await User.findOneAndUpdate({ email }, { password });
     return res.status(200).json({
       message: "Password updated successfully",
       success: true,

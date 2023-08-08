@@ -42,7 +42,7 @@ const AllRoutes = () => {
           element={<ForgotPassword setProgress={setProgress} />}
         />
         <Route
-          path="/reset-password"
+          path="/reset-password/:token"
           element={<ResetPassword setProgress={setProgress} />}
         />
       </Routes>
