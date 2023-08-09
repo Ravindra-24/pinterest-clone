@@ -1,0 +1,181 @@
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import withPrivate from "../../hoc/withPrivate";
+
+const CreatePost = () => {
+  const [imagePreview, setImagePreview] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handlePreview = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    const filereader = new FileReader();
+    filereader.onload = () => {
+      setImagePreview(filereader.result);
+      setImage(file);
+    };
+    filereader.readAsDataURL(file);
+    // filereader
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      if (!title || !description || !image)
+        throw new Error("Please fill all the fields");
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("title", title);
+      formData.append("description", description);
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto w-full sm:w-3/4 py-2 px-3 sm:py-5 sm:px-0 "
+      >
+        <h2 class="text-4xl font-extrabold my-3">New Post</h2>
+        <div className="space-y-12">
+          <div className="border-b border-gray-900/10 pb-12">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Title
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <input
+                      onChange={(e) => setTitle(e.target.value)}
+                      type="text"
+                      name="title"
+                      id="title"
+                      autoComplete="title"
+                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="Enter a title for your post"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-span-full">
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Description
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    onChange={(e) => setDescription(e.target.value)}
+                    id="description"
+                    name="description"
+                    placeholder="Write a description for your post."
+                    rows={3}
+                    className="block w-full py-1.5 pl-1 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    defaultValue={""}
+                  />
+                </div>
+              </div>
+              {imagePreview ? (
+                <div className="col-span-full">
+                  <label
+                    htmlFor="cover-photo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Preview
+                  </label>
+                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <div className="text-center">
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="w-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="col-span-full">
+                  <label
+                    htmlFor="photo"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Photo
+                  </label>
+                  <div className="mt-2 flex items-center gap-x-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25px"
+                      height="25px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="m8 8 4-4 4 4"
+                        stroke="#ffbf00"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M12 4v12M19 17v.6c0 1.33-1.07 2.4-2.4 2.4H7.4C6.07 20 5 18.93 5 17.6V17"
+                        stroke="#ffbf00"
+                        stroke-width="1.5"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <input
+                      type="file"
+                      name="photo"
+                      id="photo"
+                      accept="image/*"
+                      onChange={handlePreview}
+                      className="sr-only"
+                    />
+                    <label
+                      htmlFor="photo"
+                      className="rounded-md text-white bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 px-2.5 py-1.5 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer"
+                    >
+                      Upload
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+          <button
+            type="button"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Cancel
+          </button>
+          <button
+            className="m-2 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
+            // hover:from-green-400 hover:to-blue-500
+            type="button"
+            data-te-ripple-init=""
+            data-te-ripple-color="light"
+          >
+            Create
+          </button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+export default withPrivate(CreatePost);

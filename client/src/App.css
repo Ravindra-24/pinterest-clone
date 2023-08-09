@@ -1,0 +1,15 @@
+/* GradientProgressBar.css */
+.gradient-progress-wrapper .loading-bar {
+  background-image: linear-gradient(to right, #4285f4, #ea4335);
+  animation: gradient-fill 3s linear;
+  width: 0; /* Initialize width */
+}
+
+@keyframes gradient-fill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}

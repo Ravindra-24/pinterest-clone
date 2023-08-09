@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Gallery from "./components/Galleri";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
@@ -9,26 +9,46 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import NotFound from "./layout/NotFound";
+import { useLocation } from "react-router";
+import "./App.css";
+import CreatePost from "./components/post/CreatePost";
 
 const AllRoutes = () => {
+  const location = useLocation();
+
   const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    try {
+      setProgress(50);
+    } catch (error) {
+      setProgress(100);
+      toast.error(error.message);
+    } finally {
+      setProgress(100);
+    }
+  }, [location.pathname]);
 
   return (
     <div>
       <Toaster />
       <Navbar setProgress={setProgress} />
-      <LoadingBar
-        color="#6096f8"
-        height={4}
-        shadow={true}
-        progress={progress}
-        loaderSpeed={500}
-        containerStyle={{ zIndex: 1000 }}
-        transitionTime={500}
-        waitingTime={1000}
-        onLoaderFinished={() => setProgress(0)}
-      />
+      <div className="gradient-progress-wrapper">
+        <LoadingBar
+          // className="loading-bar"
+          color="#6096f8"
+          height={4}
+          shadow={true}
+          progress={progress}
+          loaderSpeed={500}
+          containerStyle={{ zIndex: 1000 }}
+          transitionTime={500}
+          waitingTime={500}
+          onLoaderFinished={() => setProgress(0)}
+        />
+      </div>
       <Routes>
         <Route path="/" element={<Gallery setProgress={setProgress} />} />
         <Route
@@ -45,6 +65,8 @@ const AllRoutes = () => {
           path="/reset-password/:token"
           element={<ResetPassword setProgress={setProgress} />}
         />
+        <Route path="/create-post" element={<CreatePost setProgress={setProgress}/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

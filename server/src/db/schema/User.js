@@ -70,7 +70,7 @@ userSchema.virtual('fullName').get(function(){
 })
 
 userSchema.virtual('initials').get(function(){
-    return `${this.firstName[0]} ${this.lastName[0]}`
+    return `${this.firstName[0]}${this.lastName[0]}`
 })
 
 userSchema.pre('save',async function(next){

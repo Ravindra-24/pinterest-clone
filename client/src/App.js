@@ -12,6 +12,7 @@ function App() {
   useEffect(() => {
     dispatch(ValidateUser());
   }, [dispatch]);
+
   return (
     <div className="App">
       <Router>

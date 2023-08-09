@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import ColorfulSpinner from "../layout/spinner/spinner";
+import '../layout/spinner/spinner.css'
 
-const Gallery = ({setProgress}) => {
+const Gallery = ({ setProgress }) => {
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,7 +64,18 @@ const Gallery = ({setProgress}) => {
           ))}
         </Masonry>
       </ResponsiveMasonry>
-      {loading && <h1>Loading...</h1>}
+      {loading && (<ColorfulSpinner/>
+        // <div className="w-full flex justify-center">
+        // <div
+        //   class="inline-block border-[#BF00F1] h-8 w-8 animate-spin rounded-full border-4 border-solid border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        //   role="status"
+        // >
+        //   <span class="fill-orange-500 !absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        //     Loading...
+        //   </span>
+        // </div>
+        // </div>
+      )}
     </>
   );
 };
