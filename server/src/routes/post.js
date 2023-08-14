@@ -1,15 +1,27 @@
-import Router from 'express'
-import { getPosts, getPost, createPost, deletePost } from '../controllers/post.js'
+import Router from "express";
+import { authMiddleware } from "../middleware/index";
+import {
+  getPosts,
+  getPost,
+  createPost,
+  deletePost,
+  updatePost,
+} from "../controllers/post.js";
+import {body} from "express-validator";
+import  upload  from "../utils/uploader.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', getPosts)
-router.get('/:id', getPost)
+router.get("/", getPosts);
+
+router.get("/:id", getPost);
 
 //protected
-router.post('/', createPost)
+router.post("/", upload.single("image"),body('title').notEmpty().withMessage('title is required'),authMiddleware, createPost);
 
- //only the user who created the post can delete it and modrator
- router.post('/:id', deletePost)
+//only the user who created the post can delete it and modrator
+router.post("/:id",authMiddleware, deletePost);
 
-export default router
+router.patch("/update/:id",authMiddleware, updatePost)
+
+export default router;

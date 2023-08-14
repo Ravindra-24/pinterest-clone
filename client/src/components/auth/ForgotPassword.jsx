@@ -16,11 +16,9 @@ const ForgotPassword = ({ setProgress }) => {
     setLoading(true);
     e.preventDefault();
     try {
-      dispatch(forgotPassword({ email }, navigate, setProgress));
+      dispatch(forgotPassword({ email }, navigate,setLoading, setProgress));
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
   return (

@@ -1,24 +1,29 @@
 import { Post, Comment } from "../db";
 import logger from "../logger";
+import { validationResult } from "express-validator";
+import axios from "axios";
 
 export const getPosts = async (req, res) => {
   try {
-    const { pageNumber = 1 } = req.query;
-    const offset = (pageNumber - 1) * 10;
+    const { _page = 1, _limit = 20 } = req.query;
+    // page size = 10
+    const offset = (_page - 1) * 10;
     const posts = await Post.find()
-      .limit(10)
+      .limit(_limit)
       .skip(offset)
       .sort({ createdAt: -1 })
-      .populate("user","firstName lastName email pofilePicture")
-      .populate({
-        path:"comments",
-        populate: {
-          path:"user",
-          select: "firstName lastName email profilePicture"
-        }
-      });
+      .populate("user");
+    // .select("title description image createdAt user comments id")
+    //   .populate("comments", "commentText user");
+    // .populate({
+    //   path: "comments",
+    //   populate: {
+    //     path: "user",
+    //     select: "firstName lastName email profilePicture",
+    //   },
+    // });
     return res.status(200).json({
-      message: "Post fetched successfully",
+      message: "Posts fetched successfully",
       success: true,
       data: posts,
     });
@@ -34,7 +39,7 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const id = req.params.id;
-    const post = await Post.findOne({ _id: id });
+    const post = await Post.findOne({ _id: id }).populate("user")
     return res.status(200).json({
       message: "Post fetched successfully",
       success: true,
@@ -51,15 +56,37 @@ export const getPost = async (req, res) => {
 
 export const createPost = async (req, res) => {
   try {
-    const { title, discription, image, userId } = req.body;
-    const post = await Post.create({ 
-        title, 
-        discription, 
-        image, 
-        user: userId,
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      logger.error(errors);
+      return res.status(400).json({
+        errors: errors.array(),
+        success: false,
+      });
+    }
+    const {
+      user: { id },
+    } = req;
+    const { title, description } = req.body;
+    const file = req.file;
+    const responseURL = await axios.post(
+      `https://api.upload.io/v2/accounts/${process.env.UPLOAD_IO_ACCOUNT_ID}/uploads/binary`,
+      file.buffer,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.UPLOAD_IO_API_KEY}`,
+        },
+      }
+    );
+    // console.log(responseURL);
+    const post = await Post.create({
+      title,
+      description,
+      image: responseURL.data.fileUrl,
+      user: id,
     });
     return res.status(200).json({
-      message: "Post fetched successfully",
+      message: "Post created successfully",
       success: true,
       data: post,
     });
@@ -72,23 +99,70 @@ export const createPost = async (req, res) => {
   }
 };
 
-
-export const deletePost = async (req, res) => {
-    try {
-        //only the user who created the post can delete it and modrator
-      const { id } = req.params;
-      const post = await Post.findOneAndDelete({ _id: id });
-      return res.status(200).json({
-        message: "Post deleted successfully",
-        success: true,
-      });
-    } catch (error) {
-      logger.error(error);
-      return res.status(500).json({
-        error: error.message,
+export const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description } = req.body;
+    // console.log(id, title, description);
+    const post = await Post.findOne({ _id: id });
+    if (!post) {
+      return res.status(404).json({
+        message: "Post not found",
         success: false,
       });
     }
-  };
+    if(post.user._id.toString() !== req.user.id){
+      return res.status(401).json({
+        message: "You are not authorized to update this post",
+        success: false,
+      });
+    }
+    await Post.findByIdAndUpdate(id,{...(title && {title}),...(description && {description})})
+    const updatedPost = await Post.findById(id).populate("user")
+    // post.title = title;
+    // post.description = description;
+    // await post.save();
+    return res.status(200).json({
+      message: "Post updated successfully",
+      success: true,
+      data: updatedPost,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+      success: false,
+    });
+  }
+};
 
-  
+export const deletePost = async (req, res) => {
+  try {
+    //only the user who created the post can delete it and modrator
+    const {id} = req.params;
+    const post = await Post.findOne({ _id: id });
+    if (!post) {
+      return res.status(404).json({
+        message: "Post not found",
+        success: false,
+      });
+    }
+    if(post.user._id.toString() !== req.user.id){
+      return res.status(401).json({
+        message: "You are not authorized to delete this post",
+        success: false,
+      });
+    }
+    await Post.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      message: "Post deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    logger.error(error);
+    return res.status(500).json({
+      error: error.message,
+      success: false,
+    });
+  }
+};

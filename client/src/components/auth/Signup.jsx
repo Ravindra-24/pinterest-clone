@@ -27,8 +27,6 @@ const Signup = ({ setProgress }) => {
       );
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
   return (

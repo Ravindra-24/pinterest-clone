@@ -1,20 +1,36 @@
 import axios from "axios";
 import store from '../../redux/store'
+import toast from "react-hot-toast";
 
 export const API = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
-  timeout: 5000,
+  // timeout: 5000,
   headers: {},
 });
 
-API.interceptors.response.use((response) => {
-  return response.data;
+API.interceptors.request.use((req) => {
+  const auth = store.getState().authReducer;
+  if (auth.token) {
+    req.headers.authorization = `Bearer ${auth.token}`;
+  }
+  return req;
 },(error) => {
     console.log(error);
+    toast.error(error.response.message);
+    return Promise.reject(error)
+})
+
+API.interceptors.response.use((response) => {
+  if(response) return response.data;
+},(error) => { 
+  if(error.axiosError){
+    toast.error(error.message);
+  }
+    // console.log(error);
     if(error.response.status===401){
       store.dispatch({type:"LOGOUT"})
     }
-    return Promise.reject(error);
+    return  Promise.reject(error)
 });
 
 
@@ -25,3 +41,10 @@ export const login =(authData)=>API.post("/auth/login",authData)
 
 export const forgot = (email)=>API.post("/auth/forgot-password",email)
 export const reset = (token, password)=>API.post(`/auth/reset-password/${token}`,password)
+
+export const create = (formData) => API.post("/post", formData);
+export const update = (id, formData) => API.patch(`/post/update/${id}`, formData);
+export const deletePostId = (id) => API.post(`post/${id}`); 
+
+export const fetchAllPosts = (page, limit) => API.get(`/post?_page=${page}&_limit=${limit}`);
+export const getPost = (id) => API.get(`/post/${id}`);

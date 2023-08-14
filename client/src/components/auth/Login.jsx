@@ -17,11 +17,9 @@ const Login = ({ setProgress }) => {
     setLoading(true);
     e.preventDefault();
     try {
-      dispatch(loginUser({ email, password }, navigate, setProgress));
+      dispatch(loginUser({ email, password }, navigate,setLoading, setProgress));
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 

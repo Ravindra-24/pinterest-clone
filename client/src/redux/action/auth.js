@@ -27,7 +27,7 @@ export const signupUser =
   };
 
 export const loginUser =
-  (authData, navigate, setProgress) => async (dispatch) => {
+  (authData, navigate,setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const responseData = await api.login(authData);
@@ -45,11 +45,12 @@ export const loginUser =
       setProgress(100);
     } finally {
       setProgress(100);
+      setLoading(false);
     }
   };
 
 export const forgotPassword =
-  (email, navigate, setProgress) => async (dispatch) => {
+  (email, navigate,setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const response = await api.forgot(email);
@@ -62,11 +63,12 @@ export const forgotPassword =
       toast.error(error.response.data.message);
     } finally {
       setProgress(100);
+      setLoading(false)
     }
   };
 
 export const resetPassword =
-  (token, password, navigate, setProgress) => async (dispatch) => {
+  (token, password, navigate,setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const response = await api.reset(token, password);
@@ -75,10 +77,12 @@ export const resetPassword =
       navigate("/login");
       setProgress(100);
     } catch (error) {
+      if(error.response.data.data || error.response.data.message){
       errorBox(error.response.data.data);
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message);}
     } finally {
       setProgress(100);
+      setLoading(false)
     }
   };
 
@@ -87,13 +91,15 @@ export const ValidateUser = () => async (dispatch) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     const responseData = await api.validate(token);
+    if(responseData === null) return;
     dispatch({
       type: "AUTH",
       payload: { token, user: responseData.data.user },
     });
     toast.success(responseData.message);
   } catch (error) {
-    toast.error(error.responseData.data.message);
+    if(error.responseData.data.message){
+    toast.error(error.responseData.data.message);}
     console.log(error);
   }
 };

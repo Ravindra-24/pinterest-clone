@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Gallery from "./components/Galleri";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
-import PostView from "./components/PostView";
+import PostView from "./components/post/PostView";
 import LoadingBar from "react-top-loading-bar";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
@@ -14,6 +14,7 @@ import NotFound from "./layout/NotFound";
 import { useLocation } from "react-router";
 import "./App.css";
 import CreatePost from "./components/post/CreatePost";
+import EditPost from "./components/post/EditPost";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -55,6 +56,7 @@ const AllRoutes = () => {
           path="/post/:id"
           element={<PostView setProgress={setProgress} />}
         />
+        <Route path="/post/edit/:id" element={<EditPost setProgress={setProgress}/>}/>
         <Route path="/login" element={<Login setProgress={setProgress} />} />
         <Route path="/signup" element={<Signup setProgress={setProgress} />} />
         <Route

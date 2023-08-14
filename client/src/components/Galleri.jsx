@@ -1,30 +1,37 @@
-import axios from "axios";
+import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ColorfulSpinner from "../layout/spinner/spinner";
-import '../layout/spinner/spinner.css'
+import { useDispatch, useSelector } from "react-redux";
+import "../layout/spinner/spinner.css";
+import { fetchPosts } from "../redux/action/post";
+import PostsDetails from "./post/PostsDetails";
 
 const Gallery = ({ setProgress }) => {
   const [page, setPage] = useState(1);
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const dispatch = useDispatch();
+
   const lastImageRef = useRef(null);
   const observer = useRef(null);
   const limit = 20;
-  const fetchData = async () => {
+
+  const allPosts = useSelector((state) => state.postsReducer.posts);
+
+  const fetchData = () => {
     try {
       setLoading(true);
       setProgress(30);
-      const { data } = await axios.get(
-        `https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=${limit}`
+      dispatch(
+        fetchPosts(page, limit, setProgress, setDone, setLoading)
       );
       setProgress(70);
-      setPosts((prev) => [...prev, ...data]);
       setProgress(100);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
   useEffect(() => {
@@ -32,7 +39,7 @@ const Gallery = ({ setProgress }) => {
   }, [page]);
 
   useEffect(() => {
-    if (loading) return;
+    if (loading || done) return;
     if (observer.current) {
       // if observer is already observing then disconnect it
       observer.current.disconnect();
@@ -45,36 +52,35 @@ const Gallery = ({ setProgress }) => {
     if (lastImageRef.current) {
       observer.current.observe(lastImageRef.current);
     }
-  }, [posts, loading]);
+  }, [allPosts, loading]);
 
   return (
     <>
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4, 1100: 5 }}
-      >
-        <Masonry>
-          {posts.map(({ url, id }, index) => (
-            <img
-              ref={index === posts.length - 1 ? lastImageRef : null}
-              className="m-2"
-              key={id}
-              src={url}
-              alt="random"
-            />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
-      {loading && (<ColorfulSpinner/>
-        // <div className="w-full flex justify-center">
-        // <div
-        //   class="inline-block border-[#BF00F1] h-8 w-8 animate-spin rounded-full border-4 border-solid border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        //   role="status"
-        // >
-        //   <span class="fill-orange-500 !absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-        //     Loading...
-        //   </span>
-        // </div>
-        // </div>
+      <div className="">
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4, 1100: 5 }}
+        >
+          <Masonry>
+            {allPosts && allPosts.map((post, index) => (
+              <div key={post._id} className="relative m-1">
+                <img
+                  ref={index === allPosts.length - 1 ? lastImageRef : null}
+                  className="m-2"
+                  key={post._id}
+                  src={post.image}
+                  alt="random"
+                  style={{ objectFit: "contain" }}
+                />
+                <PostsDetails post={post} setProgress={setProgress}/>
+              </div>
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      </div>
+      {loading && (
+        <div className="w-full flex justify-center mb-5">
+          <ColorfulSpinner />
+        </div>
       )}
     </>
   );

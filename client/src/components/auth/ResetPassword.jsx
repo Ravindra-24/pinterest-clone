@@ -21,11 +21,9 @@ const ResetPassword = ({ setProgress }) => {
     try {
       if (password !== confirmPassword)
         return toast.error("Password do not match");
-      dispatch(resetPassword(token,{ password }, navigate, setProgress));
+      dispatch(resetPassword(token,{ password }, navigate,setLoading, setProgress));
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 

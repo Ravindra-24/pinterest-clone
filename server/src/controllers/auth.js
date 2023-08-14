@@ -58,7 +58,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Invalid Credentials",
+        message: "User with this email does not exist",
         success: false,
         data: null,
       });

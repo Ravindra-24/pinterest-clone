@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 const withPrivate = (Component) => {
     const AuthRoute = (props) => {
         const auth = useSelector(state => state.authReducer)
-        return auth.token ? <Component {...props} /> : <Navigate to="/" />
+        return auth.token ? <Component {...props} /> : <Navigate to="/login" />
         
     }
     return AuthRoute

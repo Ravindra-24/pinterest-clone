@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Avatar from "./Avatar";
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   const auth = useSelector((state) => state.authReducer);
 
   const handleLogout = () => {
@@ -19,7 +21,7 @@ const Navbar = () => {
       }}
       className="bg-white-800 shadow-md w-full"
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="inset-y-0 left-0 flex items-center">
             <img
@@ -84,19 +86,7 @@ const Navbar = () => {
                     </Link>
                   )}
                   <>
-                    <button
-                      className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid"
-                      id="user-menu"
-                      aria-label="User menu"
-                      aria-haspopup="true"
-                    >
-                      <span className="sr-only">Open user menu</span>
-                      <span className="rounded-full h-8 w-8 flex items-center justify-center">
-                        <span className="text-white font-medium">
-                          {auth.user.initials.toUpperCase()}
-                        </span>
-                      </span>
-                    </button>
+                    <Avatar auth={auth}/>
                   </>
                   <svg
                     onClick={handleLogout}
@@ -146,7 +136,7 @@ const Navbar = () => {
                         data-te-ripple-color="light"
                         onClick={() => navigate("/login")}
                       >
-                        Log in
+                        Login
                       </button>
                       <button
                         className="ml-1 border-[#fuchsia] m-2 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600"
