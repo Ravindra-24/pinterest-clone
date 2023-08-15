@@ -25,8 +25,8 @@ const EditPost = ({ setProgress }) => {
       dispatch(
         getPostDetails(
           id,
-          setProgress
-          // navigate,
+          setProgress,
+          navigate
           // setTitle,
           // setDescription,
           // setImagePreview

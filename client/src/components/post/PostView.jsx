@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Comments from "./Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { useParams } from "react-router";
-import { getPostDetails } from "../../redux/action/post";
+import { useNavigate, useParams } from "react-router";
+import { deletePost, getPostDetails } from "../../redux/action/post";
 import ColorfulLoader from "../../layout/spinner/spinner";
 
 const PostView = ({ setProgress }) => {
@@ -13,6 +13,7 @@ const PostView = ({ setProgress }) => {
   const [liked, setLiked] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const handleLike = () => {
@@ -21,11 +22,21 @@ const PostView = ({ setProgress }) => {
 
   const getpostDetail = () => {
     try {
-      dispatch(getPostDetails(id, setProgress));
+      dispatch(getPostDetails(id, setProgress, navigate));
     } catch (error) {
       toast.error(error.message);
-    }
+    } 
   };
+
+  const handlePostDelete = () => {
+    try {
+      dispatch(deletePost(post._id, setProgress));
+    } catch (error) {
+      toast.error(error.message);
+    }finally{
+      navigate('/')
+    }
+  }
 
   useEffect(() => {
     getpostDetail();
@@ -114,6 +125,11 @@ const PostView = ({ setProgress }) => {
                       <p className="text-gray-600 text-sm">
                         {liked ? "Liked" : "Like"}
                       </p>
+                    </button>
+                    <button
+                      className="flex items-center focus:outline-none"
+                      onClick={handlePostDelete}
+                    >delete
                     </button>
                   </div>
                   <div className="mb-4">

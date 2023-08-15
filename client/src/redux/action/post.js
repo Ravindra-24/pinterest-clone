@@ -63,7 +63,7 @@ export const updatePost =
     }
   };
 
-export const getPostDetails = (id, setProgress) => async (dispatch) => {
+export const getPostDetails = (id, setProgress, navigate) => async (dispatch) => {
   try {
     setProgress(40);
     const response = await api.getPost(id);
@@ -71,6 +71,8 @@ export const getPostDetails = (id, setProgress) => async (dispatch) => {
     dispatch({ type: "GET_POST_DETAILS", payload: response.data });
     setProgress(100);
   } catch (error) {
+    toast.error(error.response.data.message);
+    navigate("/");
     console.log(error);
     setProgress(100);
   }
@@ -103,17 +105,20 @@ export const getPostDetails = (id, setProgress) => async (dispatch) => {
 
 
 export const fetchPosts =
-  (page, limit, setProgress, setDone, setLoading) =>
+  (page, limit,search, setProgress, setDone, setLoading) =>
   async (dispatch) => {
     try {
       setProgress(50);
-      const response = await api.fetchAllPosts(page, limit);
-      console.log(response);
+      const response = await api.fetchAllPosts(page, limit, search);
+      // console.log(response);
       setProgress(80);
       if (response.data.length === 0) {
         setDone(true);
         console.log("Data Base retunrns nothing");
-      } else {
+      } else if(search){
+        dispatch({ type: "FETCH_SEARCH_POSTS", payload: response.data })
+        console.log("Search is working");
+      }else{
         // setPosts((prevPosts) => {
         //   const uniquePosts = response.data.filter(
         //     (newPost) =>

@@ -46,5 +46,5 @@ export const create = (formData) => API.post("/post", formData);
 export const update = (id, formData) => API.patch(`/post/update/${id}`, formData);
 export const deletePostId = (id) => API.post(`post/${id}`); 
 
-export const fetchAllPosts = (page, limit) => API.get(`/post?_page=${page}&_limit=${limit}`);
+export const fetchAllPosts = (page, limit, search) => API.get(`/post?_page=${page}&_limit=${limit}&_search=${search}`);
 export const getPost = (id) => API.get(`/post/${id}`);

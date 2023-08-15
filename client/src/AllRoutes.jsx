@@ -15,6 +15,7 @@ import { useLocation } from "react-router";
 import "./App.css";
 import CreatePost from "./components/post/CreatePost";
 import EditPost from "./components/post/EditPost";
+import { SearchProvider } from "./context/searchContext";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ const AllRoutes = () => {
   return (
     <div>
       <Toaster />
+      <SearchProvider>
       <Navbar setProgress={setProgress} />
       <div className="gradient-progress-wrapper">
         <LoadingBar
@@ -70,6 +72,7 @@ const AllRoutes = () => {
         <Route path="/create-post" element={<CreatePost setProgress={setProgress}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </SearchProvider>
       <Footer />
     </div>
   );
