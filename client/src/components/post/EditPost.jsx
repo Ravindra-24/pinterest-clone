@@ -83,11 +83,11 @@ const EditPost = ({ setProgress }) => {
 
   return (
     <>
-      <div className="flex justify-center align-center">
-        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 max-sm:m-auto">
+      <div className="flex justify-center align-center dark:bg-gray-800">
+        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 max-sm:m-auto dark:bg-gray-700">
           <form
             onSubmit={handleSubmit}
-            className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0 "
+            className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0 dark:bg-gray-700"
           >
             <h2 class="text-4xl font-extrabold my-3 max-sm:text-2xl">
               Edit Post
@@ -99,7 +99,7 @@ const EditPost = ({ setProgress }) => {
                   <div className="sm:col-span-4">
                     <label
                       htmlFor="title"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                     >
                       Title
                     </label>
@@ -112,7 +112,7 @@ const EditPost = ({ setProgress }) => {
                           name="title"
                           id="title"
                           autoComplete="title"
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                          className="block flex-1 border-[1px] rounded bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-gray-300 shadow-sm sm:text-sm sm:leading-6 dark:text-white dark:bg-gray-600"
                           placeholder="Enter a title for your post"
                         />
                       </div>
@@ -122,7 +122,7 @@ const EditPost = ({ setProgress }) => {
                   <div className="col-span-full">
                     <label
                       htmlFor="description"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                     >
                       Description
                     </label>
@@ -134,7 +134,7 @@ const EditPost = ({ setProgress }) => {
                         name="description"
                         placeholder="Write a description for your post."
                         rows={3}
-                        className="block w-full py-1.5 pl-1 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full py-1.5 pl-1 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-gray-600 dark:text-white"
                         defaultValue={""}
                       />
                     </div>
@@ -142,11 +142,11 @@ const EditPost = ({ setProgress }) => {
                   <div className="col-span-full">
                     <label
                       htmlFor="cover-photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-sm font-medium leading-6 text-gray-900 dark:text-white"
                     >
                       Post
                     </label>
-                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 hover:cursor-not-allowed">
+                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 hover:cursor-not-allowed dark:bg-gray-600">
                       <div className="text-center">
                         <img
                           src={imagePreview}
@@ -165,7 +165,7 @@ const EditPost = ({ setProgress }) => {
                 disabled={isLoading}
                 onClick={handleCancel}
                 type="button"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="text-sm font-semibold leading-6 text-gray-900 dark:text-white"
               >
                 Cancel
               </button>

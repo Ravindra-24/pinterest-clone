@@ -14,7 +14,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className="App bg-gray-50 dark:bg-gray-700 dark:text-white">
       <Router>
         <AllRoutes />
       </Router>

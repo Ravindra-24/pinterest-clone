@@ -61,10 +61,10 @@ const PostView = ({ setProgress }) => {
   return (
     <>
       {post ? (
-        <div className="flex justify-center align-center">
+        <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">
           <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto">
-            <div className="max-w-full mx-auto bg-white rounded-md shadow-md overflow-hidden w-full">
-              <div className="md:flex gap-4 w-full">
+            <div className="max-w-full mx-auto bg-gray-50 dark:bg-gray-800 dark:test-white rounded-md shadow-md overflow-hidden w-full">
+              <div className="md:flex gap-4 w-full ">
                 <div className="md:w-2/3 flex place-items-start justify-center align-top">
                   <img
                     src={post?.image}
@@ -77,7 +77,7 @@ const PostView = ({ setProgress }) => {
                     }}
                   />
                 </div>
-                <div className="md:w-1/2 p-4 flex flex-col justify-center">
+                <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
                   <div className="flex items-center">
                     {post.user?.profilePhoto ? (
                       <img
@@ -101,25 +101,25 @@ const PostView = ({ setProgress }) => {
                         </span>
                       </div>
                     )}
-                    <div>
-                      <h2 className="text-lg font-semibold">
+                    <div className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
+                      <h2 className="text-lg font-semibold dark:text-white">
                         {post?.user?.firstName.charAt(0).toUpperCase() +
                           post?.user?.firstName.slice(1) +
                           " " +
                           post?.user?.lastName.charAt(0).toUpperCase() +
                           post?.user?.lastName.slice(1)}
                       </h2>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-600 text-sm dark:text-gray-200">
                         Posted {moment(post?.createdAt).fromNow()}{" "}
                         
                       </p>
                     </div>
                   </div>
                   <div className="m-4">
-                    <h3 className="text-lg font-semibold mb-2">
+                    <h3 className="text-lg font-semibold mb-2 dark:text-white">
                       {post?.title}
                     </h3>
-                    <p className="text-gray-600 text-sm overflow-hidden whitespace-normal break-all">
+                    <p className="text-gray-600 text-sm overflow-hidden whitespace-normal break-all dark:text-white">
                       {post?.description}
                     </p>
                   </div>
@@ -129,21 +129,21 @@ const PostView = ({ setProgress }) => {
                       className="flex items-center focus:outline-none ml-4"
                       onClick={handleShare}
                     >
-                      <p className="text-gray-600 text-sm">Share</p>
+                      <p className="text-gray-600 text-sm dark:text-gray-200">Share</p>
                     </button>
                     {auth && auth.id === post.user._id && (
                       <button
                         className="flex items-center focus:outline-none ml-4"
                         onClick={handlePostDelete}
                       >
-                        <p className="text-gray-600 text-sm">delete</p>
+                        <p className="text-gray-600 text-sm dark:text-gray-200">delete</p>
                       </button>
                     )}
                   </div>
                   <div className="mb-4">
                     <div className="flex justify-between">
-                      <h3 className="text-lg font-semibold mb-2">Comments</h3>
-                      <span className=" italic">
+                      <h3 className="text-lg font-semibold mb-2 dark:text-white">Comments</h3>
+                      <span className=" italic dark:text-gray-200">
                         {post?.comments?.length > 0
                           ? post?.comments?.length + " comments"
                           : ""}

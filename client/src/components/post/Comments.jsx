@@ -36,7 +36,7 @@ const Comments = ({ comments, postId }) => {
         comments.map((comment) => (
           <div
             key={comment._id}
-            className="m-4 flex mx-auto bg-white rounded-md shadow-md p-2 overflow-hidden md:max-w-full md:flex max-sm:w-full"
+            className="m-4 flex mx-auto bg-white rounded-md shadow-md p-2 overflow-hidden md:max-w-full md:flex max-sm:w-full dark:bg-gray-700"
           >
             <div className=" md:flex-shrink-0 flex items-center rounded">
               <>
@@ -66,7 +66,7 @@ const Comments = ({ comments, postId }) => {
             </div>
             <div className="p-4 md:w-1/2 md:flex-grow ">
               <div className="flex">
-              <div className=" tracking-wide text-sm text-indigo-500 font-semibold">
+              <div className={` tracking-wide text-sm  font-semibold ${comment?.user._id === auth?.id ? "text-indigo-500" : "dark:text-white"}`}>
                 {comment?.user?.firstName.charAt(0).toUpperCase() +
                   comment?.user?.firstName.slice(1) +
                   " " +
@@ -74,17 +74,17 @@ const Comments = ({ comments, postId }) => {
                   comment?.user?.lastName.slice(1)}
                   
               </div>
-              <p className="text-gray-600 text-sm ml-2">
+              <p className="text-gray-600 text-sm ml-2 dark:text-gray-300">
                         {moment(comment?.createdAt).fromNow()}
                       </p>
               </div>
               <div className="">
-                <p className="mt-2 text-gray-600 overflow-hidden whitespace-normal break-all">
+                <p className="mt-2 text-gray-600 overflow-hidden whitespace-normal break-all dark:text-white">
                   {comment.commentText}
                 </p>
               </div>
               <div className="flex">
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-sm dark:text-gray-300">
         {comment?.likes?.length > 0 ? comment?.likes?.length + " Likes" : ""}
       </p>
       <button
@@ -96,7 +96,7 @@ const Comments = ({ comments, postId }) => {
           className={`h-6 w-6 mr-1 ${
             comment?.likes?.includes(auth?.id) 
               ? "text-red-500 animate-like"
-              : "text-gray-600"
+              : "text-gray-600 dark:text-gray-200"
           }`}
           fill="none"
           viewBox="0 0 24 24"
@@ -113,16 +113,16 @@ const Comments = ({ comments, postId }) => {
             }
           />
         </svg>
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-600 text-sm dark:text-gray-200">
           {comment?.likes?.includes(auth?.id) ? "Liked" : "Like"}
         </p>
       </button>
                 {auth && auth.id === comment.user._id && (
                   <button
-                    className="flex items-center focus:outline-none ml-4"
+                    className="flex items-center focus:outline-none ml-4 "
                     onClick={() => handleCommentDelete(comment._id)}
                   >
-                    <p className="text-gray-600 text-sm">delete</p>
+                    <p className="text-gray-600 text-sm dark:text-gray-200">delete</p>
                   </button>
                 )}
               </div>

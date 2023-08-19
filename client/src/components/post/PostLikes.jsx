@@ -18,11 +18,11 @@ const PostLikes = ({ post }) => {
 
   return (
     <div className="flex">
-      <p className="text-gray-600 text-sm">
+      <p className="text-gray-600 text-sm dark:text-gray-300">
         {post?.likes?.length > 0 ? post?.likes?.length + " Likes" : ""}
       </p>
       <button
-        className="flex items-center focus:outline-none ml-4"
+        className="flex items-center focus:outline-none ml-4 dark:text-gray-200"
         onClick={handlePostLike}
       >
         <svg
@@ -30,7 +30,7 @@ const PostLikes = ({ post }) => {
           className={`h-6 w-6 mr-1 ${
             post?.likes?.includes(auth?.id) 
               ? "text-red-500 animate-like"
-              : "text-gray-600"
+              : "text-gray-600 dark:text-gray-200"
           }`}
           fill="none"
           viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ const PostLikes = ({ post }) => {
             }
           />
         </svg>
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-600 text-sm dark:text-gray-200">
           {post?.likes?.includes(auth?.id) ? "Liked" : "Like"}
         </p>
       </button>
