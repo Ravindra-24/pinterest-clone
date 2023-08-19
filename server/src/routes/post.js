@@ -6,6 +6,7 @@ import {
   createPost,
   deletePost,
   updatePost,
+  updatePostLikes,
 } from "../controllers/post.js";
 import {body} from "express-validator";
 import  upload  from "../utils/uploader.js";
@@ -23,5 +24,7 @@ router.post("/", upload.single("image"),body('title').notEmpty().withMessage('ti
 router.post("/:id",authMiddleware, deletePost);
 
 router.patch("/update/:id",authMiddleware, updatePost)
+
+router.patch("/like/:postId",authMiddleware, updatePostLikes);
 
 export default router;

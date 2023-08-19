@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Comments from "./Comments";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import { toast } from "react-hot-toast";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { deletePost, getPostDetails } from "../../redux/action/post";
 import ColorfulLoader from "../../layout/spinner/spinner";
+import AddComment from "../../layout/AddComment";
+import PostLikes from "./PostLikes";
 
 const PostView = ({ setProgress }) => {
+  const auth = useSelector((state) => state.authReducer.user);
   const post = useSelector((state) => state.postsReducer.post);
   console.log(post);
 
@@ -14,6 +18,7 @@ const PostView = ({ setProgress }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
 
   const handleLike = () => {
@@ -25,7 +30,7 @@ const PostView = ({ setProgress }) => {
       dispatch(getPostDetails(id, setProgress, navigate));
     } catch (error) {
       toast.error(error.message);
-    } 
+    }
   };
 
   const handlePostDelete = () => {
@@ -33,10 +38,21 @@ const PostView = ({ setProgress }) => {
       dispatch(deletePost(post._id, setProgress));
     } catch (error) {
       toast.error(error.message);
-    }finally{
-      navigate('/')
+    } finally {
+      navigate("/");
     }
-  }
+  };
+
+  const handleShare = () => {
+    try {
+      navigator.clipboard.writeText(
+        "http://localhost:3000" + location.pathname
+      );
+      toast.success("Link Copied");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getpostDetail();
@@ -63,9 +79,9 @@ const PostView = ({ setProgress }) => {
                 </div>
                 <div className="md:w-1/2 p-4 flex flex-col justify-center">
                   <div className="flex items-center">
-                    {post.user.photo ? (
+                    {post.user?.profilePhoto ? (
                       <img
-                        src={post?.user.photo}
+                        src={post?.user?.profilePhoto}
                         alt="Profile"
                         className="w-10 h-10 rounded-full mr-2 object-cover"
                       />
@@ -79,96 +95,67 @@ const PostView = ({ setProgress }) => {
                         {/* <span className="sr-only">Open user menu</span> */}
                         <span className="rounded-full h-8 w-8 flex items-center justify-center">
                           <span className="text-white font-medium">
-                            {post?.user?.firstName?.charAt(0).toUpperCase()+post?.user?.lastName?.charAt(0).toUpperCase() }
+                            {post?.user?.firstName?.charAt(0).toUpperCase() +
+                              post?.user?.lastName?.charAt(0).toUpperCase()}
                           </span>
                         </span>
                       </div>
                     )}
                     <div>
                       <h2 className="text-lg font-semibold">
-                        {post.user.firstName + " " + post.user.lastName}
+                        {post?.user?.firstName.charAt(0).toUpperCase() +
+                          post?.user?.firstName.slice(1) +
+                          " " +
+                          post?.user?.lastName.charAt(0).toUpperCase() +
+                          post?.user?.lastName.slice(1)}
                       </h2>
-                      <p className="text-gray-600 text-sm">{post?.user?.location || <>location</>}</p>
+                      <p className="text-gray-600 text-sm">
+                        Posted {moment(post?.createdAt).fromNow()}{" "}
+                        
+                      </p>
                     </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="m-4">
                     <h3 className="text-lg font-semibold mb-2">
                       {post?.title}
                     </h3>
-                    <p className="text-gray-600 text-sm">{post?.description}</p>
+                    <p className="text-gray-600 text-sm overflow-hidden whitespace-normal break-all">
+                      {post?.description}
+                    </p>
                   </div>
                   <div className="flex items-center mb-4">
+                    <PostLikes post={post}/>
                     <button
-                      className="flex items-center focus:outline-none"
-                      onClick={handleLike}
+                      className="flex items-center focus:outline-none ml-4"
+                      onClick={handleShare}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-6 w-6 mr-1 ${
-                          liked ? "text-red-500 animate-like" : "text-gray-600"
-                        }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                      <p className="text-gray-600 text-sm">Share</p>
+                    </button>
+                    {auth && auth.id === post.user._id && (
+                      <button
+                        className="flex items-center focus:outline-none ml-4"
+                        onClick={handlePostDelete}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d={
-                            liked
-                              ? "M5 12h14M12 5l7 7-7 7"
-                              : "M12 4.5c-3.3 0-6 2.7-6 6 0 1.8.8 3.4 2 4.5l4 3.5 4-3.5c1.2-1.1 2-2.7 2-4.5 0-3.3-2.7-6-6-6zm0 10.5l-3.5 3-1.5-1.5 5-4.5 5 4.5-1.5 1.5-3.5-3z"
-                          }
-                        />
-                      </svg>
-                      <p className="text-gray-600 text-sm">
-                        {liked ? "Liked" : "Like"}
-                      </p>
-                    </button>
-                    <button
-                      className="flex items-center focus:outline-none"
-                      onClick={handlePostDelete}
-                    >delete
-                    </button>
+                        <p className="text-gray-600 text-sm">delete</p>
+                      </button>
+                    )}
                   </div>
                   <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">Comments</h3>
-                    <Comments
-                      comment={{
-                        author: "John Doe",
-                        content:
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                      }}
-                    />
-                    <Comments
-                      comment={{
-                        author: "Jane Doe",
-                        content:
-                          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      }}
-                    />
-                    <Comments
-                      comment={{
-                        author: "Jane Doe",
-                        content:
-                          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      }}
-                    />
-                    <Comments
-                      comment={{
-                        author: "Jane Doe",
-                        content:
-                          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      }}
-                    />
-                    <Comments
-                      comment={{
-                        author: "Jane Doe",
-                        content:
-                          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      }}
-                    />
+                    <div className="flex justify-between">
+                      <h3 className="text-lg font-semibold mb-2">Comments</h3>
+                      <span className=" italic">
+                        {post?.comments?.length > 0
+                          ? post?.comments?.length + " comments"
+                          : ""}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center mb-4 w-full">
+                      <AddComment />
+                    </div>
+                    <div className="max-sm:w-full">
+                      <Comments comments={post?.comments} postId={post?._id} />
+                    </div>
                   </div>
                 </div>
               </div>

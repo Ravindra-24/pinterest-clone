@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Search from "./Search"
 import Avatar from "./Avatar";
+import ProjectLogo from "./ProjectLogo";
 
 const Navbar = () => {
   const location = useLocation();
@@ -18,14 +19,15 @@ const Navbar = () => {
   return (
     <nav
       style={{
-        background: "#0E131F",
+        background: "#FFDAB9",
       }}
       className="bg-white-800 shadow-md w-full"
     >
       <div className="w-full mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="inset-y-0 left-0 flex items-center">
-            <img
+            <ProjectLogo/>
+            {/* <img
               className="block lg:hidden h-10 w-auto"
               src="https://www.svgrepo.com/show/384978/donut-doughnut-sweet-dessert-food-fastfood.svg"
               alt="Logo"
@@ -34,7 +36,7 @@ const Navbar = () => {
               className="hidden lg:block h-10 w-auto"
               src="https://www.svgrepo.com/show/384978/donut-doughnut-sweet-dessert-food-fastfood.svg"
               alt="Logo"
-            />
+            /> */}
           </div>
           <Search />
 
@@ -45,7 +47,7 @@ const Navbar = () => {
                   {location.pathname !== "/create-post" && (
                     <Link
                       to="/create-post"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-3"
+                      className="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-3"
                     >
                       New+
                     </Link>

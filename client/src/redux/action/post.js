@@ -63,46 +63,31 @@ export const updatePost =
     }
   };
 
-export const getPostDetails = (id, setProgress, navigate) => async (dispatch) => {
+export const getPostDetails = (id,navigate) => async (dispatch) => {
   try {
-    setProgress(40);
+    // setProgress(40);
     const response = await api.getPost(id);
-    // console.log(response);
-    dispatch({ type: "GET_POST_DETAILS", payload: response.data });
-    setProgress(100);
+    console.log(response);
+    dispatch({ type: "GET_POST_DETAILS", payload: response?.data });
+    // setProgress(100);
   } catch (error) {
-    toast.error(error.response.data.message);
+    toast.error(error.response?.data?.message);
     navigate("/");
     console.log(error);
-    setProgress(100);
+    // setProgress(100);
   }
 };
 
-
-// export const validatePost =
-//   (id, setProgress, navigate, setTitle, setDescription, setImagePreview) =>
-//   async (dispatch) => {
-//     try {
-//       setProgress(40);
-//       const response = await api.getPost(id);
-//       if (response) {
-//         setProgress(60);
-//         console.log(response);
-//         setTitle(response.data.title);
-//         setDescription(response.data.discription);
-//         setImagePreview(response.data.image);
-//       }
-//       setProgress(100);
-//     } catch (error) {
-//       if (error.response.data.error) {
-//         navigate("/");
-//         toast.error(error.response.data.error);
-//       }
-//       setProgress(100);
-//     }
-//   };
-
-
+export const updatePostLike = (postId) => async (dispatch) => {
+  try {
+    const response = await api.postLike(postId);
+    console.log(response);
+    dispatch(getPostDetails(postId));
+  } catch (error) {
+    toast.error(error.response.data.error);
+    console.log(error);
+  }
+}
 
 export const fetchPosts =
   (page, limit,search, setProgress, setDone, setLoading) =>

@@ -1,4 +1,4 @@
-import { Post, Comment } from "../db";
+import { Post, Comment, User } from "../db";
 import logger from "../logger";
 import { validationResult } from "express-validator";
 import axios from "axios";
@@ -7,20 +7,22 @@ export const getPosts = async (req, res) => {
   try {
     const { _page = 1, _limit = 20, _search } = req.query;
 
-    if(_search && _search.length>0) {
-      const posts = await Post.find({title: {$regex: _search, $options: 'i'}})
-      // await Post.find({$text: {$search: _search}})
-      .limit(_limit)
-      .skip((_page - 1) * 10)
-      .sort({ createdAt: -1 })
-      .populate("user")
+    if (_search && _search.length > 0) {
+      const posts = await Post.find({
+        title: { $regex: _search, $options: "i" },
+      })
+        // await Post.find({$text: {$search: _search}})
+        .limit(_limit)
+        .skip((_page - 1) * 10)
+        .sort({ createdAt: -1 })
+        .populate("user");
       return res.status(200).json({
         message: "Posts fetched successfully",
         success: true,
         data: posts,
       });
     }
-    
+
     // page size = 10
     const offset = (_page - 1) * 10;
     const posts = await Post.find()
@@ -54,8 +56,16 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const id = req.params.id;
-    const post = await Post.findOne({ _id: id }).populate("user")
-    if(!post){
+    const post = await Post.findOne({ _id: id })
+      .populate("user")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          select: "firstName lastName email profilePicture",
+        },
+      });
+    if (!post) {
       return res.status(404).json({
         message: "Post not found",
         success: false,
@@ -132,14 +142,17 @@ export const updatePost = async (req, res) => {
         success: false,
       });
     }
-    if(post.user._id.toString() !== req.user.id){
+    if (post.user._id.toString() !== req.user.id) {
       return res.status(401).json({
         message: "You are not authorized to update this post",
         success: false,
       });
     }
-    await Post.findByIdAndUpdate(id,{...(title && {title}),...(description && {description})})
-    const updatedPost = await Post.findById(id).populate("user")
+    await Post.findByIdAndUpdate(id, {
+      ...(title && { title }),
+      ...(description && { description }),
+    });
+    const updatedPost = await Post.findById(id).populate("user");
     // post.title = title;
     // post.description = description;
     // await post.save();
@@ -156,10 +169,49 @@ export const updatePost = async (req, res) => {
   }
 };
 
+export const updatePostLikes = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findOne({ _id: postId });
+    if (!post) {
+      return res.status(404).json({
+        message: "Post not found",
+        success: false,
+      });
+    }
+    const user = await User.findOne({ _id: req.user.id });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+
+    const userIndex = post.likes.findIndex((id) => id == user._id.toString());
+    if (userIndex != -1) {
+      post.likes = post.likes.filter((id) => id != user._id.toString());
+    } else {
+      post.likes.push(user._id.toString());
+    }
+
+    await post.save();
+    return res.status(200).json({
+      message: "Post updated successfully",
+      success: true,
+      data: post,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+      success: false,
+    });
+  }
+};
+
 export const deletePost = async (req, res) => {
   try {
     //only the user who created the post can delete it and modrator
-    const {id} = req.params;
+    const { id } = req.params;
     const post = await Post.findOne({ _id: id });
     if (!post) {
       return res.status(404).json({
@@ -167,7 +219,7 @@ export const deletePost = async (req, res) => {
         success: false,
       });
     }
-    if(post.user._id.toString() !== req.user.id){
+    if (post.user._id.toString() !== req.user.id) {
       return res.status(401).json({
         message: "You are not authorized to delete this post",
         success: false,

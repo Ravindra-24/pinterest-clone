@@ -22,13 +22,13 @@ const Gallery = ({ setProgress }) => {
 
   const allPosts = useSelector((state) => state.postsReducer.posts);
 
-  const {search} = useContext(SearchContext)
+  const { search } = useContext(SearchContext);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setPage(1);
       setDone(false);
-      fetchData()
+      fetchData();
     }, 400);
     return () => clearTimeout(timeout);
   }, [search]);
@@ -38,7 +38,7 @@ const Gallery = ({ setProgress }) => {
       setLoading(true);
       setProgress(30);
       dispatch(
-        fetchPosts(page, limit,search, setProgress, setDone, setLoading)
+        fetchPosts(page, limit, search, setProgress, setDone, setLoading)
       );
       setProgress(70);
       setProgress(100);
@@ -73,24 +73,32 @@ const Gallery = ({ setProgress }) => {
           columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4, 1100: 5 }}
         >
           <Masonry>
-            {allPosts && allPosts.map((post, index) => (
-              <div key={post._id} className="relative m-1">
-                <img
-                  ref={index === allPosts.length - 1 ? lastImageRef : null}
-                  className="m-2"
-                  key={post._id}
-                  src={post.image}
-                  alt="random"
-                  style={{ objectFit: "contain" }}
-                />
-                <PostsDetails post={post} setProgress={setProgress}/>
-              </div>
-            ))}
+            {allPosts &&
+              allPosts.map((post, index) => (
+                <Link
+                  to={`/post/${post._id}`}
+                  rel="noopener noreferrer"
+                  className="text-white text-center font-bold text-lg"
+                >
+                  <div key={post._id} className="relative ">
+                    <img
+                      ref={index === allPosts.length - 1 ? lastImageRef : null}
+                      className="m-2"
+                      key={post._id}
+                      src={post.image}
+                      alt="random"
+                      style={{ objectFit: "contain", width: "93%" }}
+                    />
+
+                    <PostsDetails post={post} setProgress={setProgress} />
+                  </div>
+                </Link>
+              ))}
           </Masonry>
         </ResponsiveMasonry>
       </div>
       {loading && (
-        <div className="w-full flex justify-center mb-5">
+        <div className="w-full flex justify-center m-5">
           <ColorfulSpinner />
         </div>
       )}

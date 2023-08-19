@@ -45,6 +45,11 @@ export const reset = (token, password)=>API.post(`/auth/reset-password/${token}`
 export const create = (formData) => API.post("/post", formData);
 export const update = (id, formData) => API.patch(`/post/update/${id}`, formData);
 export const deletePostId = (id) => API.post(`post/${id}`); 
+export const postLike = (postId) => API.patch(`/post/like/${postId}`);
 
 export const fetchAllPosts = (page, limit, search) => API.get(`/post?_page=${page}&_limit=${limit}&_search=${search}`);
 export const getPost = (id) => API.get(`/post/${id}`);
+
+export const postComments = (id, commentData) => API.post(`/comment/${id}`, commentData);
+export const commentLike = (commentId, postId) => API.patch(`/comment/like/${commentId}/${postId}`);
+export const deletePostComment = (commentId, postId) => API.delete(`/comment/${commentId}/${postId}`);

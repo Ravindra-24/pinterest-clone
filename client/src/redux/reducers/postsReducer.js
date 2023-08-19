@@ -67,6 +67,7 @@ const postsReducer = (state = initialsSate, action) => {
         };
       }
       return state;
+    
     default:
       return state;
   }

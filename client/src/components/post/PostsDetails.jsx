@@ -1,6 +1,6 @@
 import React from "react";
 import { toast } from "react-hot-toast";
-import {useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deletePost } from "../../redux/action/post";
 
@@ -14,16 +14,41 @@ const PostsDetails = ({ post, setProgress }) => {
     } catch (error) {
       toast.error(error.message);
     }
-  }
+  };
   return (
     <>
+      {/* <div className="absolute z-10  top-0 right-0 m-2 opacity-100 hover:cursor-pointer hover:opacity-0 transition-opacity duration-300">
+        <div className=" ">
+        {post.user?.profilePhoto ? (
+          <img
+            src={post?.user?.profilePhoto}
+            alt="Profile"
+            className="w-10 h-10 rounded-full mr-2 object-cover"
+          />
+        ) : (
+          <div
+            className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid mr-2"
+            id="user-menu"
+            aria-label="User menu"
+            aria-haspopup="true"
+          >
+            <span className="rounded-full h-8 w-8 flex items-center justify-center">
+              <span className="text-white font-medium">
+                {post?.user?.firstName?.charAt(0).toUpperCase() +
+                  post?.user?.lastName?.charAt(0).toUpperCase()}
+              </span>
+            </span>
+          </div>
+        )}
+        </div>
+      </div> */}
       <div
-        className="absolute bg-black bg-opacity-50 rounded-lg flex flex-col justify-center items-center opacity-0 hover:cursor-pointer hover:opacity-100 transition-opacity duration-300 m-2"
+        className="absolute bg-black bg-opacity-50  flex flex-col justify-center items-center opacity-0 hover:cursor-pointer hover:opacity-100 transition-opacity duration-300 ml-2"
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          width: "100%",
+          width: "93%",
           height: "100%",
         }}
       >
@@ -43,9 +68,10 @@ const PostsDetails = ({ post, setProgress }) => {
           View
         </Link>
         {user && post.user?._id === user.id ? (
-          <div className="flex">
+          <div className="flex mt-3">
             <Link to={`/post/edit/${post._id}`}>
               <svg
+                className="mr-3"
                 xmlns="http://www.w3.org/2000/svg"
                 width="20px"
                 height="20px"
