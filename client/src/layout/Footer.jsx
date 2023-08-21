@@ -1,8 +1,9 @@
 const Footer = () => {
   return (
     <div>
-      <footer style={{ background: "#FFCBA4" }} 
-      className="left-0 z-20 w-full p-4  border-t  shadow md:flex md:items-center md:justify-between md:p-6">
+      <footer 
+      // style={{ background: "#FFCBA4" }} 
+      className="left-0 z-20 w-full p-4  border-t  shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-600 bg-gray-200">
         <span className="text-sm text-gery-900 sm:text-center">
           © 2023{" "}
           <a href="https://flowbite.com/" className="hover:underline">

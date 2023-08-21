@@ -46,7 +46,7 @@ const PostView = ({ setProgress }) => {
   const handleShare = () => {
     try {
       navigator.clipboard.writeText(
-        "http://localhost:3000" + location.pathname
+        "https://pinterest-clone-38i4lr1sq-ravindra-24.vercel.app" + location.pathname
       );
       toast.success("Link Copied");
     } catch (error) {
