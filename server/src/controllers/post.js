@@ -95,9 +95,9 @@ export const createPost = async (req, res) => {
         success: false,
       });
     }
-    const {
-      user: { id },
-    } = req;
+    // const {
+    //   user: { id },
+    // } = req;
     const { title, description } = req.body;
     const file = req.file;
     const responseURL = await axios.post(
@@ -114,7 +114,7 @@ export const createPost = async (req, res) => {
       title,
       description,
       image: responseURL.data.fileUrl,
-      user: id,
+      user:"64e325164d7a4e6757e3d7cb",
     });
     return res.status(200).json({
       message: "Post created successfully",

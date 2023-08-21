@@ -18,7 +18,7 @@ router.get("/", getPosts);
 router.get("/:id", getPost);
 
 //protected
-router.post("/", upload.single("image"),body('title').notEmpty().withMessage('title is required'),authMiddleware, createPost);
+router.post("/", upload.single("image"),body('title').notEmpty().withMessage('title is required'), createPost);
 
 //only the user who created the post can delete it and modrator
 router.post("/:id",authMiddleware, deletePost);
