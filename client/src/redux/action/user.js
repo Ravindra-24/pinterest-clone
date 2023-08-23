@@ -22,3 +22,12 @@ export const userPosts = (id) => async (dispatch) => {
         toast.error(error.response.data.message);
     }
 }
+
+export const followUser = (userId) => async (dispatch) => {
+    try {
+        const response = await api.follow(userId);
+        // toast.success(response.data.message);
+    } catch (error) {
+        toast.error(error.response.data.message);
+    }
+}

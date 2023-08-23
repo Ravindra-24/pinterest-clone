@@ -94,7 +94,7 @@ export const ValidateUser = () => async (dispatch) => {
     if(responseData === null) return;
     dispatch({
       type: "AUTH",
-      payload: { token, user: responseData.data.user },
+      payload: { token, user: responseData.data.user, profilePicture: responseData.data.profilePicture },
     });
     toast.success(responseData.message);
   } catch (error) {

@@ -56,3 +56,4 @@ export const deletePostComment = (commentId, postId) => API.delete(`/comment/${c
 
 export const findUser = (id) => API.get(`/user/${id}`);
 export const getUserPosts = (id) => API.get(`/user/user-posts/${id}`);
+export const follow = (userId) => API.patch(`/user/follow/${userId}`);

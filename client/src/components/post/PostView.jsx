@@ -81,9 +81,9 @@ const PostView = ({ setProgress }) => {
                 </div>
                 <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
                   <div className="flex items-center">
-                    {post.user?.profilePhoto ? (
+                    {post.user?.profilePicture ? (
                       <img
-                        src={post?.user?.profilePhoto}
+                        src={post?.user?.profilePicture}
                         alt="Profile"
                         className="w-10 h-10 rounded-full mr-2 object-cover"
                       />

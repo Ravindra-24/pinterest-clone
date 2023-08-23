@@ -43,7 +43,9 @@ const Navbar = () => {
                     </Link>
                   )}
                   <>
+                  <Link to={`/user/${auth?.user?.id}`}>
                     <Avatar auth={auth}/>
+                    </Link>
                   </>
                   <svg
                     onClick={handleLogout}
