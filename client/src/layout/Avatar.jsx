@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const Avatar = ({auth}) => {
+  const navigate =useNavigate();
   return (
     <>
       <button
@@ -8,6 +10,7 @@ const Avatar = ({auth}) => {
         id="user-menu"
         aria-label="User menu"
         aria-haspopup="true"
+        onClick={() => navigate(`/user/${auth?.user?.id}`)}
       >
         <span className="sr-only">Open user menu</span>
         <span className="rounded-full h-8 w-8 flex items-center justify-center">

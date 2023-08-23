@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import authRoutes from './routes/auth'
 import postRoutes from './routes/post'
 import commentRoutes from './routes/comment'
+import userRouter from './routes/user'
 import { connectDB } from './utils/db.utils'
 import FormData from "form-data";
 import axios from 'axios'
@@ -24,6 +25,7 @@ app.use(morganMiddleware)
 app.use('/auth', authRoutes)
 app.use('/post', postRoutes)
 app.use('/comment', commentRoutes)
+app.use('/user', userRouter)
 
 app.get('/', (req, res) =>{
     res.send(`Server is running on port ${PORT} `)

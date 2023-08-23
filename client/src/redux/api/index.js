@@ -53,3 +53,6 @@ export const getPost = (id) => API.get(`/post/${id}`);
 export const postComments = (id, commentData) => API.post(`/comment/${id}`, commentData);
 export const commentLike = (commentId, postId) => API.patch(`/comment/like/${commentId}/${postId}`);
 export const deletePostComment = (commentId, postId) => API.delete(`/comment/${commentId}/${postId}`);
+
+export const findUser = (id) => API.get(`/user/${id}`);
+export const getUserPosts = (id) => API.get(`/user/user-posts/${id}`);

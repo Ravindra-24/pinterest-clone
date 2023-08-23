@@ -27,16 +27,6 @@ const Navbar = () => {
         <div className="relative flex items-center justify-between h-16">
           <div className="inset-y-0 left-0 flex items-center">
             <ProjectLogo/>
-            {/* <img
-              className="block lg:hidden h-10 w-auto"
-              src="https://www.svgrepo.com/show/384978/donut-doughnut-sweet-dessert-food-fastfood.svg"
-              alt="Logo"
-            />
-            <img
-              className="hidden lg:block h-10 w-auto"
-              src="https://www.svgrepo.com/show/384978/donut-doughnut-sweet-dessert-food-fastfood.svg"
-              alt="Logo"
-            /> */}
           </div>
           <Search />
 
@@ -47,7 +37,7 @@ const Navbar = () => {
                   {location.pathname !== "/create-post" && (
                     <Link
                       to="/create-post"
-                      className="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-3"
+                      className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-3"
                     >
                       New+
                     </Link>

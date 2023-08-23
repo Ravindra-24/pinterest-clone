@@ -16,6 +16,7 @@ import "./App.css";
 import CreatePost from "./components/post/CreatePost";
 import EditPost from "./components/post/EditPost";
 import { SearchProvider } from "./context/searchContext";
+import Profile from "./components/user/Profile";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -70,6 +71,8 @@ const AllRoutes = () => {
           element={<ResetPassword setProgress={setProgress} />}
         />
         <Route path="/create-post" element={<CreatePost setProgress={setProgress}/>}/>
+
+        <Route path="/user/:id" element={<Profile/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       </SearchProvider>

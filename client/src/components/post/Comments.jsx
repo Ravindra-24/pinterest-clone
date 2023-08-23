@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {useParams} from "react-router-dom";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { deleteComment, updateComentLike } from "../../redux/action/comment";
 import moment from "moment";
 import { toast } from "react-hot-toast";
@@ -83,7 +84,7 @@ const Comments = ({ comments, postId }) => {
                   {comment.commentText}
                 </p>
               </div>
-              <div className="flex">
+              <div className="flex mt-2">
               <p className="text-gray-600 text-sm dark:text-gray-300">
         {comment?.likes?.length > 0 ? comment?.likes?.length + " Likes" : ""}
       </p>
@@ -119,10 +120,10 @@ const Comments = ({ comments, postId }) => {
       </button>
                 {auth && auth.id === comment.user._id && (
                   <button
-                    className="flex items-center focus:outline-none ml-4 "
+                    className="flex items-center focus:outline-none ml-4"
                     onClick={() => handleCommentDelete(comment._id)}
                   >
-                    <p className="text-gray-600 text-sm dark:text-gray-200">delete</p>
+                    <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faTrash}/> delete</p>
                   </button>
                 )}
               </div>

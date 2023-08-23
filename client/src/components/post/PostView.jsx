@@ -8,6 +8,8 @@ import { deletePost, getPostDetails } from "../../redux/action/post";
 import ColorfulLoader from "../../layout/spinner/spinner";
 import AddComment from "../../layout/AddComment";
 import PostLikes from "./PostLikes";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faEdit, faShareNodes, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
@@ -101,8 +103,8 @@ const PostView = ({ setProgress }) => {
                         </span>
                       </div>
                     )}
-                    <div className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
-                      <h2 className="text-lg font-semibold dark:text-white">
+                    <div className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900 cursor-pointer " onClick={()=>navigate(`/user/${post?.user?._id}`)}>
+                      <h2 className="text-lg font-semibold dark:text-white ">
                         {post?.user?.firstName.charAt(0).toUpperCase() +
                           post?.user?.firstName.slice(1) +
                           " " +
@@ -129,15 +131,23 @@ const PostView = ({ setProgress }) => {
                       className="flex items-center focus:outline-none ml-4"
                       onClick={handleShare}
                     >
-                      <p className="text-gray-600 text-sm dark:text-gray-200">Share</p>
+                      <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faShareNodes} />  Share</p>
                     </button>
                     {auth && auth.id === post.user._id && (
+                      <>
                       <button
                         className="flex items-center focus:outline-none ml-4"
                         onClick={handlePostDelete}
                       >
-                        <p className="text-gray-600 text-sm dark:text-gray-200">delete</p>
+                        <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faTrash} />   delete</p>
                       </button>
+                      <button
+                      className="flex items-center focus:outline-none ml-4"
+                      onClick={()=>navigate(`/post/edit/${post._id}`)}
+                    >
+                      <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faEdit} />   edit</p>
+                    </button>
+                    </>
                     )}
                   </div>
                   <div className="mb-4">
