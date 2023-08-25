@@ -30,7 +30,6 @@ const Comments = ({ comments, postId }) => {
       console.log(error);
     }
   };
-
   return (
     <>
       {comments &&
@@ -41,9 +40,9 @@ const Comments = ({ comments, postId }) => {
           >
             <div className=" md:flex-shrink-0 flex items-center rounded">
               <>
-                {comment?.user?.profilePhoto ? (
+                {comment?.user?.profilePicture ? (
                   <img
-                    src={comment?.user?.profilePhoto}
+                    src={comment?.user?.profilePicture}
                     alt="Profile"
                     className="w-10 h-10 rounded-full mr-2 object-cover"
                   />

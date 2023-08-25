@@ -26,7 +26,7 @@ export const userPosts = (id) => async (dispatch) => {
 export const followUser = (userId) => async (dispatch) => {
     try {
         const response = await api.follow(userId);
-        // toast.success(response.data.message);
+        // toast.success(response.message);
     } catch (error) {
         toast.error(error.response.data.message);
     }

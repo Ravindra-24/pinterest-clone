@@ -32,6 +32,7 @@ const PostView = ({ setProgress }) => {
       dispatch(getPostDetails(id, setProgress, navigate));
     } catch (error) {
       toast.error(error.message);
+      navigate('/')
     }
   };
 

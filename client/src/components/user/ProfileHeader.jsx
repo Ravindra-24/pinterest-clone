@@ -25,10 +25,10 @@ const ProfileHeader = () => {
       {user !== null ? (
         <header className=" p-4 border-b border-gray-300 bg-gray-200 dark:bg-gray-800 dark:text-gray-50">
           <div className="flex flex-col items-center md:flex-row md:items-center m-5 ">
-            {user && user?.profilePicture ? (
+            { user.profilePicture ? (
               <img
                 className="w-16 h-16 rounded-full mb-2 md:mr-2 md:mb-0"
-                src={user?.profilePicture}
+                src={user.profilePicture}
                 alt="Profile"
               />
             ) : (

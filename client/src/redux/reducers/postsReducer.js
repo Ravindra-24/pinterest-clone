@@ -63,7 +63,7 @@ const postsReducer = (state = initialsSate, action) => {
         );
         return {
           ...state,
-          posts: [...searchedPosts, ...state.posts], // Append fetched posts
+          posts: [...searchedPosts], // Append fetched posts
         };
       }
       return state;
