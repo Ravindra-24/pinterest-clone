@@ -5,7 +5,11 @@ const userRouter = (state = {}, action) => {
     case "GET_USER":
       return { ...state, ...payload };
     case "GET_USER_POSTS":
-      return { ...state, posts: payload };
+      if(payload){
+        const newarr = payload.filter((newPost) => !state.posts.some((existingPost) => existingPost._id === newPost._id))
+        return {...state, posts: [...(state.posts || []), ...newarr]}
+      }
+      return state
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import * as api from "../api";
 
 const errorBox = (error) => {
-  if(!error) return;
+  if (!error) return;
   error.forEach((err) => {
     return toast.error(err.msg);
   });
@@ -27,7 +27,7 @@ export const signupUser =
   };
 
 export const loginUser =
-  (authData, navigate,setLoading, setProgress) => async (dispatch) => {
+  (authData, navigate, setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const responseData = await api.login(authData);
@@ -41,7 +41,6 @@ export const loginUser =
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
-      console.log(error);
       setProgress(100);
     } finally {
       setProgress(100);
@@ -50,11 +49,10 @@ export const loginUser =
   };
 
 export const forgotPassword =
-  (email, navigate,setLoading, setProgress) => async (dispatch) => {
+  (email, navigate, setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const response = await api.forgot(email);
-      console.log(response);
       setProgress(70);
       toast.success(response.message);
       navigate("/login");
@@ -63,12 +61,12 @@ export const forgotPassword =
       toast.error(error.response.data.message);
     } finally {
       setProgress(100);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
 export const resetPassword =
-  (token, password, navigate,setLoading, setProgress) => async (dispatch) => {
+  (token, password, navigate, setLoading, setProgress) => async (dispatch) => {
     try {
       setProgress(30);
       const response = await api.reset(token, password);
@@ -77,12 +75,13 @@ export const resetPassword =
       navigate("/login");
       setProgress(100);
     } catch (error) {
-      if(error.response.data.data || error.response.data.message){
-      errorBox(error.response.data.data);
-      toast.error(error.response.data.message);}
+      if (error.response.data.data || error.response.data.message) {
+        errorBox(error.response.data.data);
+        toast.error(error.response.data.message);
+      }
     } finally {
       setProgress(100);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -91,15 +90,19 @@ export const ValidateUser = () => async (dispatch) => {
     const token = localStorage.getItem("token");
     if (!token) return;
     const responseData = await api.validate(token);
-    if(responseData === null) return;
+    if (responseData === null) return;
     dispatch({
       type: "AUTH",
-      payload: { token, user: responseData.data.user, profilePicture: responseData.data.profilePicture },
+      payload: {
+        token,
+        user: responseData.data.user,
+        profilePicture: responseData.data.profilePicture,
+      },
     });
     toast.success(responseData.message);
   } catch (error) {
-    if(error.responseData.data.message){
-    toast.error(error.responseData.data.message);}
-    console.log(error);
+    if (error.responseData.data.message) {
+      toast.error(error.responseData.data.message);
+    }
   }
 };

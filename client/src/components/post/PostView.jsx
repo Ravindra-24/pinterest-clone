@@ -14,7 +14,6 @@ import { faEdit, faShareNodes, faTrash } from '@fortawesome/free-solid-svg-icons
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
   const post = useSelector((state) => state.postsReducer.post);
-  console.log(post);
 
   const [liked, setLiked] = useState(false);
 
@@ -53,7 +52,7 @@ const PostView = ({ setProgress }) => {
       );
       toast.success("Link Copied");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
