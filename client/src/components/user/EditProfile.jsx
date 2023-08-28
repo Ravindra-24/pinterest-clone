@@ -6,7 +6,7 @@ import ColorfulLoader from "../../layout/spinner/spinner";
 import ImageCrop from "./croper/ImageCrop";
 import { useNavigate, useParams } from "react-router";
 
-const EditProfile = ({setProgress}) => {
+const EditProfile = ({ setProgress }) => {
   const [loading, setLoading] = useState(false);
   const [openCrop, setOpenCrop] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -15,9 +15,9 @@ const EditProfile = ({setProgress}) => {
   const [phone, setPhone] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [image, setImage] = useState("");
-  const {id} = useParams()
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const auth = useSelector((state) => state.authReducer.user);
   const user = useSelector((state) => state.userReducer);
 
@@ -34,7 +34,7 @@ const EditProfile = ({setProgress}) => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     try {
       e.preventDefault();
       if (firstName === null || lastName === null)
@@ -48,7 +48,7 @@ const EditProfile = ({setProgress}) => {
       dispatch(updateUser(formData, id, navigate, setProgress, setLoading));
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -71,52 +71,57 @@ const EditProfile = ({setProgress}) => {
         <div className="max-w-screen-lg mx-auto p-4 bg-gray-200 dark:bg-gray-800 rounded mt-2 mb-2">
           <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {
-              openCrop ? 
-            <ImageCrop setProfilePicture= {setProfilePicture} profilePicture={profilePicture} setImage={setImage} setOpenCrop={setOpenCrop}/>: <>
-            
-            <div className="flex items-center justify-center flex-col md:flex-row md:items-center md:space-x-6 ">
-              <div>
-                {user.profilePicture === null ? (
-                  <div
-                    className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid"
-                    id="user-menu"
-                  >
-                    <span className="rounded-full h-14 w-14 flex items-center justify-center">
-                      <span className="text-white font-medium">
-                        {user?.firstName?.charAt(0).toUpperCase()}
-                        {user?.lastName?.charAt(0).toUpperCase()}
-                      </span>
-                    </span>
-                  </div>
-                ) : (
-                  <div className="">
-                    <img
-                      className="w-20 h-20 rounded-full mb-2  object-cover"
-                      src={profilePicture || user.profilePicture}
-                      alt="Profile"
+            {openCrop ? (
+              <ImageCrop
+                setProfilePicture={setProfilePicture}
+                profilePicture={profilePicture}
+                setImage={setImage}
+                setOpenCrop={setOpenCrop}
+              />
+            ) : (
+              <>
+                <div className="flex items-center justify-center flex-col md:flex-row md:items-center md:space-x-6 ">
+                  <div className="flex flex-col">
+                    {user.profilePicture === null ? (
+                      <div
+                        className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid"
+                        id="user-menu"
+                      >
+                        <span className="rounded-full h-14 w-14 flex items-center justify-center">
+                          <span className="text-white font-medium">
+                            {user?.firstName?.charAt(0).toUpperCase()}
+                            {user?.lastName?.charAt(0).toUpperCase()}
+                          </span>
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="">
+                        <img
+                          className="w-20 h-20 rounded-full  object-cover"
+                          src={profilePicture || user.profilePicture}
+                          alt="Profile"
+                        />
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      name="photo"
+                      id="photo"
+                      accept="image/*"
+                      onChange={handlePreview}
+                      className="sr-only"
                     />
                   </div>
-                )}
-                <input
-                  type="file"
-                  name="photo"
-                  id="photo"
-                  accept="image/*"
-                  onChange={handlePreview}
-                  className="sr-only"
-                />
-                <label
-                  htmlFor="photo"
-                  aria-required
-                  className="mt-2 rounded-md text-white bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 px-2.5 py-1.5 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer"
-                >
-                  Upload
-                </label>
-              </div>
-            </div>
-            </>
-            }
+                  <label
+                    htmlFor="photo"
+                    aria-required
+                    className="mt-2 rounded-md text-white bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 px-2.5 py-1.5 text-sm font-semibold shadow-sm cursor-pointer"
+                  >
+                    Upload
+                  </label>
+                </div>
+              </>
+            )}
             <div className="flex flex-col md:flex-row md:items-center md:space-x-6">
               <label
                 htmlFor="firstName"
@@ -175,7 +180,7 @@ const EditProfile = ({setProgress}) => {
                 Phone Number:
               </label>
               <input
-              onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
                 value={phone || user?.phone}
                 type="tel"
                 id="phoneNumber"
@@ -191,7 +196,7 @@ const EditProfile = ({setProgress}) => {
                 Bio:
               </label>
               <textarea
-              onChange={(e) => setBio(e.target.value)}
+                onChange={(e) => setBio(e.target.value)}
                 value={bio || user?.bio}
                 id="bio"
                 className="w-full md:flex-grow border rounded p-2 focus:ring focus:ring-blue-300 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-50"
@@ -199,20 +204,22 @@ const EditProfile = ({setProgress}) => {
                 placeholder="Tell something about yourself..."
               ></textarea>
             </div>
-            <div className="float-right m-5">
-            <button
-              disabled={loading}
+            <div className="flex m-5 justify-end">
+              <button
+                disabled={loading}
                 onClick={handleCancel}
                 type="button"
                 className="mr-2 text-sm font-semibold leading-6 text-gray-900 dark:text-white"
               >
                 Cancel
               </button>
-            <button type="submit"
-            disabled={loading || openCrop}
-            className=" w-full md:w-auto text-white focus:ring-4 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none  active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600">
-              Save Changes
-            </button>
+              <button
+                type="submit"
+                disabled={loading || openCrop}
+                className=" max-w-30 md:w-auto text-white focus:ring-4 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none  active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
+              >
+                Save Changes
+              </button>
             </div>
           </form>
         </div>

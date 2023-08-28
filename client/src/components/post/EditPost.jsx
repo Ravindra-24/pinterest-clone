@@ -77,7 +77,7 @@ const EditPost = ({ setProgress }) => {
     } catch (error) {
       toast.error(error.message);
       console.log(error);
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
