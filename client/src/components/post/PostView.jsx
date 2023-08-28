@@ -8,30 +8,30 @@ import { deletePost, getPostDetails } from "../../redux/action/post";
 import ColorfulLoader from "../../layout/spinner/spinner";
 import AddComment from "../../layout/AddComment";
 import PostLikes from "./PostLikes";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faEdit, faShareNodes, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEdit,
+  faShareNodes,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
   const post = useSelector((state) => state.postsReducer.post);
 
-  const [liked, setLiked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
 
-  const handleLike = () => {
-    setLiked(!liked);
-  };
-
   const getpostDetail = () => {
     try {
-      dispatch(getPostDetails(id, setProgress, navigate));
+      dispatch(getPostDetails(id, navigate, setLoading));
     } catch (error) {
       toast.error(error.message);
-      navigate('/')
+      navigate("/");
     }
   };
 
@@ -48,7 +48,8 @@ const PostView = ({ setProgress }) => {
   const handleShare = () => {
     try {
       navigator.clipboard.writeText(
-        "https://pinterest-clone-38i4lr1sq-ravindra-24.vercel.app" + location.pathname
+        "https://pinterest-clone-38i4lr1sq-ravindra-24.vercel.app" +
+          location.pathname
       );
       toast.success("Link Copied");
     } catch (error) {
@@ -57,12 +58,14 @@ const PostView = ({ setProgress }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
+    dispatch({ type: "GET_POST_DETAILS", payload: {} });
     getpostDetail();
   }, []);
 
   return (
     <>
-      {post ? (
+      {!loading ? (
         <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">
           <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto">
             <div className="max-w-full mx-auto bg-gray-50 dark:bg-gray-800 dark:test-white rounded-md shadow-md overflow-hidden w-full">
@@ -81,7 +84,7 @@ const PostView = ({ setProgress }) => {
                 </div>
                 <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
                   <div className="flex items-center">
-                    {post.user?.profilePicture ? (
+                    {post?.user?.profilePicture ? (
                       <img
                         src={post?.user?.profilePicture}
                         alt="Profile"
@@ -103,7 +106,10 @@ const PostView = ({ setProgress }) => {
                         </span>
                       </div>
                     )}
-                    <div className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900 cursor-pointer " onClick={()=>navigate(`/user/${post?.user?._id}`)}>
+                    <div
+                      className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900 cursor-pointer "
+                      onClick={() => navigate(`/user/${post?.user?._id}`)}
+                    >
                       <h2 className="text-lg font-semibold dark:text-white ">
                         {post?.user?.firstName.charAt(0).toUpperCase() +
                           post?.user?.firstName.slice(1) +
@@ -113,7 +119,6 @@ const PostView = ({ setProgress }) => {
                       </h2>
                       <p className="text-gray-600 text-sm dark:text-gray-200">
                         Posted {moment(post?.createdAt).fromNow()}{" "}
-                        
                       </p>
                     </div>
                   </div>
@@ -126,33 +131,41 @@ const PostView = ({ setProgress }) => {
                     </p>
                   </div>
                   <div className="flex items-center mb-4">
-                    <PostLikes post={post}/>
+                    <PostLikes post={post} />
                     <button
                       className="flex items-center focus:outline-none ml-4"
                       onClick={handleShare}
                     >
-                      <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faShareNodes} />  Share</p>
+                      <p className="text-gray-600 text-sm dark:text-gray-200">
+                        <FontAwesomeIcon icon={faShareNodes} /> Share
+                      </p>
                     </button>
-                    {auth && auth.id === post.user._id && (
+                    {auth && auth.id === post?.user?._id && (
                       <>
-                      <button
-                        className="flex items-center focus:outline-none ml-4"
-                        onClick={handlePostDelete}
-                      >
-                        <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faTrash} />   delete</p>
-                      </button>
-                      <button
-                      className="flex items-center focus:outline-none ml-4"
-                      onClick={()=>navigate(`/post/edit/${post._id}`)}
-                    >
-                      <p className="text-gray-600 text-sm dark:text-gray-200"><FontAwesomeIcon icon={faEdit} />   edit</p>
-                    </button>
-                    </>
+                        <button
+                          className="flex items-center focus:outline-none ml-4"
+                          onClick={handlePostDelete}
+                        >
+                          <p className="text-gray-600 text-sm dark:text-gray-200">
+                            <FontAwesomeIcon icon={faTrash} /> delete
+                          </p>
+                        </button>
+                        <button
+                          className="flex items-center focus:outline-none ml-4"
+                          onClick={() => navigate(`/post/edit/${post._id}`)}
+                        >
+                          <p className="text-gray-600 text-sm dark:text-gray-200">
+                            <FontAwesomeIcon icon={faEdit} /> edit
+                          </p>
+                        </button>
+                      </>
                     )}
                   </div>
                   <div className="mb-4">
                     <div className="flex justify-between">
-                      <h3 className="text-lg font-semibold mb-2 dark:text-white">Comments</h3>
+                      <h3 className="text-lg font-semibold mb-2 dark:text-white">
+                        Comments
+                      </h3>
                       <span className=" italic dark:text-gray-200">
                         {post?.comments?.length > 0
                           ? post?.comments?.length + " comments"

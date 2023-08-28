@@ -74,7 +74,7 @@ const AllRoutes = () => {
         <Route path="/create-post" element={<CreatePost setProgress={setProgress}/>}/>
 
         <Route path="/user/:id" element={<Profile/>}/>
-        <Route path="/user/edit/:id" element={<EditProfile />}/>
+        <Route path="/user/edit/:id" element={<EditProfile setProgress={setProgress}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       </SearchProvider>

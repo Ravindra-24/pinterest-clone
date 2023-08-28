@@ -50,13 +50,15 @@ export const deletePost = (id, setProgress) => async (dispatch) => {
   }
 };
 
-export const getPostDetails = (id, navigate) => async (dispatch) => {
+export const getPostDetails = (id, navigate, setLoading) => async (dispatch) => {
   try {
     const response = await api.getPost(id);
     dispatch({ type: "GET_POST_DETAILS", payload: response?.data });
   } catch (error) {
     toast.error(error.response?.data?.message);
     navigate("/");
+  } finally{
+    setLoading(false);
   }
 };
 

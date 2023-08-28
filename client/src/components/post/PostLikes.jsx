@@ -10,8 +10,12 @@ const PostLikes = ({ post }) => {
   const handlePostLike = () => {
     try {
       setLoading(true);
-      if (!auth) return toast.error("Please Login to like the post");
-      dispatch(updatePostLike(post._id, setLoading));
+      if (!auth) {
+        toast.error("Please Login to like the post");
+        setLoading(false);
+      } else {
+        dispatch(updatePostLike(post._id, setLoading));
+      }
     } catch (error) {
       toast.error(error.message);
       console.log(error);

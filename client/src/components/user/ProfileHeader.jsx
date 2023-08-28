@@ -19,6 +19,7 @@ const ProfileHeader = () => {
 
   const handleClick = (userId) => {
     try {
+      setLoading(false);
       setIsLoading(true);
       if (!auth) {
         setIsLoading(false);
@@ -26,10 +27,10 @@ const ProfileHeader = () => {
       }
       if (auth) {
         if (auth?.id !== userId) {
-          dispatch(followUser(userId, setIsLoading));
+          dispatch(followUser(userId, setLoading, setIsLoading));
         } else {
           navigate(`/user/edit/${userId}`);
-          setLoading(false);
+          setIsLoading(false);
         }
       }
     } catch (error) {
@@ -40,8 +41,8 @@ const ProfileHeader = () => {
   useEffect(() => {
     setLoading(true);
     dispatch({ type: "GET_USER", payload: null });
-    dispatch(getUser(id));
-    setLoading(false);
+    dispatch(getUser(id, setLoading));
+    // setLoading(false);
   }, [dispatch, id]);
   return (
     <>
@@ -87,11 +88,12 @@ const ProfileHeader = () => {
                 {user?.posts?.length + " Posts"} • {user?.followers?.length}{" "}
                 Followers • {user?.following?.length} following
               </p>
+              <p className="text-gray-600 dark:text-gray-200">{user?.bio}</p>
             </div>
           </div>
           <div className="flex">
             <button
-              className="w-full text-white focus:ring-4 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none  active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
+              className="w-full md:w-auto text-white focus:ring-4 shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none  active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
               // bg-blue-500 text-white px-4 py-1 rounded mt-2 block w-full md:w-auto
 
               onClick={() => handleClick(user._id)}
