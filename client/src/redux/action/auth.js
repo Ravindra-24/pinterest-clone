@@ -9,7 +9,7 @@ const errorBox = (error) => {
 };
 
 export const signupUser =
-  (authData, navigate, setProgress) => async (dispatch) => {
+  (authData, navigate, setProgress,setLoading) => async (dispatch) => {
     try {
       setProgress(30);
       const response = await api.signup(authData);
@@ -23,6 +23,7 @@ export const signupUser =
       setProgress(100);
     } finally {
       setProgress(100);
+      setLoading(false)
     }
   };
 

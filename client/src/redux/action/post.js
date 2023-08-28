@@ -62,14 +62,14 @@ export const getPostDetails = (id, navigate, setLoading) => async (dispatch) => 
   }
 };
 
-export const updatePostLike = (postId, setLoading) => async (dispatch) => {
+export const updatePostLike = (postId,navigate, setLoading, setIsLoading) => async (dispatch) => {
   try {
     await api.postLike(postId);
-    dispatch(getPostDetails(postId));
+    dispatch(getPostDetails(postId,navigate, setLoading));
   } catch (error) {
     toast.error(error.response.data.error);
   }finally{
-    setLoading(false);
+    setIsLoading(false);
   }
 };
 

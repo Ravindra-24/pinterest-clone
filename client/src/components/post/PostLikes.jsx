@@ -2,22 +2,27 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePostLike } from "../../redux/action/post";
+import { useNavigate } from "react-router";
 
 const PostLikes = ({ post }) => {
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.authReducer.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const handlePostLike = () => {
     try {
-      setLoading(true);
+      setLoading(false);
+      setIsLoading(true);
       if (!auth) {
         toast.error("Please Login to like the post");
-        setLoading(false);
+        setIsLoading(false);
       } else {
-        dispatch(updatePostLike(post._id, setLoading));
+        dispatch(updatePostLike(post._id,navigate, setLoading, setIsLoading));
       }
     } catch (error) {
       toast.error(error.message);
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -31,7 +36,7 @@ const PostLikes = ({ post }) => {
         className="flex items-center focus:outline-none ml-4 dark:text-gray-200"
         onClick={handlePostLike}
       >
-        {loading ? (
+        {isLoading ? (
           <>
             {" "}
             <svg

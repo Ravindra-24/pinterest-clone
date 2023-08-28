@@ -63,7 +63,7 @@ const EditProfile = ({setProgress}) => {
   };
 
   useEffect(() => {
-    dispatch(getUser(auth.id));
+    dispatch(getUser(auth.id, setLoading));
   }, []);
   return (
     <>

@@ -23,11 +23,13 @@ const Signup = ({ setProgress }) => {
         signupUser(
           { firstName, lastName, email, password },
           navigate,
-          setProgress
+          setProgress,
+          setLoading
         )
       );
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   return (

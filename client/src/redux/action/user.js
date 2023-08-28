@@ -43,7 +43,7 @@ export const updateUser =
   (formData, id, navigate, setProgress, setLoading) => async (dispatch) => {
     try {
       setProgress(40);
-      const response = await api.updateUserData(formData, setProgress);
+      const response = await api.updateUserData(formData);
       setProgress(70);
       dispatch(ValidateUser());
       toast.success(response.data.message);
