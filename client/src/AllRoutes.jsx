@@ -46,14 +46,14 @@ const AllRoutes = () => {
       <div className="gradient-progress-wrapper">
         <LoadingBar
           // className="loading-bar"
-          color="#6096f8"
-          height={4}
+          color="#FF6000"
+          height={3}
           shadow={true}
           progress={progress}
-          loaderSpeed={500}
-          containerStyle={{ zIndex: 1000 }}
-          transitionTime={500}
-          waitingTime={500}
+          // loaderSpeed={500}
+          // containerStyle={{ zIndex: 1000 }}
+          // transitionTime={500}
+          // waitingTime={500}
           onLoaderFinished={() => setProgress(0)}
         />
       </div>

@@ -117,14 +117,14 @@ const About = () => {
             <ul className="list-disc pl-5">
               <li>
                 Front-End: HTML, CSS, JavaScript, and a front-end framework
-                (e.g., React) for building the user interface and interactivity.
+                ( React) for building the user interface and interactivity.
               </li>
               <li>
-                Back-End: A server-side language (e.g., Node.js) for handling
+                Back-End: A server-side language (Node.js) for handling
                 user accounts, content storage, and interactions.
               </li>
               <li>
-                Database: A database system (e.g., MySQL, MongoDB) to store user
+                Database: A database system ( MongoDB) to store user
                 profiles, pins, boards, and related data.
               </li>
               <li>
