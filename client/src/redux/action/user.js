@@ -46,7 +46,7 @@ export const updateUser =
       const response = await api.updateUserData(formData);
       setProgress(70);
       dispatch(ValidateUser());
-      toast.success(response.data.message);
+      toast.success(response.message);
       setProgress(100);
       navigate(`/user/${id}`);
     } catch (error) {

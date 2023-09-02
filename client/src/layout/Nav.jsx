@@ -5,7 +5,7 @@ import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "./Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faBars, faCircleArrowUp, faPenToSquare, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
   const location = useLocation();
@@ -52,9 +52,9 @@ const Nav = () => {
             className="ml-2 dark:text-gray-100 text-gray-900 hover:text-gray-300 focus:outline-none ease-in-out transition duration-300"
           >
             {menuOpen ? (
-              <FontAwesomeIcon icon={faXmark} />
+              <FontAwesomeIcon icon={faXmark} width={"30"} height={"40"} />
             ) : (
-              <FontAwesomeIcon icon={faBars} />
+              <FontAwesomeIcon icon={faBars} width={"30"} height={"40"}/>
             )}
           </button>
         </div>
@@ -164,25 +164,25 @@ const Nav = () => {
             <Link
               to={`/user/${auth?.user?.id}`}
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
-            >
+            ><FontAwesomeIcon icon={faUser} className="mr-2"/>
               Profile
             </Link>
             <Link
               to={`/user/edit/${auth?.user?.id}`}
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
-            >
+            ><FontAwesomeIcon icon={faPenToSquare} className="mr-2"/>
               Edit profile
             </Link>
             <Link
               to={`/create-post`}
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
-            >
+            ><FontAwesomeIcon icon={faCircleArrowUp} className="mr-2"/>
               New +
             </Link>
             <Link
               to="/about"
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
-            >
+            ><FontAwesomeIcon icon={faAddressCard} className="mr-2" />
               About Us
             </Link>
           </>

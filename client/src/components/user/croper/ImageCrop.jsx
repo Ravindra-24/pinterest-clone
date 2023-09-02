@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 import withPrivate from '../../../hoc/withPrivate';
 
 
-const ImageCrop = ({ profilePicture, setOpenCrop, setProfilePicture, setImage }) => {
+const ImageCrop = ({ profilePicture, setOpenCrop, setProfilePicture, setImage, setCropLoading }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
@@ -33,12 +33,14 @@ const ImageCrop = ({ profilePicture, setOpenCrop, setProfilePicture, setImage })
       );
       setProfilePicture(url);
       setImage(file);
+      setCropLoading(false);
       setOpenCrop(false);
       setCroppedAreaPixels(null);
     } catch (error) {
       setProfilePicture(null);
       toast.error('An error occurred')
       setOpenCrop(false);
+      setCropLoading(false);
     }
   };
   return (
