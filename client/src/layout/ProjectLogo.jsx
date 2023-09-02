@@ -5,7 +5,7 @@ const ProjectLogo = () => {
   return (
     <>
       <Link to={"/"}>
-        <svg width="auto" height="25" xmlns="http://www.w3.org/2000/svg">
+        <svg width="130" height="25" xmlns="http://www.w3.org/2000/svg">
           {/* <!-- Pin Shape --> */}
           <path d="M10 10 L0 0 L-10 10 L10 40 Z" fill="#E60023" />
           <defs>
@@ -38,7 +38,7 @@ export const AuthLogo = () => {
   return (
     <>
       <Link to={"/"}>
-        <svg width="160" height="25" xmlns="http://www.w3.org/2000/svg">
+        <svg  width="160" height="25" xmlns="http://www.w3.org/2000/svg">
           {/* <!-- Pin Shape --> */}
           <path d="M10 10 L0 0 L-10 10 L10 40 Z" fill="#E60023" />
           <defs>

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import React, { useEffect, useState } from "react";
 import Gallery from "./components/Galleri";
 import Navbar from "./layout/Navbar";
+import Nav from "../src/layout/Nav"
 import Footer from "./layout/Footer";
 import PostView from "./components/post/PostView";
 import LoadingBar from "react-top-loading-bar";
@@ -18,6 +19,7 @@ import EditPost from "./components/post/EditPost";
 import { SearchProvider } from "./context/searchContext";
 import Profile from "./components/user/Profile";
 import EditProfile from "./components/user/EditProfile";
+import About from "./layout/About";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -39,7 +41,8 @@ const AllRoutes = () => {
     <div>
       <Toaster />
       <SearchProvider>
-      <Navbar setProgress={setProgress} />
+      {/* <Navbar setProgress={setProgress} /> */}
+      <Nav/>
       <div className="gradient-progress-wrapper">
         <LoadingBar
           // className="loading-bar"
@@ -75,6 +78,7 @@ const AllRoutes = () => {
 
         <Route path="/user/:id" element={<Profile/>}/>
         <Route path="/user/edit/:id" element={<EditProfile setProgress={setProgress}/>}/>
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </SearchProvider>
