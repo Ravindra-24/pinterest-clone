@@ -23,8 +23,12 @@ const Nav = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const closeHamburger = () => {
+    setMenuOpen(false);
+  }
+
   return (
-    <nav className="bg-white-800 shadow-md w-full dark:bg-gray-700 bg-gray-200 p-2">
+    <nav className={`bg-white-800 shadow-md w-full dark:bg-gray-700 bg-gray-200 p-2 ${menuOpen && "transition-all duration-700 ease-in" }`}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white font-bold text-xl">
           <ProjectLogo />
@@ -49,7 +53,7 @@ const Nav = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="ml-2 dark:text-gray-100 text-gray-900 hover:text-gray-300 focus:outline-none ease-in-out transition duration-300"
+            className="ml-2 dark:text-gray-100 text-gray-900 hover:text-gray-300 focus:outline-none"
           >
             {menuOpen ? (
               <FontAwesomeIcon icon={faXmark} width={"30"} height={"40"} />
@@ -155,12 +159,12 @@ const Nav = () => {
 
       {/* Mobile menu for md:screen */}
       <div
-        className={`mt-5 md:hidden flex-col items-center ${
-          menuOpen ? "flex" : "hidden"
+        className={`mt-5 md:hidden flex-col items-center transition-${menuOpen} ease-in-out duration-700 ${
+          menuOpen ? "flex " : "hidden"
         }`}
       >
         {auth && auth?.token ? (
-          <>
+          <div onClick={closeHamburger}>
             <Link
               to={`/user/${auth?.user?.id}`}
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
@@ -185,7 +189,7 @@ const Nav = () => {
             ><FontAwesomeIcon icon={faAddressCard} className="mr-2" />
               About Us
             </Link>
-          </>
+          </div>
         ) : (
           <>
             <Link
@@ -206,7 +210,7 @@ const Nav = () => {
               Logout
             </button>
           ) : (
-            <>
+            <div onClick={closeHamburger}>
               <button
                 className="m-2 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
                 // hover:from-green-400 hover:to-blue-500
@@ -226,7 +230,7 @@ const Nav = () => {
               >
                 Signup
               </button>
-            </>
+            </div>
           )}
         </div>
       </div>

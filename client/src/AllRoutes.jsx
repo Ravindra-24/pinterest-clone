@@ -27,14 +27,11 @@ const AllRoutes = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    try {
-      setProgress(50);
-    } catch (error) {
-      setProgress(100);
-      toast.error(error.message);
-    } finally {
-      setProgress(100);
-    }
+    setProgress(40)
+    const timeout = setTimeout(() => {
+      setProgress(100)
+    })
+    return () => clearTimeout(timeout)
   }, [location.pathname]);
 
   return (
@@ -50,9 +47,9 @@ const AllRoutes = () => {
           height={3}
           shadow={true}
           progress={progress}
-          // loaderSpeed={500}
-          // containerStyle={{ zIndex: 1000 }}
-          // transitionTime={500}
+          loaderSpeed={400}
+          containerStyle={{ zIndex: 1000 }}
+          transitionTime={200}
           // waitingTime={500}
           onLoaderFinished={() => setProgress(0)}
         />
