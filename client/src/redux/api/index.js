@@ -3,8 +3,8 @@ import store from '../../redux/store'
 import toast from "react-hot-toast";
 
 export const API = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
-  // timeout: 5000,
+  baseURL: 'https://sore-red-scrubs.cyclic.app',
+  // timeout: 5000, https://sore-red-scrubs.cyclic.app,  process.env.REACT_APP_API_BASE_URL
   headers: {},
 });
 

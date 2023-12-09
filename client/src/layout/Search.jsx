@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SearchContext } from "../context/searchContext";
 import { useLocation } from "react-router";
 
 const Search = () => {
   const location = useLocation();
+  const [text, setText] = useState("")
   const { setSearch } = useContext(SearchContext);
   return (
     <>
@@ -19,7 +20,7 @@ const Search = () => {
             Search
           </label>
           <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none ">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
                 className="w-4 h-4"
                 aria-hidden="true"
@@ -40,16 +41,46 @@ const Search = () => {
               style={{
                 borderBottom: "1px solid #ffbf00",
               }}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setText(e.target.value)}
               type="text"
               id="simple-search"
               className="
                 rounded-md
                 focus:outline-none
-                bg-white-50  text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 max-sm:h-8 bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
+                bg-white-50
+                text-gray-900
+                text-sm
+                focus:ring-blue-500
+                focus:border-blue-500
+                block
+                w-full
+                pl-10
+                p-2.5
+                max-sm:h-8
+                bg-gray-50
+                dark:bg-gray-700
+                dark:text-gray-200"
               placeholder="Search post by name..."
               required=""
             />
+            <button
+            onClick={() => setSearch(text)}
+              className="
+                absolute
+                right-0
+                top-0
+                h-full
+                px-3
+                py-2
+                bg-blue-500
+                text-white
+                rounded-r-md
+                hover:bg-blue-600
+                focus:outline-none
+              "
+            >
+              Search
+            </button>
           </div>
         </div>
       )}

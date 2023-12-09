@@ -89,7 +89,9 @@ export const resetPassword =
 export const ValidateUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token)  {
+      return dispatch({type:"AUTH",payload:null})
+    };
     const responseData = await api.validate(token);
     if (responseData === null) return;
     dispatch({

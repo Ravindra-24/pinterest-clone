@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 import React, { useEffect, useState } from "react";
 import Gallery from "./components/Galleri";
-import Navbar from "./layout/Navbar";
 import Nav from "../src/layout/Nav"
 import Footer from "./layout/Footer";
 import PostView from "./components/post/PostView";
@@ -10,7 +9,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import NotFound from "./layout/NotFound";
 import { useLocation } from "react-router";
 import "./App.css";
@@ -20,9 +19,13 @@ import { SearchProvider } from "./context/searchContext";
 import Profile from "./components/user/Profile";
 import EditProfile from "./components/user/EditProfile";
 import About from "./layout/About";
+import { useSelector } from "react-redux";
+import SpinnerComponent from "./layout/spinner/spinner";
 
 const AllRoutes = () => {
   const location = useLocation();
+
+  const loaded = useSelector((state) => state.authReducer.loaded);
 
   const [progress, setProgress] = useState(0);
 
@@ -54,7 +57,8 @@ const AllRoutes = () => {
           onLoaderFinished={() => setProgress(0)}
         />
       </div>
-      <Routes>
+      {
+        loaded ? <Routes>
         <Route path="/" element={<Gallery setProgress={setProgress} />} />
         <Route
           path="/post/:id"
@@ -77,7 +81,9 @@ const AllRoutes = () => {
         <Route path="/user/edit/:id" element={<EditProfile setProgress={setProgress}/>}/>
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> : <div className="w-screen h-screen flex justify-center align-middle"><SpinnerComponent/></div>
+      }
+      
       </SearchProvider>
       <Footer />
     </div>

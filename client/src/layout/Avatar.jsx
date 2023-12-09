@@ -26,7 +26,7 @@ const Avatar = ({auth}) => {
                         <span className="sr-only">Open user menu</span>
                         <span className="rounded-full h-8 w-8 flex items-center justify-center">
                           <span className="text-white font-medium">
-                            {auth?.user?.initials.toUpperCase()}
+                            {auth?.user?.initials?.toUpperCase()}
                           </span>
                         </span>
                       </button>

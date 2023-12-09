@@ -16,7 +16,7 @@
   }
   
   .spinner-container {
-    display: inline-block;
+    display: flex;
     position: relative;
   }
   

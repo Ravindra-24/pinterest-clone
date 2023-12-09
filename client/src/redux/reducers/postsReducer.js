@@ -1,5 +1,6 @@
 const initialsSate = {
   posts: [],
+  loaded: false
 };
 const postsReducer = (state = initialsSate, action) => {
   const { payload, type } = action;
@@ -14,7 +15,8 @@ const postsReducer = (state = initialsSate, action) => {
         );
         return {
           ...state,
-          posts: [...(state.posts || []), ...newPosts], // Append fetched posts
+          posts: [...(state.posts || []), ...newPosts],
+          loaded: true
         };
       }
       return state;
@@ -23,6 +25,7 @@ const postsReducer = (state = initialsSate, action) => {
         return {
           ...state,
           post: payload,
+          loaded: true
         };
       }
       return state;
@@ -36,6 +39,7 @@ const postsReducer = (state = initialsSate, action) => {
         return {
           ...state,
           posts: updatedPosts,
+
         };
       }
       return state;
@@ -63,7 +67,8 @@ const postsReducer = (state = initialsSate, action) => {
         );
         return {
           ...state,
-          posts: [...searchedPosts], // Append fetched posts
+          posts: [...searchedPosts, ...state.posts], 
+          loaded: true
         };
       }
       return state;
