@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/bundle.js",
     "build": "node_modules/.bin/webpack --config webpack.config.js --mode=production",
     "dev": "node_modules/.bin/webpack --config webpack.config.js --mode=development -w "
   },
@@ -33,7 +34,7 @@
     "@babel/core": "7.16.0",
     "@babel/preset-env": "7.16.4",
     "babel-loader": "8.2.3",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "nodemon-webpack-plugin": "^4.8.1",
     "rimraf": "3.0.2",
     "webpack": "^5.86.0",
