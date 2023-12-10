@@ -1,7 +1,6 @@
 const initialState = {
   token: null,
   user: null,
-  profilePicture: null,
   loaded: false,
 };
 

@@ -94,12 +94,13 @@ export const ValidateUser = () => async (dispatch) => {
     };
     const responseData = await api.validate(token);
     if (responseData === null) return;
+    console.log(responseData)
     dispatch({
       type: "AUTH",
       payload: {
         token,
         user: responseData.data.user,
-        profilePicture: responseData.data.profilePicture,
+      
       },
     });
     toast.success(responseData.message);

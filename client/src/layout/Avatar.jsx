@@ -7,11 +7,11 @@ const Avatar = ({auth}) => {
   // const user = useSelector((state) => state.user);
   return (
     <>
-      {auth?.profilePicture ? (
+      {auth?.user?.profilePicture ? (
         
         <span className="rounded-full h-8 w-8 flex items-center justify-center">
                       <img
-                        src={auth?.profilePicture}
+                        src={auth?.user?.profilePicture}
                         alt="Profile"
                         className="w-8 h-8 rounded-full mr-2 object-cover"
                       />
@@ -26,7 +26,7 @@ const Avatar = ({auth}) => {
                         <span className="sr-only">Open user menu</span>
                         <span className="rounded-full h-8 w-8 flex items-center justify-center">
                           <span className="text-white font-medium">
-                            {auth?.user?.initials?.toUpperCase()}
+                            {auth?.user?.firstName?.charAt(0).toUpperCase()}
                           </span>
                         </span>
                       </button>

@@ -5,7 +5,7 @@ const ProjectLogo = () => {
   return (
     <>
       <Link to={"/"}>
-        <svg width="130" height="25" xmlns="http://www.w3.org/2000/svg">
+        <svg width="70" height="25" xmlns="http://www.w3.org/2000/svg">
           {/* <!-- Pin Shape --> */}
           <path d="M10 10 L0 0 L-10 10 L10 40 Z" fill="#E60023" />
           <defs>
@@ -24,7 +24,7 @@ const ProjectLogo = () => {
             stroke="url(#gradient)"
             strokeWidth={1}
           >
-            PINTERESTLike
+            PIN
           </text>
         </svg>
       </Link>

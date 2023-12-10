@@ -14,6 +14,7 @@ import {
   faShareNodes,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import Avatar from "../../layout/Avatar";
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
@@ -84,28 +85,7 @@ const PostView = ({ setProgress }) => {
                 </div>
                 <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
                   <div className="flex items-center">
-                    {post?.user?.profilePicture ? (
-                      <img
-                        src={post?.user?.profilePicture}
-                        alt="Profile"
-                        className="w-10 h-10 rounded-full mr-2 object-cover"
-                      />
-                    ) : (
-                      <div
-                        className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid mr-2"
-                        id="user-menu"
-                        aria-label="User menu"
-                        aria-haspopup="true"
-                      >
-                        {/* <span className="sr-only">Open user menu</span> */}
-                        <span className="rounded-full h-8 w-8 flex items-center justify-center">
-                          <span className="text-white font-medium">
-                            {post?.user?.firstName?.charAt(0).toUpperCase() +
-                              post?.user?.lastName?.charAt(0).toUpperCase()}
-                          </span>
-                        </span>
-                      </div>
-                    )}
+                    <Avatar auth={post} />
                     <div
                       className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900 cursor-pointer "
                       onClick={() => navigate(`/user/${post?.user?._id}`)}

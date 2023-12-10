@@ -6,6 +6,8 @@ import { deleteComment, updateComentLike } from "../../redux/action/comment";
 import moment from "moment";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import Avatar from "../../layout/Avatar";
+import { Link } from "react-router-dom";
 
 const Comments = ({ comments, postId }) => {
   const [loading, setLoading] = useState(false);
@@ -42,37 +44,15 @@ const Comments = ({ comments, postId }) => {
             className="m-4 flex mx-auto bg-white rounded-md shadow-md p-2 overflow-hidden md:max-w-full md:flex max-sm:w-full dark:bg-gray-700"
           >
             <div className=" md:flex-shrink-0 flex items-center rounded">
-              <>
-                {comment?.user?.profilePicture ? (
-                  <img
-                    src={comment?.user?.profilePicture}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full mr-2 object-cover"
-                  />
-                ) : (
-                  <div
-                    className="max-w-xs bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 rounded-full flex items-center text-sm focus:outline-none focus:shadow-solid mr-2"
-                    id="user-menu"
-                    aria-label="User menu"
-                    aria-haspopup="true"
-                  >
-                    {/* <span className="sr-only">Open user menu</span> */}
-                    <span className="rounded-full h-8 w-8 flex items-center justify-center">
-                      <span className="text-white font-medium">
-                        {comment?.user?.firstName?.charAt(0).toUpperCase() +
-                          comment?.user?.lastName?.charAt(0).toUpperCase()}
-                      </span>
-                    </span>
-                  </div>
-                )}
-              </>
+              <Avatar auth={comment} />
             </div>
-            <div className="p-4 md:w-1/2 md:flex-grow ">
+            <div className="p-2 md:w-1/2 md:flex-grow ">
               <div className="flex">
+                <Link to={`/user/${comment?.user?._id}`} >
                 <div
-                  className={` tracking-wide text-sm  font-semibold ${
+                  className={` tracking-wide text-[1rem]  font-semibold ${
                     comment?.user._id === auth?.id
-                      ? "text-indigo-500"
+                      ? "text-blue-500"
                       : "dark:text-white"
                   }`}
                 >
@@ -82,7 +62,8 @@ const Comments = ({ comments, postId }) => {
                     comment?.user?.lastName.charAt(0).toUpperCase() +
                     comment?.user?.lastName.slice(1)}
                 </div>
-                <p className="text-gray-600 text-sm ml-2 dark:text-gray-300">
+                </Link>
+                <p className="text-gray-600 text-xs ml-2 flex text-center dark:text-gray-300" style={{alignItems:'center'}}>
                   {moment(comment?.createdAt).fromNow()}
                 </p>
               </div>

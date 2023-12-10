@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 
 const Search = () => {
   const location = useLocation();
-  const [text, setText] = useState("")
+  const [text, setText] = useState("");
   const { setSearch } = useContext(SearchContext);
   return (
     <>
@@ -64,7 +64,7 @@ const Search = () => {
               required=""
             />
             <button
-            onClick={() => setSearch(text)}
+              onClick={() => setSearch(text)}
               className="
                 absolute
                 right-0
@@ -72,10 +72,9 @@ const Search = () => {
                 h-full
                 px-3
                 py-2
-                bg-blue-500
                 text-white
                 rounded-r-md
-                hover:bg-blue-600
+                bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600
                 focus:outline-none
               "
             >
