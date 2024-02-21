@@ -78,7 +78,7 @@ const Gallery = ({ setProgress }) => {
   return (
     <>
       <div className="m-2">
-        <ImageSlider images={images} />
+        {/* <ImageSlider images={images} /> */}
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1100: 4 }}
         >
