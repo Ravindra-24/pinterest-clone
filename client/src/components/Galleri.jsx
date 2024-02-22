@@ -94,6 +94,10 @@ const Gallery = ({ setProgress }) => {
                       key={post._id}
                       src={post.image}
                       alt="random"
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src="../../public/assets/imgErr1.jpg";
+                      }}
                     />
 
                     <div className="pl-4 pr-4 p-1 font-sans">
