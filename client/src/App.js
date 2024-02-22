@@ -5,12 +5,14 @@ import AllRoutes from "./AllRoutes";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { ValidateUser } from "./redux/action/auth";
+import { getSildeImage } from "./redux/action/post";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(ValidateUser());
+    dispatch(getSildeImage())
   }, [dispatch]);
 
   return (

@@ -1,0 +1,62 @@
+.each-slide-effect {
+  position: relative;
+  cursor: pointer;
+}
+
+.background-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.each-slide-effect > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 400px;
+}
+
+.slider-desc {
+  z-index: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  opacity: 0.6;
+  width: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.slider-desc span {
+  padding: 10px;
+  margin-left: 10%;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+
+.slider-desc p {
+  padding: 10px; /* Adjust as needed */
+  font-size: 12px;
+  width: 20em;
+  margin-left: 10%;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+}
+
+.slider-desc button {
+  margin-left: 2%;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}

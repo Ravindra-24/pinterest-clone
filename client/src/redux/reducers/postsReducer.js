@@ -1,5 +1,6 @@
 const initialsSate = {
   posts: [],
+  slideshowImages: [],
   loaded: false
 };
 const postsReducer = (state = initialsSate, action) => {
@@ -72,6 +73,16 @@ const postsReducer = (state = initialsSate, action) => {
         };
       }
       return state;
+
+      case "SLIDE_SHOW_IMAGES":
+        if (payload) {
+          return {
+            ...state,
+            slideshowImages: payload,
+            loaded: true
+          };
+        }
+        return state;
     
     default:
       return state;

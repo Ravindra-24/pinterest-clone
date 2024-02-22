@@ -49,6 +49,7 @@ export const postLike = (postId) => API.patch(`/post/like/${postId}`);
 
 export const fetchAllPosts = (page, limit, search) => API.get(`/post?_page=${page}&_limit=${limit}&_search=${search}`);
 export const getPost = (id) => API.get(`/post/${id}`);
+export const slideImages = () => API.get('/post/slide-show-images')
 
 export const postComments = (id, commentData) => API.post(`/comment/${id}`, commentData);
 export const commentLike = (commentId, postId) => API.patch(`/comment/like/${commentId}/${postId}`);

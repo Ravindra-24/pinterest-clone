@@ -5,10 +5,7 @@ import ColorfulSpinner from "../layout/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import "../layout/spinner/spinner.css";
 import { fetchPosts } from "../redux/action/post";
-import PostsDetails from "./post/PostsDetails";
 import { SearchContext } from "../context/searchContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../layout/Avatar";
 import moment from "moment";
 import ImageSlider from "./slider/ImageSlider";
@@ -70,15 +67,11 @@ const Gallery = ({ setProgress }) => {
       observer.current.observe(lastImageRef.current);
     }
   }, [allPosts, loading]);
-  const images = [
-    "https://res.cloudinary.com/dbjq9ekgu/image/upload/v1702190806/posts/cqtnrjotygnikrsett0k.jpg",
-    "https://res.cloudinary.com/dbjq9ekgu/image/upload/v1702190806/posts/cqtnrjotygnikrsett0k.jpg",
-    "https://res.cloudinary.com/dbjq9ekgu/image/upload/v1702190806/posts/cqtnrjotygnikrsett0k.jpg",
-  ];
+  
   return (
     <>
-      <div className="m-2">
-        {/* <ImageSlider images={images} /> */}
+      <div>
+        <ImageSlider />
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1100: 4 }}
         >
@@ -88,7 +81,7 @@ const Gallery = ({ setProgress }) => {
                 <Link
                   to={`/post/${post._id}`}
                   rel="noopener noreferrer"
-                  className="block  rounded overflow-hidden shadow-md transition-transform transform hover:scale-105"
+                  className="block rounded overflow-hidden shadow-md transition-transform transform hover:scale-105"
                   key={post._id}
                 >
                   <div
