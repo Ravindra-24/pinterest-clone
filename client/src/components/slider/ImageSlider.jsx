@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./ImageSllider.css";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ImageSlider = () => {
   const slideImages = useSelector(
@@ -32,8 +32,8 @@ const ImageSlider = () => {
         defaultIndex={currentIndex}
         indicatorStyle={indicatorStyles} // Add indicatorStyle prop
       >
-        {slideImages &&
-          slideImages.map((images) => (
+        {
+          slideImages?.map((images) => (
             <div className="each-slide-effect" key={images._id}>
               <div
                 className="background-img"
@@ -50,7 +50,7 @@ const ImageSlider = () => {
                     View
                   </button>
                 </div>
-                <div className="slider-text-background bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"></div>
+                {/* <div className="slider-text-background bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"></div> */}
               </div>
             </div>
           ))}

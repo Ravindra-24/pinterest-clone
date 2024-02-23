@@ -68,7 +68,7 @@
   bottom: 0;
   left: 0;
   height: 50%;
-  opacity: 0.5;
+  /* opacity: 0.5; */
   width: 100%;
   /* background: linear-gradient(90deg, pink, #ca8a04); */
 }
