@@ -4,7 +4,6 @@ import "react-slideshow-image/dist/styles.css";
 import "./ImageSllider.css";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import withPublic from "../../hoc/withPublic";
 
 const ImageSlider = () => {
   const slideImages = useSelector(
@@ -60,4 +59,4 @@ const ImageSlider = () => {
   );
 };
 
-export default withPublic(ImageSlider);
+export default ImageSlider;
