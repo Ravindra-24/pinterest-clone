@@ -37,9 +37,9 @@ const Nav = () => {
         <div className="hidden md:block">
           <Link
             to={"/about"}
-            className=" text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium mr-3"
+            className=" text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white px-2 py-2 rounded-md text-sm font-medium mr-3"
           >
-            About Us
+            AboutUs
           </Link>
         </div>
         {auth && auth?.token && (
@@ -187,7 +187,7 @@ const Nav = () => {
               to="/about"
               className="text-gray-900 dark:text-gray-50 hover:bg-gray-700 hover:text-white block py-2 rounded-md text-sm font-medium"
             ><FontAwesomeIcon icon={faAddressCard} className="mr-2" />
-              About Us
+              AboutUs
             </Link>
           </div>
         ) : (

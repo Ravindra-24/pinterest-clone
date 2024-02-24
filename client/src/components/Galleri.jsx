@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, lazy, Suspense } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ColorfulSpinner from "../layout/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,8 @@ import { SearchContext } from "../context/searchContext";
 import Avatar from "../layout/Avatar";
 import moment from "moment";
 import ImageSlider from "./slider/ImageSlider";
+
+const SliderComponent = lazy(() => import("./slider/ImageSlider"));
 
 const Gallery = ({ setProgress }) => {
   const [page, setPage] = useState(1);
@@ -71,7 +73,9 @@ const Gallery = ({ setProgress }) => {
   return (
     <>
       <div>
-        <ImageSlider />
+      <Suspense fallback={<div>Loading...</div>}>
+      <SliderComponent />
+    </Suspense>
         <ResponsiveMasonry
           columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1100: 4 }}
         >

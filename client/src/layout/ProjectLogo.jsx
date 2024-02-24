@@ -17,8 +17,8 @@ const ProjectLogo = () => {
           <text
             x="20"
             y="20"
-            font-family="lato"
-            font-size="15"
+            fontFamily="lato"
+            fontSize="15"
             className=" max-sm:text-xs fill-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
             // className="text-grey-900 dark:text-white"
             stroke="url(#gradient)"
@@ -50,8 +50,8 @@ export const AuthLogo = () => {
           <text
             x="20"
             y="20"
-            font-family="lato"
-            font-size="20"
+            fontFamily="lato"
+            fontSize="20"
             className=" max-sm:text-xs fill-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"
             // className="text-grey-900 dark:text-white"
             stroke="url(#gradient)"

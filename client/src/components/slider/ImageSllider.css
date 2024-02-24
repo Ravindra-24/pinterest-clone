@@ -68,20 +68,22 @@
   bottom: 0;
   left: 0;
   height: 50%;
-  /* opacity: 0.5; */
+  opacity: 0.5;
   width: 100%;
-  /* background: linear-gradient(90deg, pink, #ca8a04); */
 }
 
 .indicator {
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  border: 1px #fff solid;
-  margin: 0;
+  border-radius:50% ;
+  border: 1px #fa6fb5 solid;
+  /* background: #eab308; */
+  margin: 2px;
 }
 
 .indicator.active {
-  color: #fff;
-  background: #fff;
+  /* color: #db2777; */
+  background: #f7d17f;
+  border: 1px #db2777  solid;
 }

@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./ImageSllider.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ImageSlider = () => {
-  const slideImages = useSelector(
-    (state) => state.postsReducer.slideshowImages
-  );
+  const slideImages = useSelector((state) => state.ImageSliderReducer);
 
   const navigate = useNavigate();
 
@@ -18,22 +16,16 @@ const ImageSlider = () => {
     setCurrentIndex(currentIndex);
   };
 
-  const indicatorStyles = {
-    backgroundColor: "white",
-    border: "1px solid pink",
-    color: "pink",
-  };
-
   return (
     <div className="slide-container">
-      <Slide
-        onChange={handleSlideChange}
-        indicators={true}
-        defaultIndex={currentIndex}
-        indicatorStyle={indicatorStyles} // Add indicatorStyle prop
-      >
-        {
-          slideImages?.map((images) => (
+      {slideImages.loaded && (
+        <Slide
+          onChange={handleSlideChange}
+          indicators={index => <div className="indicator"></div>} scale={1.4}
+          defaultIndex={currentIndex}
+
+        >
+          {slideImages?.slideshowImages.map((images) => (
             <div className="each-slide-effect" key={images._id}>
               <div
                 className="background-img"
@@ -50,11 +42,12 @@ const ImageSlider = () => {
                     View
                   </button>
                 </div>
-                {/* <div className="slider-text-background bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"></div> */}
+                <div className="slider-text-background bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600"></div>
               </div>
             </div>
           ))}
-      </Slide>
+        </Slide>
+      )}
     </div>
   );
 };

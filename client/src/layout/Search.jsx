@@ -15,7 +15,7 @@ const Search = () => {
       location.pathname === "/post/:id " ? (
         <></>
       ) : (
-        <div className="flex w-2/3 items-center ml-1">
+        <div className="flex w-2/3 items-center ">
           <label htmlFor="simple-search" className="sr-only">
             Search
           </label>
