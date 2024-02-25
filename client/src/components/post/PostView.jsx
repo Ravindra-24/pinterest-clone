@@ -15,14 +15,14 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../../layout/Avatar";
-import DeleteCard from "../../layout/DeleteCard";
+import DeleteCard from "../../layout/Modal/DeleteCard";
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
   const post = useSelector((state) => state.postsReducer.post);
 
   const [loading, setLoading] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const PostView = ({ setProgress }) => {
 
   const handleDeleteModal = () => {
     try {
-      setShowDelete(!showDelete);
+      setModal(!modal);
     } catch (error) {
       toast.error(error.message);
     }
@@ -65,18 +65,20 @@ const PostView = ({ setProgress }) => {
 
   return (
     <>
-    {
-     showDelete && (<>
-     <div className="bg-black opacity-50 absolute w-full h-full overflow-hidden"></div>
-        <div className="mx-auto ease-in">
-          <DeleteCard
-            post={post?._id}
-            setProgress={setProgress}
-            setShowDelete={setShowDelete}
-          />
-        </div>
-      </>)
-      }
+      {modal && (
+        <>
+          <div className="bg-black opacity-50 absolute w-full h-full overflow-hidden"></div>
+          <div className="mx-auto ease-in">
+            <DeleteCard
+              post={post?._id}
+              setProgress={setProgress}
+              setModal={setModal}
+              modal={modal}
+            />
+          </div>
+        </>
+      )}
+
       {!loading ? (
         <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">
           <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto">

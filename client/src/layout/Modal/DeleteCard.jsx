@@ -1,10 +1,11 @@
 import React from "react";
-import { deletePost } from "../redux/action/post";
+import { deletePost } from "../../redux/action/post";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import Modal from "./Modal";
 
-const DeleteCard = ({ post, setProgress, setShowDelete }) => {
+const DeleteCard = ({ post, setProgress, setModal, modal}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -14,18 +15,20 @@ const DeleteCard = ({ post, setProgress, setShowDelete }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setShowDelete(false);
+      setModal(false);
       navigate("/");
     }
   };
 
   const handleClose = () => {
-    setShowDelete(false);
+    setModal(false);
   };
 
   return (
-    <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div className="bg-gradient-to-r from-pink-500 to-yellow-500 dark:border-white border-2 border-spacing-1 border-gray-900 shadow-md rounded-lg p-4 h-fit ">
+    <>
+       <Modal post={post} setProgress={setProgress} setModal={setModal} modal={modal}>X
+     <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+       <div className="bg-gradient-to-r from-pink-500 to-yellow-500 dark:border-white border-2 border-spacing-1 border-gray-900 shadow-md rounded-lg p-4 h-fit ">
         <h2 className="text-xl font-bold mb-4 dark:text-gray-100 text-gray-900 ">
           Delete Post
         </h2>
@@ -46,8 +49,10 @@ const DeleteCard = ({ post, setProgress, setShowDelete }) => {
             Cancel
           </button>
         </div>
-      </div>
-    </div>
+     </div>
+     </div>
+        </Modal>
+    </>
   );
 };
 
