@@ -15,12 +15,14 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../../layout/Avatar";
+import DeleteCard from "../../layout/DeleteCard";
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
   const post = useSelector((state) => state.postsReducer.post);
 
   const [loading, setLoading] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,21 +38,18 @@ const PostView = ({ setProgress }) => {
     }
   };
 
-  const handlePostDelete = () => {
+  const handleDeleteModal = () => {
     try {
-      dispatch(deletePost(post._id, setProgress));
+      setShowDelete(!showDelete);
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      navigate("/");
     }
   };
 
   const handleShare = () => {
     try {
       navigator.clipboard.writeText(
-        "https://pinterest-clone-tau.vercel.app" +
-          location.pathname
+        "https://pinterest-clone-tau.vercel.app" + location.pathname
       );
       toast.success("Link Copied");
     } catch (error) {
@@ -66,6 +65,18 @@ const PostView = ({ setProgress }) => {
 
   return (
     <>
+    {
+     showDelete && (<>
+     <div className="bg-black opacity-50 absolute w-full h-full overflow-hidden"></div>
+        <div className="mx-auto ease-in">
+          <DeleteCard
+            post={post?._id}
+            setProgress={setProgress}
+            setShowDelete={setShowDelete}
+          />
+        </div>
+      </>)
+      }
       {!loading ? (
         <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">
           <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto">
@@ -124,7 +135,7 @@ const PostView = ({ setProgress }) => {
                       <>
                         <button
                           className="flex items-center focus:outline-none ml-4"
-                          onClick={handlePostDelete}
+                          onClick={handleDeleteModal}
                         >
                           <p className="text-gray-600 text-sm dark:text-gray-200">
                             <FontAwesomeIcon icon={faTrash} /> delete

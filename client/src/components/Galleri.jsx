@@ -98,6 +98,7 @@ const Gallery = ({ setProgress }) => {
                       key={post._id}
                       src={post.image}
                       alt="random"
+                      loading="lazy"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
                         currentTarget.src="../../public/assets/imgErr1.jpg";

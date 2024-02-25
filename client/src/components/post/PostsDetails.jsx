@@ -6,6 +6,7 @@ import { deletePost } from "../../redux/action/post";
 
 const PostsDetails = ({ post, setProgress }) => {
   const user = useSelector((state) => state.authReducer.user);
+  
   const dispatch = useDispatch();
 
   const handlePostDelete = () => {
@@ -14,7 +15,8 @@ const PostsDetails = ({ post, setProgress }) => {
     } catch (error) {
       toast.error(error.message);
     }
-  };
+  }; 
+
   return (
     <>
       {/* <div className="absolute z-10  top-0 right-0 m-2 opacity-100 hover:cursor-pointer hover:opacity-0 transition-opacity duration-300">
