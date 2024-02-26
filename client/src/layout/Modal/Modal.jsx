@@ -1,29 +1,29 @@
 import React from "react";
 
-const Modal = ({ post, setProgress, setModal, modal, children }) => {
+const Modal = ({ open, setOpen, children }) => {
   const handleClose = () => {
-    setModal(false);
+    setOpen(false);
   };
   return (
     <>
       <div
         onClick={handleClose}
         className={`
-        fixed inset-0 flex justify-center items-center transition-colors
-        ${modal ? "visible backdrop-blur-sm" : "invisible"}
+        fixed inset-0 flex justify-center items-center transition-colors z-50
+        ${open ? "visible backdrop-blur-sm" : "invisible"}
       `}
       >
-        {/* modal */}
+        {/* open */}
         <div
           onClick={(e) => e.stopPropagation()}
           className={`
-          bg-white rounded-xl shadow p-6 transition-all
-          ${modal ? "scale-100 opacity-100" : "scale-125 opacity-0"}
+          bg-gradient-to-r from-pink-500 to-yellow-500 rounded-xl shadow p-1 transition-all duration-200
+          ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
         `}
         >
           <button
             onClick={handleClose}
-            className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
+            className="absolute top-2 right-2 p-1 rounded-lg dark:text-gray-300 dark:bg-gray-800 dark:hover:text-gray-50 text-gray-700 bg-gray-100 hover:text-gray-900"
           >
             <svg
               className="flex-shrink-0 size-4"

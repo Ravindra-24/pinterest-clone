@@ -28,23 +28,18 @@ export const signupUser =
   };
 
 export const loginUser =
-  (authData, navigate, setLoading, setProgress) => async (dispatch) => {
+  (authData, navigate, setLoading) => async (dispatch) => {
     try {
-      setProgress(30);
       const responseData = await api.login(authData);
-      setProgress(70);
       dispatch({ type: "AUTH", payload: responseData.data });
       // const { token } = responseData;
       // api.API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", responseData.data.token);
-      setProgress(100);
       toast.success(responseData.message);
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
-      setProgress(100);
     } finally {
-      setProgress(100);
       setLoading(false);
     }
   };

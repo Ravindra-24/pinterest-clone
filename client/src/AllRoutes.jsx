@@ -28,6 +28,7 @@ const AllRoutes = () => {
   const loaded = useSelector((state) => state.authReducer.loaded);
 
   const [progress, setProgress] = useState(0);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setProgress(40)
@@ -42,7 +43,9 @@ const AllRoutes = () => {
       <Toaster />
       <SearchProvider>
       {/* <Navbar setProgress={setProgress} /> */}
-      <Nav/>
+      <Nav open={open} setOpen={setOpen}/>
+      <Login open={open} setOpen={setOpen}/>
+      
       <div className="gradient-progress-wrapper">
         <LoadingBar
           // className="loading-bar"
@@ -65,7 +68,7 @@ const AllRoutes = () => {
           element={<PostView setProgress={setProgress} />}
         />
         <Route path="/post/edit/:id" element={<EditPost setProgress={setProgress}/>}/>
-        <Route path="/login" element={<Login setProgress={setProgress} />} />
+        {/* <Route path="/login" element={<Login setProgress={setProgress} />} /> */}
         <Route path="/signup" element={<Signup setProgress={setProgress} />} />
         <Route
           path="/forgot-password"

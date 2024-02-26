@@ -22,7 +22,7 @@ const PostView = ({ setProgress }) => {
   const post = useSelector((state) => state.postsReducer.post);
 
   const [loading, setLoading] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const PostView = ({ setProgress }) => {
 
   const handleDeleteModal = () => {
     try {
-      setModal(!modal);
+      setOpen(!open);
     } catch (error) {
       toast.error(error.message);
     }
@@ -65,19 +65,12 @@ const PostView = ({ setProgress }) => {
 
   return (
     <>
-      {modal && (
-        <>
-          <div className="bg-black opacity-50 absolute w-full h-full overflow-hidden"></div>
-          <div className="mx-auto ease-in">
-            <DeleteCard
+      <DeleteCard
               post={post?._id}
-              setProgress={setProgress}
-              setModal={setModal}
-              modal={modal}
+              open={open}
+              setOpen={setOpen}
+              setLoading={setLoading}
             />
-          </div>
-        </>
-      )}
 
       {!loading ? (
         <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">

@@ -5,30 +5,30 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import Modal from "./Modal";
 
-const DeleteCard = ({ post, setProgress, setModal, modal}) => {
+const DeleteCard = ({ post, open, setOpen, setLoading}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handlePostDelete = () => {
     try {
-      dispatch(deletePost(post, setProgress));
+      dispatch(deletePost(post, setLoading));
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setModal(false);
+      setOpen(false);
       navigate("/");
     }
   };
 
   const handleClose = () => {
-    setModal(false);
+    setOpen(false);
   };
 
   return (
     <>
-       <Modal post={post} setProgress={setProgress} setModal={setModal} modal={modal}>X
-     <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-       <div className="bg-gradient-to-r from-pink-500 to-yellow-500 dark:border-white border-2 border-spacing-1 border-gray-900 shadow-md rounded-lg p-4 h-fit ">
+       <Modal setOpen={setOpen} open={open}>
+     <div className=" ">
+       <div className=" dark:bg-gray-800 bg-gray-50 shadow-md rounded-lg p-4 w-80 ">
         <h2 className="text-xl font-bold mb-4 dark:text-gray-100 text-gray-900 ">
           Delete Post
         </h2>
@@ -38,13 +38,13 @@ const DeleteCard = ({ post, setProgress, setModal, modal}) => {
         <div className="flex justify-end">
           <button
             onClick={handlePostDelete}
-            className="bg-red-500 hover:bg-red-600 dark:text-gray-100 text-gray-900 font-bold py-2 px-4 rounded mr-2"
+            className="bg-red-500 hover:bg-red-600 dark:text-gray-100 text-gray-900 px-2 rounded mr-1"
           >
             Delete
           </button>
           <button
             onClick={handleClose}
-            className=" dark:text-gray-100 dark:hover:text-gray-300 text-gray-800 hover:text-gray-950 font-bold py-2 px-4 rounded"
+            className=" dark:text-gray-100 dark:hover:text-gray-300 text-gray-800 hover:text-gray-950 py-1 px-2 rounded"
           >
             Cancel
           </button>
