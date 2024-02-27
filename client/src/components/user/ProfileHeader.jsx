@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBirthdayCake, faPen } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
-import ColorfulLoader from "../../layout/spinner/spinner";
 import { followUser, getUser } from "../../redux/action/user";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-hot-toast";

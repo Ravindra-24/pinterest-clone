@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostDetails, updatePost } from "../../redux/action/post";
-import withPrivate from "../../hoc/WithPrivate";
+import withPrivate from "../../hoc/withPrivate";
 
 const EditPost = ({ setProgress }) => {
   const { id } = useParams();

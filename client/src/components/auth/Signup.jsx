@@ -5,7 +5,7 @@ import Modal from "../../layout/Modal/Modal";
 import "./Signup.css";
 import { ModalContext } from "../../context/ModalContext";
 import toast from "react-hot-toast";
-import withPublic from "../../hoc/WithPublic";
+import withPublic from "../../hoc/withPublic";
 
 const Signup = () => {
   const [email, setEmail] = useState("");

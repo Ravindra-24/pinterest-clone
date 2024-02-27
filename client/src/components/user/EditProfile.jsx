@@ -4,7 +4,7 @@ import { getUser, updateUser } from "../../redux/action/user";
 import ColorfulLoader from "../../layout/spinner/spinner";
 import ImageCrop from "./croper/ImageCrop";
 import { useNavigate, useParams } from "react-router";
-import withPrivate from "../../hoc/WithPrivate";
+import withPrivate from "../../hoc/withPrivate";
 
 const EditProfile = ({ setProgress }) => {
   const [loading, setLoading] = useState(false);

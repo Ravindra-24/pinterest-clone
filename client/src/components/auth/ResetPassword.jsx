@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../redux/action/auth";
 import { AuthLogo } from "../../layout/ProjectLogo";
-import withPublic from "../../hoc/WithPublic";
+import withPublic from "../../hoc/withPublic";
 
 const ResetPassword = ({ setProgress }) => {
   const { token } = useParams();

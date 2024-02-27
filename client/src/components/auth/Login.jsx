@@ -7,7 +7,7 @@ import { ModalContext } from "../../context/ModalContext";
 
 import "./Login.css";
 import toast from "react-hot-toast";
-import withPublic from "../../hoc/WithPublic";
+import withPublic from "../../hoc/withPublic";
 
 const Login = () => {
   const [email, setEmail] = useState("");

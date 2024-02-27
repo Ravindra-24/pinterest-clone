@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { createPost } from "../../redux/action/post";
-import withPrivate from "../../hoc/WithPrivate";
+import withPrivate from "../../hoc/withPrivate";
 
 const CreatePost = ({ setProgress }) => {
   const [imagePreview, setImagePreview] = useState(null);
