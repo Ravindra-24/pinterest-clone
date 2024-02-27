@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { ModalContext } from '../context/ModalContext'
 
-const WithPrivate = (Component) => {
+const withPrivate = (Component) => {
     const AuthRoute = (props) => {
         const auth = useSelector(state => state.authReducer)
         return auth.token ? <Component {...props} /> : <Navigate to={'/'}/>
@@ -12,4 +12,4 @@ const WithPrivate = (Component) => {
   
 }
 
-export default WithPrivate
+export default withPrivate

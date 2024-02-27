@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { createPost } from "../../redux/action/post";
-import WithPrivate from "../../hoc/WithPrivate";
+import withPrivate from "../../hoc/WithPrivate";
 
 const CreatePost = ({ setProgress }) => {
   const [imagePreview, setImagePreview] = useState(null);
@@ -226,4 +226,4 @@ const CreatePost = ({ setProgress }) => {
   );
 };
 
-export default WithPrivate(CreatePost);
+export default withPrivate(CreatePost);

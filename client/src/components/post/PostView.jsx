@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { toast } from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router";
-import { deletePost, getPostDetails } from "../../redux/action/post";
+import { getPostDetails } from "../../redux/action/post";
 import ColorfulLoader from "../../layout/spinner/spinner";
 import AddComment from "../../layout/AddComment";
 import PostLikes from "./PostLikes";
