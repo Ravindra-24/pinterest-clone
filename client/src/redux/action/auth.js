@@ -9,26 +9,22 @@ const errorBox = (error) => {
 };
 
 export const signupUser =
-  (authData, navigate, setProgress,setLoading) => async (dispatch) => {
+  (authData, setLoading, setOpenSignup, setOpenLogin) => async (dispatch) => {
     try {
-      setProgress(30);
       const response = await api.signup(authData);
-      setProgress(70);
-      navigate("/login");
       toast.success(response.message);
-      setProgress(100);
     } catch (error) {
       errorBox(error.response.data.data);
       toast.error(error.response.data.message);
-      setProgress(100);
     } finally {
-      setProgress(100);
       setLoading(false)
+      setOpenSignup(false)
+      setOpenLogin(true)
     }
   };
 
 export const loginUser =
-  (authData, navigate, setLoading) => async (dispatch) => {
+  (authData, setLoading) => async (dispatch) => {
     try {
       const responseData = await api.login(authData);
       dispatch({ type: "AUTH", payload: responseData.data });
@@ -36,7 +32,6 @@ export const loginUser =
       // api.API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", responseData.data.token);
       toast.success(responseData.message);
-      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

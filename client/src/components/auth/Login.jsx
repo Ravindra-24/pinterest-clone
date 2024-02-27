@@ -7,11 +7,13 @@ import withPublic from "../../hoc/withPublic";
 import Modal from "../../layout/Modal/Modal";
 
 import "./Login.css";
+import Signup from "./Signup";
 
-const Login = ({ open, setOpen }) => {
+const Login = ({ openLogin, setOpenLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,21 +22,21 @@ const Login = ({ open, setOpen }) => {
     setLoading(true);
     e.preventDefault();
     try {
-      dispatch(loginUser({ email, password }, navigate, setLoading));
-      setOpen(false);
+      dispatch(loginUser({ email, password }, setLoading));
+      setOpenLogin(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSignUp = () => {
-    navigate("/signup");
-    setOpen(false);
+    setOpenLogin(false);
+    setOpenSignup(true);
   }
 
   return (
     <>
-      <Modal open={open} setOpen={setOpen}>
+      <Modal open={openLogin} setOpen={setOpenLogin}>
         <form className="form" onSubmit={handleSubmit}>
           <p id="heading">Login</p>
           <div className="field">
@@ -79,7 +81,7 @@ const Login = ({ open, setOpen }) => {
             />
           </div>
           <div className="btn">
-            <button className="button1 hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700">
+            <button type="submit" className="button1 transition duration-150 ease-in-out hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
             <button className="button2 hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700 " onClick={handleSignUp}>
@@ -89,6 +91,7 @@ const Login = ({ open, setOpen }) => {
           <button className="button3">Forgot Password</button>
         </form>
       </Modal>
+      <Signup openSignup={openSignup} setOpenSignup={setOpenSignup} />
     </>
   );
 };

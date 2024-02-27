@@ -43,7 +43,6 @@ const AllRoutes = () => {
       <SearchProvider>
       {/* <Navbar setProgress={setProgress} /> */}
       <Nav />
-      {/* <Login open={open} setOpen={setOpen}/> */}
       
       <div className="gradient-progress-wrapper">
         <LoadingBar
@@ -68,7 +67,7 @@ const AllRoutes = () => {
         />
         <Route path="/post/edit/:id" element={<EditPost setProgress={setProgress}/>}/>
         {/* <Route path="/login" element={<Login setProgress={setProgress} />} /> */}
-        <Route path="/signup" element={<Signup setProgress={setProgress} />} />
+        {/* <Route path="/signup" element={<Signup setProgress={setProgress} />} /> */}
         <Route
           path="/forgot-password"
           element={<ForgotPassword setProgress={setProgress} />}

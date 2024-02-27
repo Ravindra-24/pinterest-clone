@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Avatar from "./Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faBars, faCircleArrowUp, faPenToSquare, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
-import LoginButton from "./Buttons/LoginButton";
+import {LoginButton, SignupButton} from "./Buttons/Buttons";
 
 const Nav = ({open, setOpen}) => {
   const location = useLocation();
@@ -91,15 +91,7 @@ const Nav = ({open, setOpen}) => {
               ) : (
                 <>
                   <LoginButton />
-                  <button
-                    className=" border-[#fuchsia] ml-2 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-900 dark:text-gray-50 hover:text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 max-sm:hidden"
-                    type="button"
-                    data-te-ripple-init=""
-                    data-te-ripple-color="light"
-                    onClick={() => navigate("/signup")}
-                  >
-                    Signup
-                  </button>
+                  <SignupButton />
                 </>
               )}
             </div>
@@ -202,17 +194,9 @@ const Nav = ({open, setOpen}) => {
               Logout
             </button>
           ) : (
-            <div onClick={closeHamburger}>
-              <LoginButton open={open} setOpen={setOpen}/>
-              <button
-                className="ml-1 border-[#fuchsia] m-2 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-900 dark:text-gray-50 hover:text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-r after:from-pink-600 after:to-yellow-600 "
-                type="button"
-                data-te-ripple-init=""
-                data-te-ripple-color="light"
-                onClick={() => navigate("/signup")}
-              >
-                Signup
-              </button>
+            <div >
+              <LoginButton />
+              <SignupButton />
             </div>
           )}
         </div>
