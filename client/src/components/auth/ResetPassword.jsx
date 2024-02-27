@@ -140,4 +140,4 @@ const ResetPassword = ({ setProgress }) => {
   );
 };
 
-export default WithPublic(ResetPassword);
+export default ResetPassword
