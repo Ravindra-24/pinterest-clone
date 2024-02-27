@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-const withPublic = (Component) => {
+const WithPublic = (Component) => {
     const AuthRoute = (props) => {
         const auth = useSelector(state => state.authReducer)
         return auth.token ? <Navigate to="/" /> : <Component {...props} />
@@ -12,4 +12,4 @@ const withPublic = (Component) => {
   
 }
 
-export default withPublic
+export default WithPublic

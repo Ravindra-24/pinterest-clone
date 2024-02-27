@@ -20,26 +20,20 @@ const ProfilePosts = () => {
     <>
       {!loading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4 mb-10">
-          {userAllPosts?.length === 0 ? (
-            <h1 className="text-2xl text-gray-900 dark:text-gray-50 "></h1>
-          ) : (
+          {userAllPosts?.map((post) => (
             <>
-              {userAllPosts?.map((post) => (
-                <>
-                  <Link to={`/post/${post?._id}`} key={post?._id}>
-                    <div key={post?._id} className="relative">
-                      <img
-                        className="w-full h-48 object-cover"
-                        src={post?.image}
-                        alt={post?.title}
-                      />
-                      <div className="absolute bottom-0 left-0 p-2 bg-black bg-opacity-50 text-white"></div>
-                    </div>
-                  </Link>
-                </>
-              ))}
+              <Link to={`/post/${post?._id}`} key={post?._id}>
+                <div key={post?._id} className="relative">
+                  <img
+                    key={post?._id}
+                    className="w-full h-48 object-cover"
+                    src={post?.image}
+                    alt={post?.title}
+                  />
+                </div>
+              </Link>
             </>
-          )}
+          ))}
         </div>
       ) : (
         <ColorfulLoader />

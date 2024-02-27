@@ -9,7 +9,7 @@ const errorBox = (error) => {
 };
 
 export const signupUser =
-  (authData, setLoading, setOpenSignup) => async (dispatch) => {
+  (authData, setLoading, toggleSignupModal) => async (dispatch) => {
     try {
       const response = await api.signup(authData);
       toast.success(response.message);
@@ -18,12 +18,12 @@ export const signupUser =
       toast.error(error.response.data.message);
     } finally {
       setLoading(false)
-      setOpenSignup(false)
+      toggleSignupModal(false)
     }
   };
 
 export const loginUser =
-  (authData, setLoading) => async (dispatch) => {
+  (authData, setLoading, toggleLoginModal) => async (dispatch) => {
     try {
       const responseData = await api.login(authData);
       dispatch({ type: "AUTH", payload: responseData.data });
@@ -35,6 +35,7 @@ export const loginUser =
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
+      toggleLoginModal()
     }
   };
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import withPublic from "../../hoc/withPublic";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../redux/action/auth";
 import ProjectLogo, { AuthLogo } from "../../layout/ProjectLogo";
+import WithPublic from "../../hoc/WithPublic";
 
 const ResetPassword = ({ setProgress }) => {
   const { token } = useParams();
@@ -140,4 +140,4 @@ const ResetPassword = ({ setProgress }) => {
   );
 };
 
-export default withPublic(ResetPassword);
+export default WithPublic(ResetPassword);

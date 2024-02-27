@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './cropWorker';
 import { toast } from 'react-hot-toast';
-import withPrivate from '../../../hoc/withPrivate';
+import withPrivate from '../../../hoc/WithPrivate';
 
 
 const ImageCrop = ({ profilePicture, setOpenCrop, setProfilePicture, setImage, setCropLoading }) => {

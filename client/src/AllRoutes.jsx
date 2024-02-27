@@ -15,7 +15,6 @@ import { useLocation } from "react-router";
 import "./App.css";
 import CreatePost from "./components/post/CreatePost";
 import EditPost from "./components/post/EditPost";
-import { SearchProvider } from "./context/searchContext";
 import Profile from "./components/user/Profile";
 import EditProfile from "./components/user/EditProfile";
 import About from "./layout/About";
@@ -40,10 +39,11 @@ const AllRoutes = () => {
   return (
     <div>
       <Toaster />
-      <SearchProvider>
       {/* <Navbar setProgress={setProgress} /> */}
       <Nav />
-      
+      <Login/>
+      <Signup/>
+      <ForgotPassword/>
       <div className="gradient-progress-wrapper">
         <LoadingBar
           // className="loading-bar"
@@ -66,12 +66,6 @@ const AllRoutes = () => {
           element={<PostView setProgress={setProgress} />}
         />
         <Route path="/post/edit/:id" element={<EditPost setProgress={setProgress}/>}/>
-        {/* <Route path="/login" element={<Login setProgress={setProgress} />} /> */}
-        {/* <Route path="/signup" element={<Signup setProgress={setProgress} />} /> */}
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword setProgress={setProgress} />}
-        />
         <Route
           path="/reset-password/:token"
           element={<ResetPassword setProgress={setProgress} />}
@@ -85,7 +79,6 @@ const AllRoutes = () => {
       </Routes> : <div className="w-screen h-screen flex justify-center align-middle"><SpinnerComponent/></div>
       }
       
-      </SearchProvider>
       <Footer />
     </div>
   );

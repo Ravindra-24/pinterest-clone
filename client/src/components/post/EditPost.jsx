@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router";
-import withPrivate from "../../hoc/withPrivate";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostDetails, updatePost } from "../../redux/action/post";
+import WithPrivate from "../../hoc/WithPrivate";
 
 const EditPost = ({ setProgress }) => {
   const { id } = useParams();
@@ -211,4 +211,4 @@ const EditPost = ({ setProgress }) => {
   );
 };
 
-export default withPrivate(EditPost);
+export default WithPrivate(EditPost);

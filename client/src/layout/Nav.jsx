@@ -194,7 +194,7 @@ const Nav = ({open, setOpen}) => {
               Logout
             </button>
           ) : (
-            <div >
+            <div onClick={closeHamburger}>
               <LoginButton />
               <SignupButton />
             </div>

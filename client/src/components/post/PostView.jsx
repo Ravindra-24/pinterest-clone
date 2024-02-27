@@ -22,7 +22,7 @@ const PostView = ({ setProgress }) => {
   const post = useSelector((state) => state.postsReducer.post);
 
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [showDeleteCard, setShowDeleteCard] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,13 +38,10 @@ const PostView = ({ setProgress }) => {
     }
   };
 
-  const handleDeleteModal = () => {
-    try {
-      setOpen(!open);
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  const toggleDeleteCard = () => {
+    setShowDeleteCard(!showDeleteCard);
+  }
+
 
   const handleShare = () => {
     try {
@@ -67,8 +64,8 @@ const PostView = ({ setProgress }) => {
     <>
       <DeleteCard
               post={post?._id}
-              open={open}
-              setOpen={setOpen}
+              open={showDeleteCard}
+              setOpen={toggleDeleteCard}
               setLoading={setLoading}
             />
 
@@ -130,7 +127,7 @@ const PostView = ({ setProgress }) => {
                       <>
                         <button
                           className="flex items-center focus:outline-none ml-4"
-                          onClick={handleDeleteModal}
+                          onClick={toggleDeleteCard}
                         >
                           <p className="text-gray-600 text-sm dark:text-gray-200">
                             <FontAwesomeIcon icon={faTrash} /> delete

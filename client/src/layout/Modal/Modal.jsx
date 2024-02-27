@@ -1,13 +1,13 @@
 import React from "react";
 
 const Modal = ({ open, setOpen, children }) => {
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   return (
     <>
       <div
-        onClick={handleClose}
+        onClick={setOpen}
         className={`
         fixed inset-0 flex justify-center items-center transition-colors z-50
         ${open ? "visible backdrop-blur-sm" : "invisible"}
@@ -22,7 +22,7 @@ const Modal = ({ open, setOpen, children }) => {
         `}
         >
           <button
-            onClick={handleClose}
+            onClick={setOpen}
             className="absolute top-2 right-2 p-1 rounded-lg dark:text-gray-300 dark:bg-gray-800 dark:hover:text-gray-50 text-gray-700 bg-gray-100 hover:text-gray-900"
           >
             <svg
