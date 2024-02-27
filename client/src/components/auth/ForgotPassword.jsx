@@ -5,7 +5,6 @@ import { forgotPassword } from "../../redux/action/auth";
 import { ModalContext } from "../../context/ModalContext";
 import Modal from "../../layout/Modal/Modal";
 import toast from "react-hot-toast";
-import withPublic from "../../hoc/withPublic";
 
 const ForgotPassword = ({ setProgress }) => {
   const [email, setEmail] = useState("");
@@ -100,4 +99,4 @@ const ForgotPassword = ({ setProgress }) => {
   );
 };
 
-export default withPublic(ForgotPassword)
+export default ForgotPassword

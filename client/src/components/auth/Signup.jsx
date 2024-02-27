@@ -163,4 +163,4 @@ const Signup = () => {
   );
 };
 
-export default withPublic(Signup)
+export default Signup;

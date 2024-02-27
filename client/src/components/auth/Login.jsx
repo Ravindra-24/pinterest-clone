@@ -7,7 +7,6 @@ import { ModalContext } from "../../context/ModalContext";
 
 import "./Login.css";
 import toast from "react-hot-toast";
-import withPublic from "../../hoc/withPublic";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -150,4 +149,4 @@ const Login = () => {
   );
 };
 
-export default withPublic(Login)
+export default Login
