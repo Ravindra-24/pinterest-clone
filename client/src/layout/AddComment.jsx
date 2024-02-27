@@ -51,7 +51,6 @@ const AddComment = () => {
                 className="w-full px-0 text-sm text-gray-900 bg-white dark:text-gray-50 border-none focus:ring-0 dark:placeholder-gray-300 dark:bg-gray-700"
                 placeholder="Write a comment..."
                 required
-                defaultValue={""}
               />
             </div>
             <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">

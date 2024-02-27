@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Login from '../../components/auth/Login';
 
-const LoginButton = ({open, setOpen}) => {
+const LoginButton = () => {
+  const [open, setOpen] = useState(false);
   return (
     <>
     <Login open={open} setOpen={setOpen}/>

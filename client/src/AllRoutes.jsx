@@ -28,7 +28,6 @@ const AllRoutes = () => {
   const loaded = useSelector((state) => state.authReducer.loaded);
 
   const [progress, setProgress] = useState(0);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setProgress(40)
@@ -43,8 +42,8 @@ const AllRoutes = () => {
       <Toaster />
       <SearchProvider>
       {/* <Navbar setProgress={setProgress} /> */}
-      <Nav open={open} setOpen={setOpen}/>
-      <Login open={open} setOpen={setOpen}/>
+      <Nav />
+      {/* <Login open={open} setOpen={setOpen}/> */}
       
       <div className="gradient-progress-wrapper">
         <LoadingBar
