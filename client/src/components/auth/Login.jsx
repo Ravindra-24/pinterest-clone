@@ -13,7 +13,6 @@ const Login = ({ openLogin, setOpenLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [openSignup, setOpenSignup] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,9 +28,8 @@ const Login = ({ openLogin, setOpenLogin }) => {
     }
   };
 
-  const handleSignUp = () => {
+  const handleLoginClose = () => {
     setOpenLogin(false);
-    setOpenSignup(true);
   }
 
   return (
@@ -84,14 +82,13 @@ const Login = ({ openLogin, setOpenLogin }) => {
             <button type="submit" className="button1 transition duration-150 ease-in-out hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>
-            <button className="button2 hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700 " onClick={handleSignUp}>
+            <button className="button2 hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700 " onClick={handleLoginClose}>
               Sign Up
             </button>
           </div>
           <button className="button3">Forgot Password</button>
         </form>
       </Modal>
-      <Signup openSignup={openSignup} setOpenSignup={setOpenSignup} />
     </>
   );
 };

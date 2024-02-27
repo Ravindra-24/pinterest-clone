@@ -13,7 +13,6 @@ const Signup = ({openSignup, setOpenSignup}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,7 +23,7 @@ const Signup = ({openSignup, setOpenSignup}) => {
       dispatch(
         signupUser(
           { firstName, lastName, email, password },
-          setLoading, setOpenSignup, setOpenLogin
+          setLoading, setOpenSignup
         )
       );
     } catch (error) {
@@ -36,7 +35,6 @@ const Signup = ({openSignup, setOpenSignup}) => {
   const handleLogin = (e) => {
     e.preventDefault();
     setOpenSignup(false);
-    setOpenLogin(true);
   }
   return (
     <>
@@ -150,7 +148,6 @@ const Signup = ({openSignup, setOpenSignup}) => {
           </div>
         </form>
       </Modal>
-      <Login openLogin={openLogin} setOpenLogin={setOpenLogin} />
     </>
   );
 };

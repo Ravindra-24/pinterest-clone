@@ -9,7 +9,7 @@ const errorBox = (error) => {
 };
 
 export const signupUser =
-  (authData, setLoading, setOpenSignup, setOpenLogin) => async (dispatch) => {
+  (authData, setLoading, setOpenSignup) => async (dispatch) => {
     try {
       const response = await api.signup(authData);
       toast.success(response.message);
@@ -19,7 +19,6 @@ export const signupUser =
     } finally {
       setLoading(false)
       setOpenSignup(false)
-      setOpenLogin(true)
     }
   };
 
