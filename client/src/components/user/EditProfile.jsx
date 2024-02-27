@@ -4,7 +4,7 @@ import { getUser, updateUser } from "../../redux/action/user";
 import ColorfulLoader from "../../layout/spinner/spinner";
 import ImageCrop from "./croper/ImageCrop";
 import { useNavigate, useParams } from "react-router";
-import WithPrivate from "../../hoc/WithPrivate";
+import withPrivate from "../../hoc/WithPrivate";
 
 const EditProfile = ({ setProgress }) => {
   const [loading, setLoading] = useState(false);
@@ -288,4 +288,4 @@ const EditProfile = ({ setProgress }) => {
   );
 };
 
-export default WithPrivate(EditProfile);
+export default withPrivate(EditProfile);
