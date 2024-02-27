@@ -3,8 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../redux/action/auth";
-import ProjectLogo, { AuthLogo } from "../../layout/ProjectLogo";
-import WithPublic from "../../hoc/WithPublic";
+import { AuthLogo } from "../../layout/ProjectLogo";
+import withPublic from "../../hoc/WithPublic";
 
 const ResetPassword = ({ setProgress }) => {
   const { token } = useParams();
@@ -140,4 +140,4 @@ const ResetPassword = ({ setProgress }) => {
   );
 };
 
-export default ResetPassword
+export default withPublic(ResetPassword)

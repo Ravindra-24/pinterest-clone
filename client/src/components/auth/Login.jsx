@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/action/auth";
-import withPublic from "../../hoc/WithPublic";
 import Modal from "../../layout/Modal/Modal";
 import { ModalContext } from "../../context/ModalContext";
 
 import "./Login.css";
 import toast from "react-hot-toast";
+import withPublic from "../../hoc/WithPublic";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -150,4 +150,4 @@ const Login = () => {
   );
 };
 
-export default Login
+export default withPublic(Login)
