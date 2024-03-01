@@ -11,7 +11,7 @@ import { useGoogleOneTapLogin } from "@react-oauth/google";
 
 function App() {
   const dispatch = useDispatch();
-  const [authState, setAuthState] = useState(true);
+  const [authState, setAuthState] = useState(false);
   const currentUser = useSelector((state) => state.authReducer);
 
   useGoogleOneTapLogin({
@@ -31,8 +31,8 @@ function App() {
   });
 
   useEffect(() => {
-    if (currentUser.token === null && currentUser.loaded) {
-      setAuthState(false);
+    if (currentUser.token !== null && currentUser.loaded) {
+      setAuthState(true);
     }
   }, [currentUser]);
 
