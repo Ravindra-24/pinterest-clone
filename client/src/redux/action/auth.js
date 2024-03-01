@@ -17,8 +17,8 @@ export const signupUser =
       errorBox(error.response.data.data);
       toast.error(error.response.data.message);
     } finally {
-      setLoading(false)
-      toggleSignupModal(false)
+      setLoading(false);
+      toggleSignupModal(false);
     }
   };
 
@@ -35,7 +35,7 @@ export const loginUser =
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
-      toggleLoginModal()
+      toggleLoginModal();
     }
   };
 
@@ -46,7 +46,7 @@ export const forgotPassword =
       const response = await api.forgot(email);
       setProgress(70);
       toast.success(response.message);
-      navigate("/login");
+      navigate("/");
       setProgress(100);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -63,7 +63,7 @@ export const resetPassword =
       const response = await api.reset(token, password);
       setProgress(70);
       toast.success(response.message);
-      navigate("/login");
+      navigate("/");
       setProgress(100);
     } catch (error) {
       if (error.response.data.data || error.response.data.message) {
@@ -79,18 +79,14 @@ export const resetPassword =
 export const ValidateUser = () => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
-    if (!token)  {
-      return dispatch({type:"AUTH",payload:null})
-    };
+    if (!token) return dispatch({ type: "AUTH", payload: null });
     const responseData = await api.validate(token);
     if (responseData === null) return;
-    console.log(responseData)
     dispatch({
       type: "AUTH",
       payload: {
         token,
         user: responseData.data.user,
-      
       },
     });
     toast.success(responseData.message);
@@ -100,3 +96,30 @@ export const ValidateUser = () => async (dispatch) => {
     }
   }
 };
+
+export const GoogleOAuth = (codeResponse, setGoogleAuthLoading) => async (dispatch) => {
+  try {
+    console.log(codeResponse)
+    const response = await api.googleAuth(codeResponse);
+
+    dispatch({ type: "AUTH", payload: response.data });
+    localStorage.setItem("token", response.data.token);
+    toast.success(response.message);
+  } catch (error) {
+    toast.error(error.response?.data?.message);
+  }finally{
+    setGoogleAuthLoading(false);
+  }
+};
+
+
+export const oneTapLogin = (CredentialResponse) => async (dispatch) => {
+  try {
+    const response = await api.googleOneTap(CredentialResponse);
+    dispatch({ type: "AUTH", payload: response.data });
+    localStorage.setItem("token", response.data.token);
+    toast.success(response.message);
+  } catch (error) {
+    console.log(error);
+  }
+}

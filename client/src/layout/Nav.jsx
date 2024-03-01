@@ -7,6 +7,7 @@ import Avatar from "./Avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faBars, faCircleArrowUp, faPenToSquare, faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 import {LoginButton, SignupButton} from "./Buttons/Buttons";
+import { googleLogout } from "@react-oauth/google";
 
 const Nav = ({open, setOpen}) => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const Nav = ({open, setOpen}) => {
   };
 
   const handleLogout = () => {
+    googleLogout();
     dispatch({ type: "LOGOUT" });
   };
 

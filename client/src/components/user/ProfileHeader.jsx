@@ -15,6 +15,7 @@ const ProfileHeader = () => {
   const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.authReducer.user);
   const user = useSelector((state) => state.userReducer);
+  // console.log(user)
 
   const handleClick = (userId) => {
     try {

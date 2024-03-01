@@ -58,7 +58,7 @@ const CreatePost = ({ setProgress }) => {
             onSubmit={handleSubmit}
             className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0 "
           >
-            <h2 class="text-4xl font-extrabold my-3 max-sm:text-2xl dark:text-white">New Post</h2>
+            <h2 className="text-4xl font-extrabold my-3 max-sm:text-2xl dark:text-white">New Post</h2>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -142,16 +142,16 @@ const CreatePost = ({ setProgress }) => {
                           <path
                             d="m8 8 4-4 4 4"
                             stroke="#ffbf00"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M12 4v12M19 17v.6c0 1.33-1.07 2.4-2.4 2.4H7.4C6.07 20 5 18.93 5 17.6V17"
                             stroke="#ffbf00"
-                            stroke-width="1.5"
-                            stroke-miterlimit="10"
-                            stroke-linecap="round"
+                            strokeWidth="1.5"
+                            strokeMiterlimit="10"
+                            strokeLinecap="round"
                           />
                         </svg>
                         <input

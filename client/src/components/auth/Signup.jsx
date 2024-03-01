@@ -5,7 +5,7 @@ import Modal from "../../layout/Modal/Modal";
 import "./Signup.css";
 import { ModalContext } from "../../context/ModalContext";
 import toast from "react-hot-toast";
-import withPublic from "../../hoc/withPublic";
+import GoogleAuthButton from "../../layout/Buttons/GoogleAuthButton";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +13,8 @@ const Signup = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleAuthLoading, setGoogleAuthLoading] = useState(false);
+
   const { showSignupModal, toggleSignupModal, toggleLoginModal } =
     useContext(ModalContext);
 
@@ -39,6 +41,10 @@ const Signup = () => {
       setLoading(false);
     }
   };
+
+  const handleGoogleAuth = () => {
+    setGoogleAuthLoading(true)
+  }
 
   const handleSignupClose = (e) => {
     e.preventDefault();
@@ -118,7 +124,7 @@ const Signup = () => {
             <button
               onClick={handleSubmit}
               type="submit"
-              disabled={loading}
+              disabled={googleAuthLoading || loading}
               className="button1 transition duration-150 ease-in-out hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700"
             >
               {loading ? (
@@ -150,13 +156,17 @@ const Signup = () => {
               )}
             </button>
             <button
-              disabled={loading}
+              disabled={googleAuthLoading || loading}
               className="button2 hover:bg-gradient-to-r hover:from-pink-600 hover:to-yellow-600 after:from-pink-700 after:to-yellow-700 "
               onClick={handleSignupClose}
             >
               Login
             </button>
           </div>
+          <span className="flex flex-col w-full justify-center items-center mb-1 mt-3" onClick={handleGoogleAuth}>
+            OR
+        <GoogleAuthButton googleAuthLoading={googleAuthLoading}  setGoogleAuthLoading={setGoogleAuthLoading} googleText={"Signup with Google"}/>
+        </span>
         </form>
       </Modal>
     </>

@@ -36,6 +36,8 @@ API.interceptors.response.use((response) => {
 
 export const validate =(token)=>API.get(`/auth/validate/${token}`)
 
+export const googleOneTap = (CredentialResponse) => API.post('/auth/google-one-tap', {CredentialResponse}, {withCredentials: true});
+export const googleAuth = (codeResponse) => API.post('/auth/google-oauth', {codeResponse}, {withCredentials: true});
 export const signup =(authData)=>API.post("/auth/signup",authData)
 export const login =(authData)=>API.post("/auth/login",authData)
 
