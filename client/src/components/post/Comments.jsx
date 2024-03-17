@@ -44,7 +44,7 @@ const Comments = ({ comments, postId }) => {
             className="m-4 flex mx-auto bg-white rounded-md shadow-md p-2 overflow-hidden md:max-w-full md:flex max-sm:w-full dark:bg-gray-700"
           >
             <div className=" md:flex-shrink-0 flex items-center rounded">
-              <Avatar auth={comment} height={10} width={10}/>
+              <Avatar auth={comment} height={7} width={7}/>
             </div>
             <div className="p-2 md:w-1/2 md:flex-grow ">
               <div className="flex">

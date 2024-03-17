@@ -89,7 +89,7 @@ const Navbar = () => {
             to={`/user/${auth?.user?.id}`}
             className="nav-avatar flex mr-10"
           >
-            <Avatar auth={auth} height={8} width={8} />
+            <Avatar auth={auth} height={7} width={7} />
           </NavLink>
         )}
         <div className="navbar" id="navbar">
