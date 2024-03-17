@@ -5,6 +5,7 @@ import ColorfulLoader from "../../layout/spinner/spinner";
 import ImageCrop from "./croper/ImageCrop";
 import { useNavigate, useParams } from "react-router";
 import withPrivate from "../../hoc/withPrivate";
+import Modal from "../../layout/Modal/Modal";
 
 const EditProfile = ({ setProgress }) => {
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ const EditProfile = ({ setProgress }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.authReducer.user);
-  const user = useSelector((state) => state.userReducer);
+  const user = useSelector((state) => state.userReducer.user);
 
   const handlePreview = (e) => {
     
@@ -64,24 +65,31 @@ const EditProfile = ({ setProgress }) => {
     navigate(`/user/${id}`);
   };
 
+  const toggleCrop = () => {
+    setOpenCrop(!openCrop);
+  }
+
   useEffect(() => {
     dispatch({type:"GET_USER", payload:null})
     dispatch(getUser(auth.id, setLoading));
   }, []);
   return (
     <>
-      {user ? (
-        <div className="max-w-screen-lg mx-auto p-4 bg-gray-200 dark:bg-gray-800 rounded mt-2 mb-2">
-          <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {openCrop ? (
-              <ImageCrop
+    <Modal open={openCrop} setOpen={toggleCrop}>
+    <ImageCrop
                 setProfilePicture={setProfilePicture}
                 profilePicture={profilePicture}
                 setImage={setImage}
                 setOpenCrop={setOpenCrop}
                 setCropLoading={setCropLoading}
               />
+              </Modal>
+      {user ? (
+        <div className="max-w-screen-lg mx-auto p-4 bg-gray-200 dark:bg-slate-900 rounded mt-20 mb-2">
+          <h2 className="text-2xl font-bold mb-6">Edit Profile</h2>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {openCrop ? (
+              <></>
             ) : (
               <>
                 <div className="flex items-center justify-center flex-col md:flex-row md:items-center md:space-x-6 ">

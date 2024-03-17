@@ -83,11 +83,11 @@ const EditPost = ({ setProgress }) => {
 
   return (
     <>
-      <div className="flex justify-center align-center dark:bg-gray-800">
-        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 max-sm:m-auto dark:bg-gray-700">
+      <div className="flex justify-center align-center ">
+        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 max-sm:m-auto dark:bg-slate-900 mt-20">
           <form
             onSubmit={handleSubmit}
-            className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0 dark:bg-gray-700"
+            className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0"
           >
             <h2 class="text-4xl font-extrabold my-3 max-sm:text-2xl">
               Edit Post
@@ -146,7 +146,7 @@ const EditPost = ({ setProgress }) => {
                     >
                       Post
                     </label>
-                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 hover:cursor-not-allowed dark:bg-gray-600">
+                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 hover:cursor-not-allowed dark:bg-slate-700">
                       <div className="text-center">
                         <img
                           src={imagePreview}

@@ -7,6 +7,7 @@ export const ModalProvider = ({ children }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
 
   const user = useSelector((state) => state.authReducer.token);
 
@@ -30,15 +31,21 @@ export const ModalProvider = ({ children }) => {
     setShowForgotPasswordModal(!showForgotPasswordModal);
   };
 
+  const toggleSearchModal = () => {
+    setShowSearchModal(!showSearchModal);
+  }
+
   return (
     <ModalContext.Provider
       value={{
         showLoginModal,
         showSignupModal,
         showForgotPasswordModal,
+        showSearchModal,
         toggleLoginModal,
         toggleSignupModal,
         toggleForgotPasswordModal,
+        toggleSearchModal,
       }}
     >
       {children}

@@ -50,7 +50,7 @@ const ImageCrop = ({ profilePicture, setOpenCrop, setProfilePicture, setImage, s
         sx={{
           background: '#333',
           position: 'relative',
-          height: 400,
+          height: 300,
           width: 'auto',
           
         }}

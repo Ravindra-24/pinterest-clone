@@ -105,17 +105,17 @@ const Gallery = ({ setProgress }) => {
                       }}
                     />
 
-                    <div className="pl-4 pr-4 p-1 font-sans">
-                      <h3 className="text-sm dark:text-gray-100 font-sans">
+                    <div className="pl-4 pr-4 p-1 ">
+                      <h3 className="text-sm dark:text-gray-100">
                         {post.title}
                       </h3>
-                      <p className="dark:text-gray-200 text-xs font-sans italic flex-wrap overflow-hidden">
+                      <p className="dark:text-gray-200 text-xs italic flex-wrap overflow-hidden">
                         {post.description}
                       </p>
                       <div className="flex items-center justify-between mt-3">
                         <div className="flex">
-                          <Avatar auth={post} />
-                          <span className="text-[0.9rem] font-serif leading-none text-gray-900 dark:text-gray-100">
+                          <Avatar auth={post} height={8} width={8}/>
+                          <span className="text-[0.9rem] leading-none text-gray-900 dark:text-gray-100">
                             {post.user.firstName}
                             <p className="text-[0.6rem] text-gray-900 dark:text-gray-100">
                               {post.user?.followers?.length} Followers

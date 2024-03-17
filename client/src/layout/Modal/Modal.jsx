@@ -9,7 +9,7 @@ const Modal = ({ open, setOpen, children }) => {
       <div
         onClick={setOpen}
         className={`
-        fixed inset-0 flex justify-center items-center transition-colors z-50
+        fixed inset-0 flex justify-center items-center transition-colors z-[1000]
         ${open ? "visible backdrop-blur-sm" : "invisible"}
       `}
       >

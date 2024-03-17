@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 import React, { useEffect, useState } from "react";
 import Gallery from "./components/Galleri";
-import Nav from "../src/layout/Nav"
 import Footer from "./layout/Footer";
 import PostView from "./components/post/PostView";
 import LoadingBar from "react-top-loading-bar";
@@ -20,6 +19,8 @@ import EditProfile from "./components/user/EditProfile";
 import About from "./layout/About";
 import { useSelector } from "react-redux";
 import SpinnerComponent from "./layout/spinner/spinner";
+import Navbar from "./layout/Navbar/Navbar";
+import SearchModal from "./layout/Modal/SearchModal";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -39,8 +40,8 @@ const AllRoutes = () => {
   return (
     <div>
       <Toaster />
-      {/* <Navbar setProgress={setProgress} /> */}
-      <Nav />
+      <Navbar/>
+      <SearchModal/>
       <Login/>
       <Signup/>
       <ForgotPassword/>

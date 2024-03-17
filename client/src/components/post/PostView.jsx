@@ -70,9 +70,9 @@ const PostView = ({ setProgress }) => {
             />
 
       {!loading ? (
-        <div className="flex justify-center align-center bg-gray-50 dark:bg-gray-900">
-          <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto">
-            <div className="max-w-full mx-auto bg-gray-50 dark:bg-gray-800 dark:test-white rounded-md shadow-md overflow-hidden w-full">
+        <div className="flex justify-center align-center">
+          <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto mt-20">
+            <div className="max-w-full mx-auto bg-gray-50 dark:bg-slate-900 dark:test-white rounded-md shadow-md overflow-hidden w-full">
               <div className="md:flex gap-4 w-full ">
                 <div className="md:w-2/3 flex place-items-start justify-center align-top">
                   <img
@@ -86,11 +86,11 @@ const PostView = ({ setProgress }) => {
                     }}
                   />
                 </div>
-                <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900">
+                <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-slate-900 dark:test-white text-gray-900">
                   <div className="flex items-center">
-                    <Avatar auth={post} />
+                    <Avatar auth={post} height={8} width={8}/>
                     <div
-                      className="bg-gray-50 dark:bg-gray-800 dark:test-white text-gray-900 cursor-pointer "
+                      className=" dark:test-white text-gray-900 cursor-pointer "
                       onClick={() => navigate(`/user/${post?.user?._id}`)}
                     >
                       <h2 className="text-lg font-semibold dark:text-white ">
