@@ -88,7 +88,7 @@ const PostView = ({ setProgress }) => {
                 </div>
                 <div className="md:w-1/2 p-4 flex flex-col justify-center bg-gray-50 dark:bg-slate-900 dark:test-white text-gray-900">
                   <div className="flex items-center">
-                    <Avatar auth={post} height={7} width={7}/>
+                    <Avatar auth={post} height={6} width={6}/>
                     <div
                       className=" dark:test-white text-gray-900 cursor-pointer "
                       onClick={() => navigate(`/user/${post?.user?._id}`)}

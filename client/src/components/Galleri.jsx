@@ -114,7 +114,7 @@ const Gallery = ({ setProgress }) => {
                       </p>
                       <div className="flex items-center justify-between mt-3">
                         <div className="flex">
-                          <Avatar auth={post} height={7} width={7}/>
+                          <Avatar auth={post} height={6} width={6}/>
                           <span className="text-[0.9rem] leading-none text-gray-900 dark:text-gray-100">
                             {post.user.firstName}
                             <p className="text-[0.6rem] text-gray-900 dark:text-gray-100">
