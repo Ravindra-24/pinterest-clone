@@ -8,13 +8,11 @@ import { fetchPosts } from "../redux/action/post";
 import { SearchContext } from "../context/searchContext";
 import Avatar from "../layout/Avatar";
 import moment from "moment";
-import ImageSlider from "./slider/ImageSlider";
 
 const SliderComponent = lazy(() => import("./slider/ImageSlider"));
 
 const Gallery = ({ setProgress }) => {
   const [page, setPage] = useState(1);
-  // const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -28,21 +26,21 @@ const Gallery = ({ setProgress }) => {
 
   const { search } = useContext(SearchContext);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPage(1);
-      setDone(false);
-      fetchData();
-    }, 400);
-    return () => clearTimeout(timeout);
-  }, [search]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setPage(1);
+  //     setDone(false);
+  //     fetchData();
+  //   }, 400);
+  //   return () => clearTimeout(timeout);
+  // }, [search]);
 
   const fetchData = () => {
     try {
       setLoading(true);
       setProgress(30);
       dispatch(
-        fetchPosts(page, limit, search, setProgress, setDone, setLoading)
+        fetchPosts(page, limit, setProgress, setDone, setLoading)
       );
       setProgress(70);
       setProgress(100);
@@ -69,15 +67,15 @@ const Gallery = ({ setProgress }) => {
       observer.current.observe(lastImageRef.current);
     }
   }, [allPosts, loading]);
-  
+
   return (
     <>
       <div>
-      <Suspense fallback={<div>Loading...</div>}>
-      <SliderComponent />
-    </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <SliderComponent />
+        </Suspense>
         <ResponsiveMasonry
-          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1100: 4 }}
+          columnsCountBreakPoints={{ 350: 1, 450: 2, 750: 2, 900: 3, 1100: 4 }}
         >
           <Masonry>
             {allPosts &&
@@ -90,7 +88,7 @@ const Gallery = ({ setProgress }) => {
                 >
                   <div
                     key={post._id}
-                    className="relative m-3 rounded-md dark:bg-gray-700 "
+                    className="relative m-3 rounded-md dark:bg-slate-900 "
                   >
                     <img
                       ref={index === allPosts.length - 1 ? lastImageRef : null}
@@ -101,7 +99,7 @@ const Gallery = ({ setProgress }) => {
                       loading="lazy"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
-                        currentTarget.src="../../public/assets/imgErr1.jpg";
+                        currentTarget.src = "../../public/assets/imgErr1.jpg";
                       }}
                     />
 
@@ -112,9 +110,9 @@ const Gallery = ({ setProgress }) => {
                       <p className="dark:text-gray-200 text-xs italic flex-wrap overflow-hidden">
                         {post.description}
                       </p>
-                      <div className="flex items-center justify-between mt-3">
+                      <div className="flex items-center justify-between mt-3 mb-3">
                         <div className="flex">
-                          <Avatar auth={post} height={6} width={6}/>
+                          <Avatar auth={post} height={6} width={6} />
                           <span className="text-[0.9rem] leading-none text-gray-900 dark:text-gray-100">
                             {post.user.firstName}
                             <p className="text-[0.6rem] text-gray-900 dark:text-gray-100">
@@ -129,7 +127,7 @@ const Gallery = ({ setProgress }) => {
                         </div>
                       </div>
                       {post?.likes.length > 0 && (
-                        <p className="text-[0.7rem] pt-2 italic">
+                        <p className="text-[0.7rem] pt-2 mb-2 italic">
                           Liked By {post.likes?.length} People
                         </p>
                       )}

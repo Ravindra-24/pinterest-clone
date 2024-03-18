@@ -16,11 +16,11 @@ import {
   faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../Avatar";
-import { ModalContext } from "../../context/ModalContext";
+import { SearchContext } from "../../context/searchContext";
 
 const Navbar = () => {
   const [hidden, setHidden] = useState(false);
-  const {toggleSearchModal} = useContext(ModalContext)
+  const {toggleSearchModal} = useContext(SearchContext)
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.authReducer);
 

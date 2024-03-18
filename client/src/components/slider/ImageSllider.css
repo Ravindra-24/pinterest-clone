@@ -87,3 +87,22 @@
   background: #f7d17f;
   border: 1px #db2777  solid;
 }
+
+@media screen and (max-width: 768px) {
+
+  .each-slide-effect > div {
+    height: 300px;
+  }
+  .slider-desc span {
+    font-size: 15px;
+  }
+  .slider-desc p {
+    font-size: 10px;
+  }
+  .slider-desc button {
+    font-size: 10px;
+  }
+  
+}
+
+

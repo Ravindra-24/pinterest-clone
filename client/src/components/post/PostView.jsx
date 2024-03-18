@@ -58,7 +58,7 @@ const PostView = ({ setProgress }) => {
     setLoading(true);
     dispatch({ type: "GET_POST_DETAILS", payload: {} });
     getpostDetail();
-  }, []);
+  }, [id]);
 
   return (
     <>

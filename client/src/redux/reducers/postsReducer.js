@@ -54,25 +54,6 @@ const postsReducer = (state = initialsSate, action) => {
         };
       }
       return state;
-    case "FETCH_SEARCH_POSTS":
-      if (payload) {
-        const filterPost = payload.filter(
-          (post) => post._id !== state.posts._id
-        );
-        const searchedPosts = filterPost.filter(
-          (newPost) =>
-            !state.posts.some(
-              (existingPost) => existingPost._id === newPost._id
-            )
-        );
-        return {
-          ...state,
-          posts: [...searchedPosts, ...state.posts], 
-          loaded: true
-        };
-      }
-      return state;
-
     
     default:
       return state;

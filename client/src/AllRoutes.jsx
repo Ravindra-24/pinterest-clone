@@ -20,7 +20,7 @@ import About from "./layout/About";
 import { useSelector } from "react-redux";
 import SpinnerComponent from "./layout/spinner/spinner";
 import Navbar from "./layout/Navbar/Navbar";
-import SearchModal from "./layout/Modal/SearchModal";
+import SearchModal from "./layout/Modal/SearchModal/SearchModal";
 
 const AllRoutes = () => {
   const location = useLocation();

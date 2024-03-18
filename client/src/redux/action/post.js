@@ -17,6 +17,19 @@ export const createPost =
     }
   };
 
+  export const searchPosts = (search, setLoading) => async (dispatch) => {
+    try {
+      const response = await api.search(search);
+      console.log(response)
+      dispatch({ type: "FETCH_SEARCH_POSTS", payload: response.data });
+    } catch (error) {
+      toast.error(error.response.data.error);
+    } finally {
+      setLoading(false);
+    }
+  
+  }
+
 export const updatePost =
   (id, formData, navigate, setProgress, setIsLoading) => async (dispatch) => {
     try {
@@ -74,16 +87,14 @@ export const updatePostLike = (postId,navigate, setLoading, setIsLoading) => asy
 };
 
 export const fetchPosts =
-  (page, limit, search, setProgress, setDone, setLoading) =>
+  (page, limit, setProgress, setDone, setLoading) =>
   async (dispatch) => {
     try {
       setProgress(50);
-      const response = await api.fetchAllPosts(page, limit, search);
+      const response = await api.fetchAllPosts(page, limit);
       setProgress(80);
       if (response.data.length === 0) {
         setDone(true);
-      } else if (search) {
-        dispatch({ type: "FETCH_SEARCH_POSTS", payload: response.data });
       } else {
         // setPosts((prevPosts) => {
         //   const uniquePosts = response.data.filter(
