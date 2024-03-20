@@ -20,7 +20,7 @@ import { SearchContext } from "../../context/searchContext";
 
 const Navbar = () => {
   const [hidden, setHidden] = useState(false);
-  const {toggleSearchModal} = useContext(SearchContext)
+  const { toggleSearchModal } = useContext(SearchContext);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.authReducer);
 
@@ -50,6 +50,13 @@ const Navbar = () => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const handleNavLinkClick = () => {
+    const checkBox = document.getElementById("check");
+    if (checkBox.checked) {
+      checkBox.checked = false;
+    }
+  };
+
   return (
     <>
       <motion.nav
@@ -68,7 +75,7 @@ const Navbar = () => {
 
         <input type="checkbox" id="check" />
 
-        <label for="check" className="icons">
+        <label htmlFor="check" className="icons">
           <box-icon
             type="regular"
             color="white"
@@ -93,7 +100,7 @@ const Navbar = () => {
           </NavLink>
         )}
         <div className="navbar" id="navbar">
-          <NavLink to={"/"} className="nav-items ">
+          <NavLink to={"/"} className="nav-items" onClick={() => handleNavLinkClick()}>
             <FontAwesomeIcon
               icon={faHouse}
               className="mr-2 "
@@ -101,7 +108,7 @@ const Navbar = () => {
             />
             Home
           </NavLink>
-          <NavLink to={"/about"} className="nav-items ">
+          <NavLink to={"/about"} className="nav-items" onClick={() => handleNavLinkClick()}>
             <FontAwesomeIcon
               icon={faCircleInfo}
               className="mr-2 "
@@ -109,15 +116,14 @@ const Navbar = () => {
             />
             About Us
           </NavLink>
-          <button
-          onClick={()=> toggleSearchModal()}
-          className="nav-items">
+          <button onClick={() => toggleSearchModal()} className="nav-items">
+            <span onClick={() => handleNavLinkClick()}>
             <FontAwesomeIcon
               icon={faSearch}
               className="mr-2 "
               activeclassname="active"
             />
-            Search
+            Search</span>
           </button>
           {auth.loaded && auth.token ? (
             <>
@@ -125,11 +131,12 @@ const Navbar = () => {
                 activeclassname="active-nav-item"
                 to={`/user/${auth?.user?.id}`}
                 className="nav-items"
+                onClick={() => handleNavLinkClick()}
               >
                 <Avatar auth={auth} height={6} width={6} />
                 Profile
               </NavLink>
-              <NavLink to="/create-post" className="nav-items">
+              <NavLink to="/create-post" className="nav-items" onClick={() => handleNavLinkClick()}>
                 <FontAwesomeIcon
                   icon={faUpload}
                   className="mr-2 "
@@ -142,7 +149,7 @@ const Navbar = () => {
                 type="button"
                 onClick={handleLogout}
               >
-                <span className="flex justify-between items-center">
+                <span className="flex justify-between items-center" onClick={() => handleNavLinkClick()}>
                   Logout{" "}
                   <FontAwesomeIcon icon={faRightFromBracket} className="ml-2" />
                 </span>
@@ -150,18 +157,14 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <span className="nav-items">
+              <span className="nav-items" onClick={() => handleNavLinkClick()}>
                 <LoginButton />
               </span>
-              <span className="nav-items">
+              <span className="nav-items" onClick={() => handleNavLinkClick()}>
                 <SignupButton />
               </span>
             </>
           )}
-
-          {/* <a className='nav-items' href="#" style={{ '--i': 2 }}>Gallery</a>
-  <a className='nav-items' href="#" style={{ '--i': 3 }}>Services</a>
-  <a className='nav-items' href="#" style={{ '--i': 4 }}>Contact</a> */}
         </div>
       </motion.nav>
     </>

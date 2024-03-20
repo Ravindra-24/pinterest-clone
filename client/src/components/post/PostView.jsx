@@ -71,7 +71,7 @@ const PostView = ({ setProgress }) => {
 
       {!loading ? (
         <div className="flex justify-center align-center">
-          <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 max-sm:m-auto mt-20">
+          <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-5xl rounded m-5 mt-20">
             <div className="max-w-full mx-auto bg-gray-50 dark:bg-slate-900 dark:test-white rounded-md shadow-md overflow-hidden w-full">
               <div className="md:flex gap-4 w-full ">
                 <div className="md:w-2/3 flex place-items-start justify-center align-top">

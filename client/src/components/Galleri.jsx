@@ -139,7 +139,7 @@ const Gallery = ({ setProgress }) => {
         </ResponsiveMasonry>
       </div>
       {loading && (
-        <div className="w-full flex justify-center m-5">
+        <div className="w-full h-screen flex justify-center items-center m-5">
           <ColorfulSpinner />
         </div>
       )}

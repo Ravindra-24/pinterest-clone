@@ -53,7 +53,7 @@ const CreatePost = ({ setProgress }) => {
   return (
     <>
       <div className="flex justify-center align-center">
-        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 max-sm:m-auto dark:bg-slate-900 mt-20">
+        <div className=" flex flex-1 flex-col justify-center shadow-2xl max-w-4xl rounded m-5 dark:bg-slate-900 mt-20">
           <form
             onSubmit={handleSubmit}
             className="mx-auto w-full sm:w-5/6 py-2 px-3 sm:py-5 sm:px-0 "

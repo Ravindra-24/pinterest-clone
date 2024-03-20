@@ -20,7 +20,6 @@ export const createPost =
   export const searchPosts = (search, setLoading) => async (dispatch) => {
     try {
       const response = await api.search(search);
-      console.log(response)
       dispatch({ type: "FETCH_SEARCH_POSTS", payload: response.data });
     } catch (error) {
       toast.error(error.response.data.error);

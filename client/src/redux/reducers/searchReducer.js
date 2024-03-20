@@ -21,7 +21,7 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchedPosts: [],
-        loaded: true,
+        loaded: false,
       };
 
     default:
