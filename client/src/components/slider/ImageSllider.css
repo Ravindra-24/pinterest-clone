@@ -11,12 +11,24 @@
   background-repeat: no-repeat;
 }
 
-.each-slide-effect > div {
+.each-slide-effect .background-img {
   display: flex;
-  align-items: center;
+  /* align-items: end; */
   justify-content: center;
   background-size: cover;
-  height: 500px;
+  height: 400px;
+}
+
+.next-btn,
+.prev-btn{
+  border: 1px solid #fff;
+  border-radius: 5px;
+  width: 30px;
+}
+
+.next-btn:hover,
+.prev-btn:hover{
+  background-image: linear-gradient(to right, #db2777, #ca8a04);
 }
 
 .slider-desc {
@@ -73,19 +85,24 @@
 }
 
 .indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.7rem;
+  height: 0.7rem;
   cursor: pointer;
-  padding: 5px;
   text-align: center;
   border-radius:50% ;
-  border: 1px #fa6fb5 solid;
-  /* background: #eab308; */
+  border: 1px #fa228e solid;
   margin: 2px;
 }
 
-.indicator.active {
-  /* color: #db2777; */
+
+.indicator.active .active-indicator {
   background: #f7d17f;
-  border: 1px #db2777  solid;
+  width: calc(100% - 3px);
+  height: calc(100% - 3px);
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 768px) {

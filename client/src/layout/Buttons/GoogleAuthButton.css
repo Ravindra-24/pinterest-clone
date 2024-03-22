@@ -28,7 +28,7 @@
     transform: scale(0.975);
   }
   
-  button svg {
+  button .google-icon {
     height: 24px;
     width: auto;
   }
