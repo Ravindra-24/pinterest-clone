@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../../layout/Avatar";
 import DeleteCard from "../../layout/Modal/DeleteCard";
+import errorImg from "../../assets/imgErr1.jpg";
 
 const PostView = ({ setProgress }) => {
   const auth = useSelector((state) => state.authReducer.user);
@@ -77,6 +78,10 @@ const PostView = ({ setProgress }) => {
                 <div className="md:w-2/3 flex place-items-start justify-center align-top">
                   <img
                     src={post?.image}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null; // prevents looping
+                      currentTarget.src = `${errorImg}`;
+                    }}
                     alt="Post"
                     className="w-full h-auto object-cover md:object-none align-top"
                     style={{

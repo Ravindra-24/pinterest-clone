@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import ColorfulSpinner from "../layout/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import "../layout/spinner/spinner.css";
 import { fetchPosts } from "../redux/action/post";
-import { SearchContext } from "../context/searchContext";
 import "./Galleri.css";
 import Avatar from "../layout/Avatar";
-import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faShare } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
-
-const SliderComponent = lazy(() => import("./slider/ImageSlider"));
+import CardSkeleton from "./CardSkeleton";
+import errorImg from "../assets/imgErr1.jpg";
+import SliderComponent from "./slider/ImageSlider";
 
 const Gallery = ({ setProgress }) => {
   const [page, setPage] = useState(1);
@@ -27,17 +25,6 @@ const Gallery = ({ setProgress }) => {
   const limit = 20;
 
   const allPosts = useSelector((state) => state.postsReducer.posts);
-
-  const { search } = useContext(SearchContext);
-
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setPage(1);
-  //     setDone(false);
-  //     fetchData();
-  //   }, 400);
-  //   return () => clearTimeout(timeout);
-  // }, [search]);
 
   const fetchData = () => {
     try {
@@ -69,7 +56,7 @@ const Gallery = ({ setProgress }) => {
       observer.current.observe(lastImageRef.current);
     }
   }, [allPosts, loading]);
-  
+
   const convertToBlob = async (url) => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -95,11 +82,11 @@ const Gallery = ({ setProgress }) => {
       const blob = await convertToBlob(post.image);
 
       const shareData = {
-        files:[new File([blob], "image.jpg")],
-            title: post.title,
-            text: `${post?.user?.firstName} Shared a post on pin, Checkout now...`,
-            url: `https://pinterest-clone-tau.vercel.app/post/${post._id}`,
-      }
+        files: [new File([blob], "image.jpg")],
+        title: post.title,
+        text: `${post?.user?.firstName} Shared a post on pin, Checkout now...`,
+        url: `https://pinterest-clone-tau.vercel.app/post/${post._id}`,
+      };
 
       if (navigator.canShare && navigator.canShare(shareData.files)) {
         await navigator
@@ -108,13 +95,13 @@ const Gallery = ({ setProgress }) => {
           .catch((error) => console.log(error));
       } else {
         await navigator
-    .share({
-      title: post.title,
-      text: `${post?.user?.firstName} Shared a post on pin, Checkout now...`,
-      url: `https://pinterest-clone-tau.vercel.app/post/${post._id}`,
-    })
-    .then(() => toast.success("Post shared successfully"))
-    .catch((error) => console.log(error));
+          .share({
+            title: post.title,
+            text: `${post?.user?.firstName} Shared a post on pin, Checkout now...`,
+            url: `https://pinterest-clone-tau.vercel.app/post/${post._id}`,
+          })
+          .then(() => toast.success("Post shared successfully"))
+          .catch((error) => console.log(error));
       }
     } catch (error) {
       console.log(error);
@@ -123,9 +110,7 @@ const Gallery = ({ setProgress }) => {
   return (
     <>
       <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SliderComponent />
-        </Suspense>
+        <SliderComponent />
         <ResponsiveMasonry
           columnsCountBreakPoints={{
             0: 1,
@@ -157,7 +142,7 @@ const Gallery = ({ setProgress }) => {
                       alt="random"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = "../../public/assets/imgErr1.jpg";
+                        currentTarget.src = `${errorImg}`;
                       }}
                     />
 
@@ -183,7 +168,10 @@ const Gallery = ({ setProgress }) => {
                         {post?.comments.length > 0 && (
                           <div className="comment-icon">
                             <span className="comment-left">
-                              <FontAwesomeIcon icon={faComment} className="w-[1.3em]"/>
+                              <FontAwesomeIcon
+                                icon={faComment}
+                                className="w-[1.3em]"
+                              />
                             </span>
                             <span className="comment-count">
                               {post?.comments.length}
@@ -209,8 +197,8 @@ const Gallery = ({ setProgress }) => {
         </ResponsiveMasonry>
       </div>
       {loading && (
-        <div className="w-full h-screen flex justify-center items-center m-5">
-          <ColorfulSpinner />
+        <div className="w-full h-full">
+          <CardSkeleton />
         </div>
       )}
     </>
