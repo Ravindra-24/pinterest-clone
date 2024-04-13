@@ -14,6 +14,10 @@ const CreatePost = ({ setProgress }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handlePreview = (e) => {
     const file = e.target.files[0];
     const filereader = new FileReader();
@@ -35,7 +39,7 @@ const CreatePost = ({ setProgress }) => {
       formData.append("image", image);
       formData.append("title", title);
       formData.append("description", description);
-      dispatch(createPost(formData, navigate, setProgress));
+      dispatch(createPost(formData, navigate, setProgress, scrollToTop));
     } catch (error) {
       console.log(error);
       setLoading(false)
@@ -43,6 +47,7 @@ const CreatePost = ({ setProgress }) => {
   };
 
   const handleCancel = () => {
+    scrollToTop();
     setImagePreview(null);
     setTitle("");
     setDescription("");

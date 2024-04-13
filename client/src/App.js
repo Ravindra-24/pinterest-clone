@@ -41,7 +41,6 @@ function App() {
     dispatch(getSildeImage());
     dispatch(ValidateUser());
   }, [dispatch]);
-
   return (
     <div className="App dark:text-gray-50">
       <ModalProvider>

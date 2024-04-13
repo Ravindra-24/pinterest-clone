@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import * as api from "../api";
 
 export const createPost =
-  (formData, navigate, setProgress) => async (dispatch) => {
+  (formData, navigate, setProgress, scrollToTop) => async (dispatch) => {
     try {
       setProgress(40);
       const response = await api.create(formData);
@@ -11,6 +11,7 @@ export const createPost =
       toast.success(response.message);
       setProgress(100);
       navigate("/");
+      scrollToTop()
     } catch (error) {
       toast.error(error.response.data.error);
       setProgress(100);

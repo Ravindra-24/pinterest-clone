@@ -33,7 +33,8 @@ const Signup = () => {
         signupUser(
           { firstName, lastName, email, password },
           setLoading,
-          toggleSignupModal
+          toggleSignupModal,
+          toggleLoginModal
         )
       );
     } catch (error) {

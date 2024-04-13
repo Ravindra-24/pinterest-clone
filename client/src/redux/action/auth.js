@@ -9,16 +9,18 @@ const errorBox = (error) => {
 };
 
 export const signupUser =
-  (authData, setLoading, toggleSignupModal) => async (dispatch) => {
+  (authData, setLoading, toggleSignupModal, toggleLoginModal) => async (dispatch) => {
     try {
       const response = await api.signup(authData);
       toast.success(response.message);
+      toggleSignupModal();
+      toggleLoginModal();
     } catch (error) {
       errorBox(error.response.data.data);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
-      toggleSignupModal(false);
+      
     }
   };
 
@@ -31,11 +33,11 @@ export const loginUser =
       // api.API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", responseData.data.token);
       toast.success(responseData.message);
+      toggleLoginModal();
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
-      toggleLoginModal();
     }
   };
 

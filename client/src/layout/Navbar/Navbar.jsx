@@ -23,7 +23,7 @@ const Navbar = () => {
   const { toggleSearchModal } = useContext(SearchContext);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.authReducer);
-
+console.log(auth)
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
