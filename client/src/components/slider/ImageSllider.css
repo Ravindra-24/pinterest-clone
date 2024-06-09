@@ -1,0 +1,125 @@
+.each-slide-effect {
+  position: relative;
+  cursor: initial;
+  background-size: cover;
+  background-position: center;
+}
+
+.background-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.each-slide-effect .background-img {
+  display: flex;
+  /* align-items: end; */
+  justify-content: center;
+  background-size: cover;
+  height: 400px;
+}
+
+.next-btn,
+.prev-btn{
+  border: 1px solid #fff;
+  border-radius: 5px;
+  width: 30px;
+}
+
+.next-btn:hover,
+.prev-btn:hover{
+  background-image: linear-gradient(to right, #db2777, #ca8a04);
+}
+
+.slider-desc {
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.slider-desc span {
+  padding: 7px;
+  margin-left: 8%;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+
+.slider-desc p {
+  padding: 7px;
+  font-size: 12px;
+  width: 20em;
+  margin-left: 8%;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+}
+
+.slider-desc button {
+  padding: 7px;
+  margin-left: 8%;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+
+.slider-text-background{
+  z-index: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50%;
+  opacity: 0.5;
+  width: 100%;
+}
+
+.indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.7rem;
+  height: 0.7rem;
+  cursor: pointer;
+  text-align: center;
+  border-radius:50% ;
+  border: 1px #fa228e solid;
+  margin: 2px;
+}
+
+
+.indicator.active .active-indicator {
+  background: #f7d17f;
+  width: calc(100% - 3px);
+  height: calc(100% - 3px);
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+
+  .each-slide-effect > div {
+    height: 300px;
+  }
+  .slider-desc span {
+    font-size: 15px;
+  }
+  .slider-desc p {
+    font-size: 10px;
+  }
+  .slider-desc button {
+    font-size: 10px;
+  }
+  
+}
+
+

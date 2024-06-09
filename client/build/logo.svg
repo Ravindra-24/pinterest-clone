@@ -1,0 +1,5 @@
+<svg width="auto" height="25" xmlns="http://www.w3.org/2000/svg">
+          {/* <!-- Pin Shape --> */}
+          <path d="M10 10 L0 0 L-10 10 L10 40 Z" fill="#E60023" />
+
+        </svg>

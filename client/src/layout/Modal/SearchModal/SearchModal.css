@@ -1,0 +1,36 @@
+.search-container{
+  background-image:  radial-gradient(circle at center center, rgb(80, 32, 84),rgb(62, 35, 81),rgb(44, 38, 79),rgb(26, 40, 76),rgb(8, 43, 73));
+}
+
+
+
+/* @media screen and (max-width: 1111px) {
+    .search-container {
+      width: 60rem;
+      padding: 2%;
+    }
+  }
+@media screen and (max-width: 940px) {
+  .search-container {
+    width: 45rem;
+    padding: 2%;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  .search-container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 495px) {
+  .search-container {
+    width: 25rem;
+  }
+}
+
+@media screen and (max-width: 418px){
+  .search-container{
+    width: 20rem;
+  }
+} */
