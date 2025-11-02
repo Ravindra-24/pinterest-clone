@@ -44,21 +44,21 @@ export const login =(authData)=>API.post("/auth/login",authData)
 export const forgot = (email)=>API.post("/auth/forgot-password",email)
 export const reset = (token, password)=>API.post(`/auth/reset-password/${token}`,password)
 
-export const create = (formData) => API.post("/post", formData);
-export const update = (id, formData) => API.patch(`/post/update/${id}`, formData);
-export const deletePostId = (id) => API.post(`post/${id}`); 
-export const postLike = (postId) => API.patch(`/post/like/${postId}`);
+export const create = (formData) => API.post("/posts", formData);
+export const update = (id, formData) => API.patch(`/posts/update/${id}`, formData);
+export const deletePostId = (id) => API.post(`posts/${id}`); 
+export const postLike = (postId) => API.patch(`/posts/like/${postId}`);
 
-export const fetchAllPosts = (page, limit) => API.get(`/post?_page=${page}&_limit=${limit}`);
-export const search = (search) => API.get(`/post/search?_search=${search}`);
-export const getPost = (id) => API.get(`/post/${id}`);
-export const slideImages = () => API.get('/post/slide-show-images')
+export const fetchAllPosts = (page, limit) => API.get(`/posts?_page=${page}&_limit=${limit}`);
+export const search = (search) => API.get(`/posts/search?_search=${search}`);
+export const getPost = (id) => API.get(`/posts/${id}`);
+export const slideImages = () => API.get('/posts/slide-show-images')
 
-export const postComments = (id, commentData) => API.post(`/comment/${id}`, commentData);
-export const commentLike = (commentId, postId) => API.patch(`/comment/like/${commentId}/${postId}`);
-export const deletePostComment = (commentId, postId) => API.delete(`/comment/${commentId}/${postId}`);
+export const postComments = (id, commentData) => API.post(`/comments/${id}`, commentData);
+export const commentLike = (commentId, postId) => API.patch(`/comments/like/${commentId}/${postId}`);
+export const deletePostComment = (commentId, postId) => API.delete(`/comments/${commentId}/${postId}`);
 
-export const findUser = (id) => API.get(`/user/${id}`);
-export const getUserPosts = (id) => API.get(`/user/user-posts/${id}`);
-export const follow = (userId) => API.patch(`/user/follow/${userId}`);
-export const updateUserData = (formData) => API.patch(`/user/update`, formData);
+export const findUser = (id) => API.get(`/users/${id}`);
+export const getUserPosts = (id) => API.get(`/users/user-posts/${id}`);
+export const follow = (userId) => API.patch(`/users/follow/${userId}`);
+export const updateUserData = (formData) => API.patch(`/users/update`, formData);
