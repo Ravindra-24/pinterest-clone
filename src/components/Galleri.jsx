@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useDispatch, useSelector } from "react-redux";
 import "../layout/spinner/spinner.css";
@@ -26,20 +26,13 @@ const Gallery = ({ setProgress }) => {
 
   const allPosts = useSelector((state) => state.postsReducer.posts);
 
-  const fetchData = () => {
-    try {
-      setLoading(true);
-      setProgress(30);
-      dispatch(fetchPosts(page, limit, setProgress, setDone, setLoading));
-      setProgress(70);
-      setProgress(100);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
-    fetchData();
-  }, [page]);
+    setLoading(true);
+    setProgress(30);
+    dispatch(fetchPosts(page, limit, setProgress, setDone, setLoading));
+    setProgress(70);
+    setProgress(100);
+  }, [dispatch, page, setProgress]);
 
   useEffect(() => {
     if (loading || done) return;
@@ -55,7 +48,7 @@ const Gallery = ({ setProgress }) => {
     if (lastImageRef.current) {
       observer.current.observe(lastImageRef.current);
     }
-  }, [allPosts, loading]);
+  }, [allPosts, done, loading]);
 
   const convertToBlob = async (url) => {
     return new Promise((resolve, reject) => {

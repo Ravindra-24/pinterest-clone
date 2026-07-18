@@ -19,28 +19,6 @@ const EditPost = ({ setProgress }) => {
   const post = useSelector((state) => state.postsReducer.post);
   // console.log(post);
 
-  const getPost = async () => {
-    try {
-      setIsLoading(true);
-      dispatch(
-        getPostDetails(
-          id,
-          setProgress,
-          navigate
-          // setTitle,
-          // setDescription,
-          // setImagePreview
-        )
-      );
-      //   console.log(image);
-    } catch (error) {
-      toast.error(error.message);
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleCancel = () => {
     setImagePreview(null);
     setTitle("");
@@ -50,8 +28,9 @@ const EditPost = ({ setProgress }) => {
   };
 
   useEffect(() => {
-    getPost();
-  }, []);
+    setIsLoading(true);
+    dispatch(getPostDetails(id, navigate, setIsLoading));
+  }, [dispatch, id, navigate]);
 
   useEffect(() => {
     setTitle(post?.title);

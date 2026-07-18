@@ -10,7 +10,7 @@ import Avatar from "../../layout/Avatar";
 import { Link } from "react-router-dom";
 
 const Comments = ({ comments, postId }) => {
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const auth = useSelector((state) => state.authReducer.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();

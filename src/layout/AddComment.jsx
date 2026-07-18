@@ -5,7 +5,6 @@ import { postComment } from "../redux/action/comment";
 import { toast } from "react-hot-toast";
 
 const AddComment = () => {
-  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [commentText, setCommentText] = useState("");
   const navigate = useNavigate();
@@ -20,12 +19,13 @@ const AddComment = () => {
     try {
       if (!auth) return toast.error("Please login to comment");
       setIsLoading(true);
-      setLoading(false);
       dispatch(
         postComment(
           id,
           { commentText, userId },
-          setLoading, navigate, setIsLoading
+          navigate,
+          setIsLoading,
+          setIsLoading
         )
       );
     } catch (error) {

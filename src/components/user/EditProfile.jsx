@@ -70,9 +70,11 @@ const EditProfile = ({ setProgress }) => {
   }
 
   useEffect(() => {
+    if (!auth?.id) return;
+
     dispatch({type:"GET_USER", payload:null})
     dispatch(getUser(auth.id, setLoading));
-  }, []);
+  }, [auth?.id, dispatch]);
   return (
     <>
     <Modal open={openCrop} setOpen={toggleCrop}>

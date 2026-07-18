@@ -30,15 +30,6 @@ const PostView = ({ setProgress }) => {
   const location = useLocation();
   const { id } = useParams();
 
-  const getpostDetail = () => {
-    try {
-      dispatch(getPostDetails(id, navigate, setLoading));
-    } catch (error) {
-      toast.error(error.message);
-      navigate("/");
-    }
-  };
-
   const toggleDeleteCard = () => {
     setShowDeleteCard(!showDeleteCard);
   }
@@ -58,8 +49,8 @@ const PostView = ({ setProgress }) => {
   useEffect(() => {
     setLoading(true);
     dispatch({ type: "GET_POST_DETAILS", payload: {} });
-    getpostDetail();
-  }, [id]);
+    dispatch(getPostDetails(id, navigate, setLoading));
+  }, [dispatch, id, navigate]);
 
   return (
     <>

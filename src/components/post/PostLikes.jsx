@@ -5,20 +5,20 @@ import { updatePostLike } from "../../redux/action/post";
 import { useNavigate } from "react-router";
 
 const PostLikes = ({ post }) => {
-  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.authReducer.user);
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const handlePostLike = () => {
     try {
-      setLoading(false);
       setIsLoading(true);
       if (!auth) {
         toast.error("Please Login to like the post");
         setIsLoading(false);
       } else {
-        dispatch(updatePostLike(post._id,navigate, setLoading, setIsLoading));
+        dispatch(
+          updatePostLike(post._id, navigate, setIsLoading, setIsLoading)
+        );
       }
     } catch (error) {
       toast.error(error.message);

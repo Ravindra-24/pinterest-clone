@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import "./GoogleAuthButton.css";
 import { useDispatch } from "react-redux";

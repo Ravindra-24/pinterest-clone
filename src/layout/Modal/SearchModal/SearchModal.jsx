@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Modal from "../Modal";
 import "./SearchModal.css";
 import { SearchContext } from "../../../context/searchContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,22 +13,15 @@ const SearchModal = () => {
   const { search, setSearch } = useContext(SearchContext);
   const dispatch = useDispatch();
 
-  const fetchData = () => {
-    try {
-      if (search.length < 1) return;
+  useEffect(() => {
+    if (search.length < 1) return;
+
+    const timeout = setTimeout(() => {
       setLoading(true);
       dispatch(searchPosts(search, setLoading));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      fetchData();
     }, 400);
     return () => clearTimeout(timeout);
-  }, [search]);
+  }, [dispatch, search]);
 
   return (
     <div
