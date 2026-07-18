@@ -1,67 +1,72 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "canvas-app",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.18.0",
-    "@mui/material": "^5.18.0",
-    "@react-oauth/google": "^0.12.1",
-    "axios": "^1.4.0",
-    "boxicons": "^2.1.4",
-    "framer-motion": "^11.0.14",
-    "moment": "^2.29.4",
-    "nanoid": "^5.1.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-easy-crop": "^5.0.0",
-    "react-hot-toast": "^2.4.1",
-    "react-jwt": "^1.2.0",
-    "react-loading-skeleton": "^3.4.0",
-    "react-redux": "^8.1.1",
-    "react-responsive-masonry": "^2.1.7",
-    "react-router": "^6.14.0",
-    "react-router-dom": "^6.14.0",
-    "react-scripts": "^5.0.1",
-    "react-slideshow-image": "^4.3.0",
-    "react-top-loading-bar": "^2.3.1",
-    "redux": "^4.2.1",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.2",
-    "tesseract.js": "^4.1.1",
-    "tw-elements": "^1.0.0-beta3",
-    "web-vitals": "^2.1.4"
-  },
+  "type": "module",
   "engines": {
-    "node": "22.x"
+    "node": ">=22.12.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "dev": "vite",
+    "start": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.2.8",
+    "@fontsource-variable/newsreader": "^5.2.10",
+    "@hookform/resolvers": "latest",
+    "@radix-ui/react-dialog": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-tabs": "latest",
+    "@radix-ui/react-tooltip": "latest",
+    "@react-oauth/google": "latest",
+    "@reduxjs/toolkit": "latest",
+    "@sentry/react": "^10.66.0",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "date-fns": "latest",
+    "framer-motion": "latest",
+    "lucide-react": "latest",
+    "masonic": "latest",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-easy-crop": "latest",
+    "react-helmet-async": "latest",
+    "react-hook-form": "latest",
+    "react-redux": "latest",
+    "react-router-dom": "^7.18.1",
+    "sonner": "latest",
+    "tailwind-merge": "latest",
+    "web-vitals": "^5.3.0",
+    "zod": "latest"
   },
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "@eslint/js": "latest",
+    "@playwright/test": "latest",
+    "@tailwindcss/vite": "latest",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/user-event": "latest",
+    "@types/node": "latest",
+    "@types/react": "18.3.26",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "latest",
+    "eslint": "latest",
+    "eslint-plugin-react-hooks": "latest",
+    "eslint-plugin-react-refresh": "latest",
+    "globals": "latest",
+    "jsdom": "latest",
+    "msw": "latest",
+    "tailwindcss": "^4.3.3",
+    "typescript": "latest",
+    "typescript-eslint": "latest",
+    "vite": "latest",
+    "vitest": "latest"
   }
 }

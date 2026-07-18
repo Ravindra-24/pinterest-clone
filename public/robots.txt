@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /create
+Disallow: /edit/
+Disallow: /search
+
+Sitemap: https://pinterest-clone-tau.vercel.app/sitemap.xml

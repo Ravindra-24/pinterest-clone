@@ -1,83 +1,40 @@
+# Canvas web application
 
-# Pinterest Clone (Personal MERN Stack Project)
+The premium React SPA for the visual discovery platform. `Canvas` is a configurable working name until the rebrand and domain checks are complete.
 
-Welcome! My name is Ravindra Pawar, and this is my personal project inspired by Pinterest, built to deepen my understanding of the MERN stack (MongoDB, Express.js, React, Node.js). This web application is a hands-on learning journey, where I explored building a full-stack platform from scratch, focusing on user experience, authentication, and scalable image management.
+## Stack
 
-## Why I Built This Project
-I wanted to challenge myself by recreating a visually rich, interactive social platform similar to Pinterest. My goals were:
-- To master the MERN stack through practical implementation
-- To learn secure user authentication and account management
-- To handle image uploads, cropping, and cloud storage efficiently
-- To design a responsive, modern UI using React and Tailwind CSS
-- To implement real-world features like search, comments, likes, and user profiles
+- Vite, React, TypeScript, React Router
+- Tailwind CSS tokens with Radix UI primitives
+- Redux Toolkit and RTK Query
+- React Hook Form and Zod
+- Masonic, Cloudinary responsive images, Sonner, Lucide
+- React Helmet Async plus Vercel public-route HTML shells
+- Vitest, Testing Library, and Playwright
 
-## What I Learned
-- Building RESTful APIs and connecting frontend to backend
-- Managing state with Redux and Redux Thunk
-- Implementing authentication (JWT, Google OAuth)
-- Handling images and multimedia with cloud storage
-- Creating reusable components and layouts in React
-- Using modern CSS frameworks for responsive design
+## Local development
 
-## Features
-- Visual discovery and image gallery
-- Pinning, liking, and commenting on posts
-- User profiles with bio, followers, and following
-- Secure authentication (signup, login, password reset)
-- Google OAuth integration
-- Image cropping and upload
-- Search functionality for posts and users
-- Responsive design for all devices
-
-## Tech Stack
-- **Frontend:** React, Redux, Tailwind CSS, MUI
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT, Google OAuth
-- **Image Handling:** react-easy-crop, cloud storage
-
-## Getting Started
-1. Clone the repository:
-	```bash
-	git clone https://github.com/Ravindra-24/pinterest-clone.git
-	cd pinterest-clone
-	```
-2. Install dependencies:
-	```bash
-	npm install
-	# or
-	yarn install
-	```
-3. Start the development server:
-	```bash
-	npm start
-	# or
-	yarn start
-	```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Project Structure
-```
-pinterest-clone/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   ├── context/
-│   ├── hoc/
-│   ├── layout/
-│   ├── redux/
-│   ├── App.js
-│   └── index.js
-├── package.json
-├── tailwind.config.js
-└── README.md
+```bash
+cp .env.example .env.local
+npm install
+npm run dev
 ```
 
-## Author
-[Ravindra Pawar](https://github.com/Ravindra-24)
+The API base URL must include its `/api` prefix. The web app adds `/v1` for the current endpoints.
 
+## Quality commands
 
+```bash
+npm run lint
+npm test
+npm run build
+npm run test:e2e
+```
 
+On macOS the Playwright config uses the installed Google Chrome binary. CI/Linux should run `npx playwright install --with-deps chromium` before the E2E suite.
 
+## Deployment
 
+Vercel builds `dist/`. Direct public post, profile, and collection requests pass through `api/render.js`, which injects the same public content, canonical metadata, social cards, and JSON-LD before the SPA starts. Configure both `API_BASE_URL` and `VITE_API_BASE_URL` in Vercel because the serverless renderer and browser bundle read separate environment scopes.
+
+Required production settings are documented in `.env.example`. Replace the working name, logo, site URL, contact address, and social image templates when the rebrand is approved.

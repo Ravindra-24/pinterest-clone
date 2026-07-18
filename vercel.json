@@ -1,0 +1,24 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/render.js": { "includeFiles": "dist/**" }
+  },
+  "rewrites": [
+    { "source": "/p/:slugId", "destination": "/api/render?type=post&identifier=:slugId" },
+    { "source": "/u/:username", "destination": "/api/render?type=user&identifier=:username" },
+    { "source": "/c/:slugId", "destination": "/api/render?type=collection&identifier=:slugId" },
+    { "source": "/post/:id", "destination": "/api/render?type=post&identifier=:id&legacy=true" },
+    { "source": "/user/:id", "destination": "/api/render?type=user&identifier=:id&legacy=true" },
+    { "source": "/sitemap.xml", "destination": "/api/seo?file=sitemap.xml" },
+    { "source": "/sitemaps/posts.xml", "destination": "/api/seo?file=sitemaps/posts.xml" },
+    { "source": "/sitemaps/profiles.xml", "destination": "/api/seo?file=sitemaps/profiles.xml" },
+    { "source": "/sitemaps/collections.xml", "destination": "/api/seo?file=sitemaps/collections.xml" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/(.*)", "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }, { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }, { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }] }
+  ]
+}
