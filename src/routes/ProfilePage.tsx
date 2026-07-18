@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { CalendarDays, FolderHeart, Pencil, UserPlus } from "lucide-react";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { Avatar } from "../components/ui/Avatar";
 import { Button } from "../components/ui/Button";
@@ -60,7 +60,18 @@ export default function ProfilePage() {
         </div>
         {tab === "posts" ? profile.posts.length ? <FeedGrid posts={profile.posts} /> : <EmptyState title="No ideas shared yet." description={`${profile.displayName} is still curating their first post.`} /> : collections.length ? (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1rem" }}>
-            {collections.map((collection) => <article key={collection.id} className="surface" style={{ padding: "1.25rem", minHeight: 180 }}><FolderHeart size={26} style={{ color: "var(--accent)" }} /><h2 className="editorial" style={{ fontSize: "1.7rem", margin: ".8rem 0 .3rem" }}>{collection.name}</h2><p className="muted">{collection.itemCount} saved ideas · {collection.visibility}</p></article>)}
+            {collections.map((collection) => (
+              <Link key={collection.id} to={`/c/${collection.slug}`} className="surface collection-card">
+                <div className="collection-cover" style={{ background: collection.cover?.dominantColor || "var(--surface-muted)" }}>
+                  {collection.cover?.url ? <img src={collection.cover.url} alt="" loading="lazy" /> : <FolderHeart size={34} aria-hidden="true" />}
+                </div>
+                <div className="collection-card-copy">
+                  <span className="eyebrow">{collection.visibility}</span>
+                  <h2 className="editorial">{collection.name}</h2>
+                  <p className="muted">{collection.itemCount} saved {collection.itemCount === 1 ? "idea" : "ideas"}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         ) : <EmptyState title="No public collections yet." description="Private collections are only visible to their owner." />}
       </div>

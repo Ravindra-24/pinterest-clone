@@ -6,13 +6,14 @@ import { Button } from "../../components/ui/Button";
 import { Field } from "../../components/ui/Field";
 import { useAppSelector } from "../../hooks/store";
 import { useCreateCollectionMutation, useGetCollectionsQuery, useSavePostMutation } from "../../services/api";
+import { apiErrorMessage } from "../../services/errors";
 import type { PostSummary } from "../../types/api";
 
 export const CollectionDialog = ({ post, onClose, onRequireAuth }: { post: PostSummary | null; onClose: () => void; onRequireAuth: () => void }) => {
   const user = useAppSelector((state) => state.auth.user);
   const { data: collections = [], isLoading } = useGetCollectionsQuery(undefined, { skip: !user || !post });
-  const [createCollection] = useCreateCollectionMutation();
-  const [savePost] = useSavePostMutation();
+  const [createCollection, createState] = useCreateCollectionMutation();
+  const [savePost, saveState] = useSavePostMutation();
   const [newName, setNewName] = useState("");
   const [creating, setCreating] = useState(false);
 
@@ -22,15 +23,15 @@ export const CollectionDialog = ({ post, onClose, onRequireAuth }: { post: PostS
       await savePost({ collectionId, postId: post.id }).unwrap();
       toast.success("Saved to your collection");
       onClose();
-    } catch { toast.error("Could not save this idea"); }
+    } catch (error) { toast.error(apiErrorMessage(error, "Could not save this idea")); }
   };
 
   const create = async () => {
-    if (!newName.trim()) return;
+    if (newName.trim().length < 2) return toast.error("Use at least two characters for the collection name");
     try {
       const collection = await createCollection({ name: newName.trim(), visibility: "private" }).unwrap();
       await save(collection.id);
-    } catch { toast.error("Could not create the collection"); }
+    } catch (error) { toast.error(apiErrorMessage(error, "Could not create the collection")); }
   };
 
   return (
@@ -47,14 +48,14 @@ export const CollectionDialog = ({ post, onClose, onRequireAuth }: { post: PostS
             <div style={{ display: "grid", gap: ".65rem", marginTop: "1.25rem" }}>
               {isLoading && <div className="skeleton" style={{ height: 52, borderRadius: 12 }} />}
               {collections.map((collection) => (
-                <button key={collection.id} className="button button-secondary" style={{ justifyContent: "space-between", borderRadius: 12 }} onClick={() => save(collection.id)}>
+                <button key={collection.id} className="button button-secondary" style={{ justifyContent: "space-between", borderRadius: 12 }} onClick={() => save(collection.id)} disabled={saveState.isLoading}>
                   <span style={{ display: "flex", alignItems: "center", gap: ".65rem" }}><FolderPlus size={18} />{collection.name}</span><Plus size={17} />
                 </button>
               ))}
               {creating ? (
                 <div className="surface" style={{ display: "grid", gap: ".7rem", padding: ".8rem" }}>
                   <Field label="Collection name" value={newName} onChange={(event) => setNewName(event.target.value)} autoFocus maxLength={60} />
-                  <div style={{ display: "flex", justifyContent: "flex-end", gap: ".5rem" }}><Button variant="ghost" onClick={() => setCreating(false)}>Cancel</Button><Button onClick={create}>Create and save</Button></div>
+                  <div style={{ display: "flex", justifyContent: "flex-end", gap: ".5rem" }}><Button variant="ghost" onClick={() => setCreating(false)}>Cancel</Button><Button onClick={create} disabled={createState.isLoading || saveState.isLoading}>{createState.isLoading ? "Creating…" : saveState.isLoading ? "Saving…" : "Create and save"}</Button></div>
                 </div>
               ) : <Button variant="ghost" onClick={() => setCreating(true)}><Plus size={18} />New collection</Button>}
             </div>

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "../components/patterns/Header";
 import { MobileNav } from "../components/patterns/MobileNav";
 import { Footer } from "../components/patterns/Footer";
@@ -8,11 +8,12 @@ import { InterestDialog } from "../features/onboarding/InterestDialog";
 
 export const AppShell = () => {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Header theme={theme} onToggleTheme={toggleTheme} />
-      <main id="main-content"><Outlet /></main>
+      <main id="main-content" className="page-transition" key={location.pathname}><Outlet /></main>
       <Footer />
       <MobileNav />
       <ConsentBanner />

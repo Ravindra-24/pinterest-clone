@@ -9,6 +9,7 @@ import { store } from "./app/store";
 import { router } from "./app/router";
 import { SessionBootstrap } from "./app/SessionBootstrap";
 import { appConfig } from "./app/config";
+import { GoogleOneTap } from "./features/auth/GoogleOneTap";
 import "./styles/globals.css";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/newsreader";
@@ -17,6 +18,7 @@ const app = (
   <React.StrictMode>
     <Provider store={store}>
       <HelmetProvider>
+        {appConfig.googleClientId && <GoogleOneTap />}
         <SessionBootstrap><RouterProvider router={router} /></SessionBootstrap>
         <Toaster position="bottom-right" richColors closeButton />
       </HelmetProvider>

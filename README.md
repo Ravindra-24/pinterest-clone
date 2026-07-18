@@ -41,4 +41,14 @@ Vercel builds `dist/`. Direct public post, profile, and collection requests pass
 
 Netlify configuration is provided in `netlify.toml`. It builds the Vite app from this directory, proxies `/api/v1/*` to the Cloud Run API, and falls back to `index.html` for client-side routes. Keep `VITE_API_BASE_URL` set to `/api` in Netlify; remove any older value that points the browser directly at the Cloud Run hostname.
 
+For authenticated writes, add the exact deployed origin (for example, `https://your-site.netlify.app`) to the API function's comma-separated `ALLOWED_ORIGINS` environment variable and redeploy the API.
+
+Google sign-in and One Tap require the same OAuth web client on both deployments:
+
+- Netlify: set `VITE_GOOGLE_AUTH_CLIENT_ID`.
+- Cloud Run/Firebase Functions: set `GOOGLE_CLIENT_ID` to the same value.
+- Google Cloud Console: add the exact Netlify origin under **Authorized JavaScript origins**.
+
+After changing Netlify environment variables, use **Clear cache and deploy site** so Vite embeds the new public client ID.
+
 Required production settings are documented in `.env.example`. Configure the approved production domain, contact address, analytics IDs, and final raster social-card URL before launch.

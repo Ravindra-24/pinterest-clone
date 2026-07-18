@@ -66,6 +66,14 @@ export const api = createApi({
       }),
       invalidatesTags: ["Session"],
     }),
+    googleLogin: builder.mutation<Session, { credential: string }>({
+      query: (body) => ({ url: "/auth/google", method: "POST", body }),
+      transformResponse: (response: ApiEnvelope<Session>) => ({
+        ...response.data,
+        user: normalizeUser(response.data.user),
+      }),
+      invalidatesTags: ["Session"],
+    }),
     logout: builder.mutation<void, void>({
       query: () => ({ url: "/auth/logout", method: "POST" }),
       invalidatesTags: ["Session"],
@@ -186,6 +194,7 @@ export const {
   useGetSessionQuery,
   useLoginMutation,
   useSignupMutation,
+  useGoogleLoginMutation,
   useLogoutMutation,
   useGetFeedQuery,
   useGetPostQuery,

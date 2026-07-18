@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff, X } from "lucide-react";
+import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,9 +9,10 @@ import { toast } from "sonner";
 import { Button } from "../../components/ui/Button";
 import { Field } from "../../components/ui/Field";
 import { appConfig } from "../../app/config";
-import { useLoginMutation, useSignupMutation } from "../../services/api";
+import { useGoogleLoginMutation, useLoginMutation, useSignupMutation } from "../../services/api";
 import { sessionReceived } from "./authSlice";
 import { useAppDispatch } from "../../hooks/store";
+import { apiErrorMessage } from "../../services/errors";
 
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -36,6 +38,7 @@ export const AuthDialog = ({ open, onOpenChange, initialMode = "login" }: AuthDi
   const [showPassword, setShowPassword] = useState(false);
   const [login, loginState] = useLoginMutation();
   const [signup, signupState] = useSignupMutation();
+  const [googleLogin, googleState] = useGoogleLoginMutation();
   const dispatch = useAppDispatch();
   const schema = mode === "login" ? loginSchema : signupSchema;
   const form = useForm<LoginValues | SignupValues>({ resolver: zodResolver(schema), mode: "onBlur" });
@@ -54,12 +57,24 @@ export const AuthDialog = ({ open, onOpenChange, initialMode = "login" }: AuthDi
       dispatch(sessionReceived(session));
       toast.success(mode === "login" ? "Welcome back" : "Your account is ready");
       onOpenChange(false);
-    } catch (error: any) {
-      toast.error(error?.data?.error?.message || error?.data?.message || "We could not complete that request");
+    } catch (error) {
+      toast.error(apiErrorMessage(error, "We could not complete that request"));
     }
   });
 
-  const pending = loginState.isLoading || signupState.isLoading;
+  const continueWithGoogle = async (response: CredentialResponse) => {
+    if (!response.credential) return toast.error("Google did not return a sign-in credential");
+    try {
+      const session = await googleLogin({ credential: response.credential }).unwrap();
+      dispatch(sessionReceived(session));
+      toast.success("Welcome to Curiofold");
+      onOpenChange(false);
+    } catch (error) {
+      toast.error(apiErrorMessage(error, "Google sign-in could not be completed"));
+    }
+  };
+
+  const pending = loginState.isLoading || signupState.isLoading || googleState.isLoading;
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -93,6 +108,22 @@ export const AuthDialog = ({ open, onOpenChange, initialMode = "login" }: AuthDi
             <Button type="submit" disabled={pending}>{pending ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}</Button>
           </form>
           <hr className="divider" style={{ margin: "1.25rem 0" }} />
+          {appConfig.googleClientId && (
+            <>
+              <div className="auth-divider"><span>or continue with</span></div>
+              <div className="google-signin">
+                <GoogleLogin
+                  onSuccess={continueWithGoogle}
+                  onError={() => toast.error("Google sign-in is temporarily unavailable")}
+                  shape="pill"
+                  size="large"
+                  width="320"
+                  text="continue_with"
+                  use_fedcm_for_button
+                />
+              </div>
+            </>
+          )}
           <p className="muted" style={{ textAlign: "center", margin: 0 }}>
             {mode === "login" ? "New here?" : "Already a member?"}{" "}
             <button className="button button-ghost button-sm" onClick={() => setMode(mode === "login" ? "signup" : "login")}>

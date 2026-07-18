@@ -7,7 +7,7 @@ import { Button } from "../../components/ui/Button";
 import { sessionReceived } from "../auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { useUpdateProfileMutation } from "../../services/api";
-import type { ApiEnvelope } from "../../types/api";
+import { apiErrorMessage } from "../../services/errors";
 
 const dismissKey = "curiofold-onboarding-dismissed";
 
@@ -27,9 +27,8 @@ export const InterestDialog = () => {
       if (session.accessToken) dispatch(sessionReceived({ accessToken: session.accessToken, user }));
       toast.success("Your discovery feed is ready");
       close();
-    } catch (error: any) {
-      const response = error?.data as ApiEnvelope<null> | undefined;
-      toast.error(response?.error?.message || "Could not save your interests");
+    } catch (error) {
+      toast.error(apiErrorMessage(error, "Could not save your interests"));
     }
   };
   return <Dialog.Root open={open} onOpenChange={(value) => !value && close()}><Dialog.Portal><Dialog.Overlay className="dialog-overlay" /><Dialog.Content className="dialog-content"><Sparkles size={28} style={{ color: "var(--accent)" }} /><Dialog.Title className="editorial" style={{ fontSize: "2.7rem", lineHeight: 1, margin: ".6rem 0" }}>Shape your discovery feed.</Dialog.Title><Dialog.Description className="muted" style={{ lineHeight: 1.55 }}>Choose at least three themes. You can change these later from your profile.</Dialog.Description><div className="filter-row" style={{ flexWrap: "wrap", overflow: "visible", marginTop: "1rem" }}>{categories.filter((item) => item !== "All").map((item) => <button key={item} className={`chip ${selected.includes(item) ? "active" : ""}`} aria-pressed={selected.includes(item)} onClick={() => toggle(item)}>{item}</button>)}</div><div style={{ display: "flex", justifyContent: "flex-end", gap: ".5rem" }}><Button variant="ghost" onClick={close}>Not now</Button><Button onClick={save} disabled={isLoading}>{isLoading ? "Saving…" : "Personalize feed"}</Button></div></Dialog.Content></Dialog.Portal></Dialog.Root>;
