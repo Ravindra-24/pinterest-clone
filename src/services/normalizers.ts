@@ -6,7 +6,7 @@ export const normalizeUser = (input: any): PublicUser => {
     input?.displayName ||
     input?.fullName ||
     [input?.firstName, input?.lastName].filter(Boolean).join(" ") ||
-    "Canvas member";
+    "Curiofold member";
 
   return {
     id,

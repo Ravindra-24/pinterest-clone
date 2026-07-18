@@ -8,7 +8,7 @@ import { sessionReceived } from "../auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { useUpdateProfileMutation } from "../../services/api";
 
-const dismissKey = "canvas-onboarding-dismissed";
+const dismissKey = "curiofold-onboarding-dismissed";
 
 export const InterestDialog = () => {
   const session = useAppSelector((state) => state.auth);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
-import { categories } from "../app/config";
+import { appConfig, categories } from "../app/config";
 import { FeedGrid } from "../components/patterns/FeedGrid";
 import { Button } from "../components/ui/Button";
 import { EmptyState } from "../components/ui/EmptyState";
@@ -35,7 +35,7 @@ export default function HomePage() {
     <div className="page">
       <Seo
         description="Discover visual ideas across architecture, art, interiors, travel, food, fashion, and photography."
-        jsonLd={{ "@context": "https://schema.org", "@type": "WebSite", name: "Canvas", url: window.location.origin, potentialAction: { "@type": "SearchAction", target: `${window.location.origin}/search?q={search_term_string}`, "query-input": "required name=search_term_string" } }}
+        jsonLd={{ "@context": "https://schema.org", "@type": "WebSite", name: appConfig.brandName, url: appConfig.siteUrl, potentialAction: { "@type": "SearchAction", target: `${appConfig.siteUrl}/search?q={search_term_string}`, "query-input": "required name=search_term_string" } }}
       />
       <div className="container">
         <section className="hero" aria-labelledby="discover-title">

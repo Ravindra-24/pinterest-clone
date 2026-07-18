@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/Button";
 import { startObservability } from "../../services/observability";
 
-const key = "canvas-analytics-consent";
+const key = "curiofold-analytics-consent";
 
 export const ConsentBanner = () => {
   const stored = localStorage.getItem(key);

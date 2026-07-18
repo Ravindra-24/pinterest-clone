@@ -1,6 +1,6 @@
-# Canvas web application
+# Curiofold web application
 
-The premium React SPA for the visual discovery platform. `Canvas` is a configurable working name until the rebrand and domain checks are complete.
+The premium React SPA for Curiofold, a thoughtful visual discovery and collection platform.
 
 ## Stack
 
@@ -37,4 +37,4 @@ On macOS the Playwright config uses the installed Google Chrome binary. CI/Linux
 
 Vercel builds `dist/`. Direct public post, profile, and collection requests pass through `api/render.js`, which injects the same public content, canonical metadata, social cards, and JSON-LD before the SPA starts. Configure both `API_BASE_URL` and `VITE_API_BASE_URL` in Vercel because the serverless renderer and browser bundle read separate environment scopes.
 
-Required production settings are documented in `.env.example`. Replace the working name, logo, site URL, contact address, and social image templates when the rebrand is approved.
+Required production settings are documented in `.env.example`. Configure the approved production domain, contact address, analytics IDs, and final raster social-card URL before launch.

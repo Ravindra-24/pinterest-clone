@@ -1,0 +1,17 @@
+{
+  "name": "Curiofold",
+  "short_name": "Curiofold",
+  "description": "Discover and collect visual ideas from a thoughtful creative community.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f2",
+  "theme_color": "#e75b42",
+  "icons": [
+    {
+      "src": "/brand-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

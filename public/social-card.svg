@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Curiofold</title>
+  <desc id="description">Curiofold — Ideas worth keeping</desc>
+  <rect width="1200" height="630" fill="#f7f5f2"/>
+  <circle cx="1060" cy="-40" r="310" fill="#f6d8d1"/>
+  <circle cx="1120" cy="650" r="250" fill="#ece6df"/>
+  <g transform="translate(84 78)">
+    <rect width="88" height="88" rx="27" fill="#e75b42"/>
+    <path d="M24.8 48.8c0-15.1 8.5-25.4 21.7-25.4 7 0 12.4 2.5 16.8 7.3l-7.3 7c-2.6-2.7-5.5-4.1-9.1-4.1-6.9 0-11.3 5.9-11.3 14.8 0 8.8 4.4 14.3 11.7 14.3 3.7 0 6.9-1.4 9.6-4.1l6.5 7.4c-4.5 4.3-10 6.7-17 6.7-13.3 0-21.6-9.5-21.6-23.9Z" fill="#fffaf6"/>
+    <path d="m56 37.7 7.3-7-10.3-1.6Z" fill="#ffc2b5"/>
+  </g>
+  <text x="194" y="139" fill="#1d1b19" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="750" letter-spacing="-1">Curiofold</text>
+  <text x="84" y="342" fill="#1d1b19" font-family="Georgia, serif" font-size="106" font-weight="500" letter-spacing="-4">Ideas worth</text>
+  <text x="84" y="443" fill="#1d1b19" font-family="Georgia, serif" font-size="106" font-weight="500" letter-spacing="-4">keeping.</text>
+  <text x="88" y="526" fill="#68625c" font-family="Manrope, Arial, sans-serif" font-size="27">Discover. Collect. Return inspired.</text>
+</svg>

@@ -5,6 +5,8 @@ const escapeHtml = (value = "") => String(value).replace(/[&<>'\"]/g, (character
 const safeJson = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 const apiBase = () => (process.env.API_BASE_URL || process.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 const siteBase = (request) => (process.env.SITE_URL || process.env.VITE_SITE_URL || `https://${request.headers.host}`).replace(/\/$/, "");
+const brandName = () => process.env.VITE_APP_NAME || "Curiofold";
+const defaultSocialImage = (site) => process.env.VITE_SOCIAL_IMAGE || `${site}/social-card.png`;
 
 const loadIndex = async () => {
   for (const candidate of [path.join(process.cwd(), "dist/index.html"), path.join(process.cwd(), "index.html")]) {
@@ -15,7 +17,7 @@ const loadIndex = async () => {
 
 const entityConfig = (type, data, site, requestedPath) => {
   if (type === "post") return {
-    title: `${data.title} — ${process.env.VITE_APP_NAME || "Canvas"}`,
+    title: `${data.title} — ${brandName()}`,
     description: data.description || `A visual idea by ${data.user?.displayName || "the community"}.`,
     image: data.media?.url || data.image,
     canonical: `${site}/p/${data.slug}`,
@@ -23,7 +25,7 @@ const entityConfig = (type, data, site, requestedPath) => {
     body: `<article><img src="${escapeHtml(data.media?.url || data.image)}" alt="${escapeHtml(data.altText || data.title)}"><h1>${escapeHtml(data.title)}</h1><p>${escapeHtml(data.description)}</p><a href="${escapeHtml(`${site}/u/${data.user?.username}`)}">${escapeHtml(data.user?.displayName)}</a></article>`,
   };
   if (type === "user") return {
-    title: `${data.displayName} — ${process.env.VITE_APP_NAME || "Canvas"}`,
+    title: `${data.displayName} — ${brandName()}`,
     description: data.bio || `Explore visual ideas shared by ${data.displayName}.`,
     image: data.profilePicture,
     canonical: `${site}/u/${data.username}`,
@@ -31,7 +33,7 @@ const entityConfig = (type, data, site, requestedPath) => {
     body: `<article><h1>${escapeHtml(data.displayName)}</h1><p>${escapeHtml(data.bio || "")}</p><p>${Number(data.postCount || data.posts?.length || 0)} ideas</p>${(data.posts || []).slice(0, 24).map((post) => `<a href="${escapeHtml(`${site}/p/${post.slug}`)}">${escapeHtml(post.title)}</a>`).join("")}</article>`,
   };
   return {
-    title: `${data.name} — ${process.env.VITE_APP_NAME || "Canvas"}`,
+    title: `${data.name} — ${brandName()}`,
     description: data.description || `A collection of ${data.itemCount || 0} visual ideas.`,
     image: data.cover?.url,
     canonical: `${site}/c/${data.slug}`,
@@ -57,8 +59,9 @@ export default async function handler(request, response) {
     }
     const site = siteBase(request);
     const meta = entityConfig(type, data, site, request.query.path);
+    meta.image ||= defaultSocialImage(site);
     let html = await loadIndex();
-    const head = `<title>${escapeHtml(meta.title)}</title><meta name="description" content="${escapeHtml(meta.description)}"><link rel="canonical" href="${escapeHtml(meta.canonical)}"><meta property="og:title" content="${escapeHtml(meta.title)}"><meta property="og:description" content="${escapeHtml(meta.description)}"><meta property="og:type" content="${type === "post" ? "article" : "profile"}"><meta property="og:url" content="${escapeHtml(meta.canonical)}">${meta.image ? `<meta property="og:image" content="${escapeHtml(meta.image)}"><meta name="twitter:card" content="summary_large_image">` : ""}<script type="application/ld+json">${safeJson(meta.schema)}</script>`;
+    const head = `<title>${escapeHtml(meta.title)}</title><meta name="description" content="${escapeHtml(meta.description)}"><link rel="canonical" href="${escapeHtml(meta.canonical)}"><meta property="og:title" content="${escapeHtml(meta.title)}"><meta property="og:description" content="${escapeHtml(meta.description)}"><meta property="og:type" content="${type === "post" ? "article" : "profile"}"><meta property="og:url" content="${escapeHtml(meta.canonical)}"><meta property="og:image" content="${escapeHtml(meta.image)}"><meta property="og:image:alt" content="${escapeHtml(`${brandName()} — Ideas worth keeping`)}"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">${safeJson(meta.schema)}</script>`;
     html = html.replace(/<title>[\s\S]*?<\/title>/i, "").replace("</head>", `${head}</head>`).replace('<div id="root"></div>', `<div id="root"><main class="seo-shell">${meta.body}</main></div>`);
     response.setHeader("content-type", "text/html; charset=utf-8");
     response.setHeader("cache-control", "public, max-age=0, s-maxage=300, stale-while-revalidate=86400");

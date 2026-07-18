@@ -11,7 +11,7 @@ import { Field, Textarea } from "../components/ui/Field";
 import { Seo } from "../components/ui/Seo";
 import { useCreatePostMutation } from "../services/api";
 
-const draftKey = "canvas-post-draft";
+const draftKey = "curiofold-post-draft";
 const schema = z.object({
   title: z.string().trim().min(3, "Use at least 3 characters").max(100, "Keep the title under 100 characters"),
   description: z.string().trim().min(10, "Add a useful description").max(2000),
