@@ -66,10 +66,12 @@ export default function HomePage() {
               {isFetching ? "Gathering more ideas…" : data?.hasMore ? <Button variant="secondary" onClick={() => setCursor(data.nextCursor || undefined)}><ArrowDown size={17} />Load more</Button> : "You have reached the end—for now."}
             </div>
           </>
-        ) : (
+        ) : isFetching ? (
           <div aria-busy="true" aria-label="Loading ideas" style={{ columns: "240px", columnGap: 14 }}>
             {[310, 460, 360, 510, 390, 280, 440, 330].map((height, index) => <div key={index} className="skeleton" style={{ height, borderRadius: 18, marginBottom: 14, breakInside: "avoid" }} />)}
           </div>
+        ) : (
+          <EmptyState title="No ideas here yet." description="Try another category or check back after the first idea is published." />
         )}
       </div>
     </div>
