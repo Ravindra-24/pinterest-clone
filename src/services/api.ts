@@ -122,7 +122,7 @@ export const api = createApi({
       }),
       providesTags: (result) => (result ? [{ type: "Profile", id: result.id }] : []),
     }),
-    updateProfile: builder.mutation<PublicUser, FormData>({
+    updateProfile: builder.mutation<PublicUser, FormData | { interests: string[] }>({
       query: (body) => ({ url: "/users/me", method: "PATCH", body }),
       transformResponse: (response: ApiEnvelope<any>) => normalizeUser(response.data),
       invalidatesTags: ["Profile", "Session"],

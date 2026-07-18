@@ -37,4 +37,8 @@ On macOS the Playwright config uses the installed Google Chrome binary. CI/Linux
 
 Vercel builds `dist/`. Direct public post, profile, and collection requests pass through `api/render.js`, which injects the same public content, canonical metadata, social cards, and JSON-LD before the SPA starts. Configure both `API_BASE_URL` and `VITE_API_BASE_URL` in Vercel because the serverless renderer and browser bundle read separate environment scopes.
 
+### Netlify
+
+Netlify configuration is provided in `netlify.toml`. It builds the Vite app from this directory, proxies `/api/v1/*` to the Cloud Run API, and falls back to `index.html` for client-side routes. Keep `VITE_API_BASE_URL` set to `/api` in Netlify; remove any older value that points the browser directly at the Cloud Run hostname.
+
 Required production settings are documented in `.env.example`. Configure the approved production domain, contact address, analytics IDs, and final raster social-card URL before launch.

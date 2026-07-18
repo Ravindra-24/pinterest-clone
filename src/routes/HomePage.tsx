@@ -13,7 +13,7 @@ export default function HomePage() {
   const [sort, setSort] = useState("for-you");
   const [cursor, setCursor] = useState<string | undefined>();
   const [posts, setPosts] = useState<PostSummary[]>([]);
-  const { data, isFetching, isError, refetch } = useGetFeedQuery({ cursor, category, sort, limit: 24 });
+  const { data, isFetching, isError, refetch } = useGetFeedQuery({ cursor, category, sort, limit: 48 });
 
   useEffect(() => {
     if (!data) return;
